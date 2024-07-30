@@ -25,13 +25,14 @@ public class PostRepositoryImpl implements PostRepository {
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
+                long id = rs.getInt(1);
                 long writer_id = rs.getLong(2);
                 System.out.println("writer_id: " + writer_id);
                 String subject = rs.getString(3);
                 String content = rs.getString(4);
                 int view = rs.getInt(5);
 
-                viewpost = new Post(writer_id, subject, content, view);
+                viewpost = new Post(id, writer_id, subject, content, view);
                 posts.add(viewpost);
             }
             return posts;

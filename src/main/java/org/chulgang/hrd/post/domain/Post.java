@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Post {
     private long seq;
-    private int id;
+    private long id;
     private long writer_id;
     private String subject;
     private String content;
@@ -12,7 +12,7 @@ public class Post {
     private LocalDateTime created_at;
     private LocalDateTime modified_at;
 
-    public Post(int id, long writer_id, String subject, String content,
+    public Post(long id, long writer_id, String subject, String content,
                 int view_count, LocalDateTime created_at, LocalDateTime modified_at) {
         this.id = id;
         this.writer_id = writer_id;
@@ -30,6 +30,16 @@ public class Post {
         this.view_count = view_count;
 
     }
+    public Post(long id, long writer_id, String subject, String content,
+                int view_count) {
+        this.id = id;
+        this.writer_id = writer_id;
+        this.subject = subject;
+        this.content = content;
+        this.view_count = view_count;
+
+    }
+
     public Post(long writer_id, String subject, String content,
                 int view_count) {
         this.writer_id = writer_id;
@@ -47,7 +57,7 @@ public class Post {
         this.seq = seq;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
