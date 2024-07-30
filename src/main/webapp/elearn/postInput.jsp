@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+                  <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=utf-8"
          import="javax.sql.DataSource, java.sql.Connection"%>
 
@@ -38,6 +38,9 @@
     <!-- custom style css -->
     <link href="css/custom.css" rel="stylesheet" />
 
+    <script>
+
+    </script>
 </head>
 
 <body>
@@ -191,16 +194,16 @@
                 <div style = "margin: 0 auto;" class="col-lg-6">
                     <div class="faq-form">
                         <h2 class="mb-4 text-primary">Question</h2>
-                        <form class="contact quform" name="f" action="users/signUp.do" method="post">
+                        <form class="contact quform" name="f" action="post_insert.do" method="post">
                             <div class="quform-elements">
                                 <div>
 
                                     <!-- Begin Text input element -->
                                     <div class="col-md-6">
                                         <div class="quform-element form-group">
-                                            <label for="email">제목<span class="quform-required">*</span></label>
+                                            <label for="111">제목<span class="quform-required">*</span></label>
                                             <div class="quform-input">
-                                                <input class="form-control" id="email" type="text" name="email" placeholder="이메일" />
+                                                <input class="form-control" id="111" type="text" name="subject" placeholder="제목" />
                                             </div>
                                         </div>
                                     </div>
@@ -209,9 +212,10 @@
                                     <!-- Begin Text input element -->
                                     <div class="col-md-6">
                                         <div class="quform-element form-group">
-                                            <label for="username">아이디<span class="quform-required">*</span></label>
+                                            <label for="username">글쓴이<span class="quform-required">*</span></label>
                                             <div class="quform-input">
-                                                <input class="form-control" id="username" type="text" name="username" placeholder="아이디" />
+                                                <input class="form-control" disabled="disabled" id="username" type="text" value="${Full_name}" name="username" />
+
                                             </div>
                                         </div>
                                     </div>
@@ -220,45 +224,45 @@
                                     <!-- Begin Text input element -->
                                     <div class="col-md-6">
                                         <div class="quform-element form-group">
-                                            <label for="password">비밀번호<span class="quform-required">*</span></label>
+                                            <label for="222">내용<span class="quform-required">*</span></label>
                                             <div class="quform-input">
-                                                <input class="form-control" id="password" type="password" name="password" placeholder="비밀번호" />
+                                                <input class="form-control" id="222" name="content" placeholder="내용" />
                                             </div>
                                         </div>
                                     </div>
                                     <!-- End Text input element -->
 
-                                    <!-- Begin Text input element -->
-                                    <div class="col-md-6">
-                                        <div class="quform-element form-group">
-                                            <label for="full_name">성명</label>
-                                            <div class="quform-input">
-                                                <input class="form-control" id="full_name" type="text" name="full_name" placeholder="성명" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Text input element -->
+<%--                                    <!-- Begin Text input element -->--%>
+<%--                                    <div class="col-md-6">--%>
+<%--                                        <div class="quform-element form-group">--%>
+<%--                                            <label for="full_name">성명</label>--%>
+<%--                                            <div class="quform-input">--%>
+<%--                                                <input class="form-control" id="full_name" type="text" name="full_name" placeholder="성명" />--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <!-- End Text input element -->--%>
 
 
 
-                                    <!-- Begin Captcha element -->
-                                    <div class="col-md-12">
-                                        <div class="quform-element">
-                                            <div class="form-group">
-                                                <label for="phone">핸드폰번호</label>
-                                                <div class="quform-input">
-                                                    <input class="form-control" id="phone" type="text" name="phone" placeholder="핸드폰 번호" />
-                                                </div>
-                                            </div>
+<%--                                    <!-- Begin Captcha element -->--%>
+<%--                                    <div class="col-md-12">--%>
+<%--                                        <div class="quform-element">--%>
+<%--                                            <div class="form-group">--%>
+<%--                                                <label for="phone">핸드폰번호</label>--%>
+<%--                                                <div class="quform-input">--%>
+<%--                                                    <input class="form-control" id="phone" type="text" name="phone" placeholder="핸드폰 번호" />--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
 
-                                        </div>
-                                    </div>
-                                    <!-- End Captcha element -->
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <!-- End Captcha element -->--%>
 
                                     <!-- Begin Submit button -->
                                     <div class="col-md-12">
                                         <div class="quform-submit-inner">
-                                            <button class="butn secondary" type="button" onclick="submit()" ><i class="far fa-paper-plane icon-arrow before"></i><span class="label">전송</span><i class="far fa-paper-plane icon-arrow after"></i></button>
+                                            <button type="button" class="butn secondary" onclick="submit()" ><i class="far fa-paper-plane icon-arrow before"></i><span class="label">글쓰기</span><i class="far fa-paper-plane icon-arrow after"></i></button>
                                         </div>
                                         <div class="quform-loading-wrap text-start"><span class="quform-loading"></span></div>
                                     </div>
@@ -270,14 +274,7 @@
                     </div>
                 </div>
             </div>
-        </div>
     </section>
-    <script>
-        function submit(){
-            f.submit();
-        }
-
-    </script>
     <!-- MAP
     ================================================== -->
     <section class="p-0">

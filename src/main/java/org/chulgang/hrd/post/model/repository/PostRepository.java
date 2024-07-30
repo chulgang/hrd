@@ -6,6 +6,4 @@ import java.util.ArrayList;
 
 interface PostRepository {
     ArrayList<Post> posts();
-    void insertPost(Post post);
-
 }
