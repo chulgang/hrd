@@ -66,7 +66,7 @@ public class GetCoursesControllerTest {
                 COURSE_ID2, SUBJECT_ID2, TEACHER_ID2, TIME_PERIOD_ID2,
                 NAME2, DESCRIPTION2, PRICE2, START_DATE2, LAST_DATE2
         );
-        GetCoursesResponse getCoursesResponse = GetCoursesResponse.from(List.of(course1, course2));
+        GetCoursesResponse getCoursesResponse = GetCoursesResponse.from(List.of(course1, course2), PAGE_COUNT);
 
         when(courseService.getCourses(SIZE1, PAGE_NUMBER)).thenReturn(getCoursesResponse);
 

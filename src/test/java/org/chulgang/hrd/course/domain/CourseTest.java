@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CourseTest {
     private static final String COURSE_DATA_PATH
-            = "org.hrd.hrd.course.model.testutil.CourseTestDataProvider#provideCourseData";
+            = "org.chulgang.hrd.course.model.testutil.CourseTestDataProvider#provideCourseData";
 
     @DisplayName("올바른 값을 전송하면 강좌 인스턴스를 생성할 수 있다.")
     @ParameterizedTest
