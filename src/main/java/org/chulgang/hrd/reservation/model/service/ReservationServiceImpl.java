@@ -28,4 +28,9 @@ public class ReservationServiceImpl implements ReservationService {
     public List<ReservationCardResponse> getPagedReservations(Long memberId, int pageNumber) {
         return reservationRepository.findReservationCardByMemberId(memberId, pageNumber);
     }
+
+    @Override
+    public boolean deleteReservation(Long memberId, Long reservationId) {
+        return reservationRepository.deleteReservation(memberId, reservationId);
+    }
 }
