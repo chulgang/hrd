@@ -1,0 +1,118 @@
+package org.chulgang.hrd.course.model.service;
+
+import org.chulgang.hrd.course.domain.Course;
+import org.chulgang.hrd.course.dto.GetCoursesResponse;
+import org.chulgang.hrd.course.model.repository.CourseRepository;
+import org.chulgang.hrd.course.model.testutil.CourseTestObjectFactory;
+import org.chulgang.hrd.util.DbConnection;
+import org.chulgang.hrd.util.FormatConverter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
+import static org.chulgang.hrd.course.model.testutil.CourseTestConstant.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
+
+class CourseServiceTest {
+    CourseRepository courseRepository = mock(CourseRepository.class);
+    CourseService courseService = new CourseServiceImpl(courseRepository);
+    MockedStatic<DbConnection> dbConnection = mockStatic(DbConnection.class);
+
+    LocalDateTime now = LocalDateTime.now();
+    String parsedNow = FormatConverter.parseToString(now);
+
+    @BeforeEach
+    void setUp() {
+        dbConnection.when(DbConnection::initialize).thenAnswer(invocation -> null);
+    }
+
+    @AfterEach
+    void tearDown() {
+        dbConnection.close();
+    }
+
+    @DisplayName("Singleton instance를 불러 올 수 있다.")
+    @Test
+    void getInstance() {
+        // given, when
+        CourseService courseService = CourseServiceImpl.getInstance();
+
+        // then
+        assertThat(courseService).isInstanceOf(CourseService.class);
+    }
+
+    @DisplayName("원하는 페이지 크기와 페이지 번호에 해당하는 강좌 목록을 조회할 수 있다.")
+    @Test
+    void getCourses() {
+        // given
+        Course course1 = CourseTestObjectFactory.createCourse(
+                COURSE_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1, LAST_DATE1,
+                AVERAGE_SCORE1, REMAINED_SEAT1, now, now
+        );
+        Course course2 = CourseTestObjectFactory.createCourse(
+                COURSE_ID2, NAME2, DESCRIPTION2, PRICE2, START_DATE2, LAST_DATE2,
+                AVERAGE_SCORE2, REMAINED_SEAT2, now, now
+        );
+        Course course3 = CourseTestObjectFactory.createCourse(
+                COURSE_ID3, NAME3, DESCRIPTION3, PRICE3, START_DATE3, LAST_DATE3,
+                AVERAGE_SCORE3, REMAINED_SEAT3, now, now
+        );
+
+        List<Course> courses = new ArrayList<>();
+        courses.addAll(List.of(course1, course2));
+
+        when(courseRepository.findAll(anyInt(), anyInt())).thenReturn(courses);
+
+        // when
+        GetCoursesResponse getCoursesResponse1 = courseService.getCourses(SIZE1, PAGE_NUMBER);
+
+        courses.add(course3);
+        GetCoursesResponse getCoursesResponse2 = courseService.getCourses(SIZE2, PAGE_NUMBER);
+
+        // then
+        assertThat(getCoursesResponse1.getCourseResponses()).hasSize(2)
+                .extracting(
+                        "id", "name", "description", "price", "startDate", "lastDate",
+                        "averageScore", "remainedSeat", "createdAt", "modifiedAt"
+                )
+                .containsExactlyInAnyOrder(
+                        tuple(
+                                COURSE_ID1, NAME1, DESCRIPTION1, PRICE1, PARSED_START_DATE1,
+                                PARSED_LAST_DATE1, AVERAGE_SCORE1, REMAINED_SEAT1, parsedNow, parsedNow
+                        ),
+                        tuple(
+                                COURSE_ID2, NAME2, DESCRIPTION2, PRICE2, PARSED_START_DATE2,
+                                PARSED_LAST_DATE2, AVERAGE_SCORE2, REMAINED_SEAT2, parsedNow, parsedNow
+                        )
+                );
+
+        assertThat(getCoursesResponse2.getCourseResponses()).hasSize(3)
+                .extracting(
+                        "id", "name", "description", "price", "startDate", "lastDate",
+                        "averageScore", "remainedSeat", "createdAt", "modifiedAt"
+                )
+                .containsExactlyInAnyOrder(
+                        tuple(
+                                COURSE_ID1, NAME1, DESCRIPTION1, PRICE1, PARSED_START_DATE1, PARSED_LAST_DATE1,
+                                AVERAGE_SCORE1, REMAINED_SEAT1, parsedNow, parsedNow
+                        ),
+                        tuple(
+                                COURSE_ID2, NAME2, DESCRIPTION2, PRICE2, PARSED_START_DATE2, PARSED_LAST_DATE2,
+                                AVERAGE_SCORE2, REMAINED_SEAT2, parsedNow, parsedNow
+                        ),
+                        tuple(
+                                COURSE_ID3, NAME3, DESCRIPTION3, PRICE3, PARSED_START_DATE3, PARSED_LAST_DATE3,
+                                AVERAGE_SCORE3, REMAINED_SEAT3, parsedNow, parsedNow
+                        )
+                );
+    }
+}
