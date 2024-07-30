@@ -57,6 +57,8 @@ public class CourseTestConstant {
     public static final int REMAINED_SEAT2 = 20;
     public static final int REMAINED_SEAT3 = 30;
 
+    public static final int PAGE_COUNT = 10;
+
     public static final int SIZE1 = 2;
     public static final int SIZE2 = 3;
 

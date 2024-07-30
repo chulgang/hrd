@@ -15,12 +15,13 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.chulgang.hrd.course.exception.ExceptionMessage.COURSE_ID_NOT_FOUND_EXCEPTION_MESSAGE;
+import static org.chulgang.hrd.course.model.testutil.CourseTestConstant.SIZE1;
+import static org.chulgang.hrd.course.model.testutil.CourseTestConstant.SIZE2;
 import static org.chulgang.hrd.util.ConfigConstant.DB_PROPERTY_KEY;
 import static org.chulgang.hrd.util.ConfigConstant.TEST_DB_PROPERTY;
 
 class CourseRepositoryTest {
     private CourseRepository courseRepository = CourseRepositoryImpl.getInstance();
-
 
     @BeforeAll
     static void setUpBeforeAll() {
@@ -89,6 +90,36 @@ class CourseRepositoryTest {
         assertThat(courseRepository).isInstanceOf(CourseRepository.class);
     }
 
+    @DisplayName("전체 페이지 수를 계산할 수 있다.")
+    @Test
+    void computePageCount() {
+        // given
+        Course course1 = CourseTestObjectFactory.createCourse(
+                CourseTestConstant.COURSE_ID1, CourseTestConstant.SUBJECT_ID1, CourseTestConstant.TEACHER_ID1, CourseTestConstant.TIME_PERIOD_ID1,
+                CourseTestConstant.NAME1, CourseTestConstant.DESCRIPTION1, CourseTestConstant.PRICE1, CourseTestConstant.START_DATE1, CourseTestConstant.LAST_DATE1
+        );
+        Course course2 = CourseTestObjectFactory.createCourse(
+                CourseTestConstant.COURSE_ID2, CourseTestConstant.SUBJECT_ID2, CourseTestConstant.TEACHER_ID2, CourseTestConstant.TIME_PERIOD_ID2,
+                CourseTestConstant.NAME2, CourseTestConstant.DESCRIPTION2, CourseTestConstant.PRICE2, CourseTestConstant.START_DATE2, CourseTestConstant.LAST_DATE2
+        );
+        Course course3 = CourseTestObjectFactory.createCourse(
+                CourseTestConstant.COURSE_ID3, CourseTestConstant.SUBJECT_ID3, CourseTestConstant.TEACHER_ID3, CourseTestConstant.TIME_PERIOD_ID3,
+                CourseTestConstant.NAME3, CourseTestConstant.DESCRIPTION3, CourseTestConstant.PRICE3, CourseTestConstant.START_DATE3, CourseTestConstant.LAST_DATE3
+        );
+
+        courseRepository.save(course1);
+        courseRepository.save(course2);
+        courseRepository.save(course3);
+
+        // when
+        int pageCount1 = courseRepository.computePageCount(SIZE1);
+        int pageCount2 = courseRepository.computePageCount(SIZE2);
+
+        // then
+        assertThat(pageCount1).isEqualTo(2);
+        assertThat(pageCount2).isEqualTo(1);
+    }
+
     @DisplayName("원하는 페이지 크기와 페이지 번호에 해당하는 강좌 목록을 내림차순으로 조회할 수 있다.")
     @Test
     void findAll() {
@@ -111,8 +142,8 @@ class CourseRepositoryTest {
         courseRepository.save(course3);
 
         // when
-        List<Course> courses1 = courseRepository.findAll(CourseTestConstant.SIZE1, CourseTestConstant.PAGE_NUMBER);
-        List<Course> courses2 = courseRepository.findAll(CourseTestConstant.SIZE2, CourseTestConstant.PAGE_NUMBER);
+        List<Course> courses1 = courseRepository.findAll(SIZE1, CourseTestConstant.PAGE_NUMBER);
+        List<Course> courses2 = courseRepository.findAll(SIZE2, CourseTestConstant.PAGE_NUMBER);
 
         // then
         assertThat(courses1).hasSize(2)
