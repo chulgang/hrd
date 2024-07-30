@@ -42,7 +42,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     @Override
     public List<ReservationCardResponse> findReservationCardByMemberId(Long memberId, int pageNumber) {
         List<ReservationCardResponse> reservedCourses = new ArrayList<>();
-        String sql =
+        String selectReservationCardSql =
                 "SELECT c.NAME, c.DESCRIPTION, c.START_DATE, c.REMAINED_SEAT, c.PRICE, c.AVERAGE_SCORE " +
                         "FROM RESERVED_COURSE rc " +
                         "JOIN RESERVATION r ON rc.RESERVATION_ID = r.ID " +
@@ -51,7 +51,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
                         "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         try {
             Connection connection = DbConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(selectReservationCardSql);
             preparedStatement.setLong(1, memberId);
             preparedStatement.setInt(2, (pageNumber - 1) * 10);
             preparedStatement.setInt(3, 10);
@@ -71,5 +71,33 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             e.printStackTrace();
         }
         return reservedCourses;
+    }
+
+    @Override
+    public boolean deleteReservation(Long memberId, Long reservationId) {
+        String deleteReservationSQL = "DELETE FROM RESERVATION WHERE ID = ? AND STUDENT_ID = ?";
+        String deleteReservedCourseSQL = "DELETE FROM RESERVED_COURSE WHERE RESERVATION_ID = ?";
+
+        try {
+            Connection connection = DbConnection.getConnection();
+            PreparedStatement deleteReservationStmt = connection.prepareStatement(deleteReservationSQL);
+            PreparedStatement deleteReservedCourseStmt = connection.prepareStatement(deleteReservedCourseSQL);
+
+            connection.setAutoCommit(false);
+            deleteReservedCourseStmt.setLong(1, reservationId);
+            deleteReservedCourseStmt.executeUpdate();
+            deleteReservationStmt.setLong(1, reservationId);
+            deleteReservationStmt.setLong(2, memberId);
+            int rowsDeleted = deleteReservationStmt.executeUpdate();
+            connection.commit();
+            connection.setAutoCommit(true);
+
+            return rowsDeleted > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

@@ -10,4 +10,6 @@ public interface ReservationService {
 
     List<ReservationCardResponse> getPagedReservations(Long id , int pageNumber);
 
+    boolean deleteReservation(Long memberId, Long reservationId);
+
 }
