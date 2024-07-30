@@ -7,4 +7,6 @@ import java.util.ArrayList;
 public interface PostService {
 
     ArrayList<Post> postsS();
+
+    void insert_PostS(Post post);
 }

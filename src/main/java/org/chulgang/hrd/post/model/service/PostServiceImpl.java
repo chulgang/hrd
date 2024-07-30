@@ -23,5 +23,8 @@ public class PostServiceImpl implements PostService {
         return postRepository.posts();
     }
 
+    public void insert_PostS(Post post) {
+        postRepository.insert_posts(post);
+    }
 
 }

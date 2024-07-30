@@ -4,9 +4,7 @@ import org.chulgang.hrd.post.domain.Post;
 import org.chulgang.hrd.post.model.sql.PostSQL;
 import org.chulgang.hrd.util.DbConnection;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -14,7 +12,6 @@ public class PostRepositoryImpl implements PostRepository {
 
     public ArrayList<Post> posts() {
         ArrayList<Post> posts = new ArrayList<>();
-        DbConnection.getConnection();
 
         Connection con = null;
         Statement stmt = null;
@@ -26,11 +23,9 @@ public class PostRepositoryImpl implements PostRepository {
             con = DbConnection.getConnection();
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
-            System.out.println("하이");
-            
+
             while (rs.next()) {
-                System.out.println("gdgdd");
-                int writer_id = rs.getInt(2);
+                long writer_id = rs.getLong(2);
                 System.out.println("writer_id: " + writer_id);
                 String subject = rs.getString(3);
                 String content = rs.getString(4);
@@ -47,10 +42,39 @@ public class PostRepositoryImpl implements PostRepository {
         }
     }
 
-    @Override
-    public void insertPost(Post post) {
-        DbConnection.getConnection();
+    public void insert_posts(Post post){
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        String sql = PostSQL.insertPost;
 
+        try{
+            con=DbConnection.getConnection();
+            pstmt=con.prepareStatement(sql);
+
+            System.out.println("getWriter_id"+ post.getWriter_id());
+            System.out.println("getSubject"+ post.getSubject());
+            System.out.println("getSubject"+post.getContent());
+            System.out.println("getViewCount"+post.getView_count());
+
+            pstmt.setLong(1, post.getWriter_id());
+            pstmt.setString(2, post.getSubject());
+            pstmt.setString(3, post.getContent());
+            pstmt.setInt(4,post.getView_count());
+
+            int i = pstmt.executeUpdate();
+            System.out.println("Rows affected: " + i);
+        } catch (SQLException e) {
+            System.err.println("SQL Exception: " + e.getMessage());
+            e.printStackTrace();
+        }finally{
+            try{
+                pstmt.close();
+                con.close();
+            }catch(SQLException se) {
+                System.out.println("insert_post"+se);
+            }
+        }
+    }
     }
 
 
@@ -84,4 +108,4 @@ public class PostRepositoryImpl implements PostRepository {
 //
 //        }
 //    }
-}
+

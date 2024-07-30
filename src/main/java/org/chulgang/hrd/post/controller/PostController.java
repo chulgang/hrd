@@ -10,11 +10,10 @@ import jakarta.servlet.http.HttpSession;
 import org.chulgang.hrd.post.domain.Post;
 import org.chulgang.hrd.post.model.service.PostService;
 import org.chulgang.hrd.post.model.service.PostServiceImpl;
-//import org.chulgang.hrd.users.dto.UsersLoginResponse;
+import org.chulgang.hrd.users.dto.UsersLoginResponse;
 import org.chulgang.hrd.util.DbConnection;
 
 import java.io.IOException;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 
 @WebServlet("/elearn/post.do")
@@ -25,15 +24,12 @@ public class PostController extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 DbConnection.initialize();
-
                 HttpSession session = request.getSession();
-
-                //UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
-                //System.out.println(user);
+                UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
 
                 PostService service = new PostServiceImpl();
                 ArrayList<Post> postlist = service.postsS();
-
+                request.setAttribute("Full_name",user.getFull_name());
                 request.setAttribute("postlist", postlist);
                 String view = "post.jsp";
 

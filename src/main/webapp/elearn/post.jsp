@@ -16,7 +16,7 @@
     <title>eLearn - Online Education Learning Template</title>
     <script>
         function openInputJSP() {
-            var openInputUrl = "postInput.jsp";
+            var openInputUrl = "post_insertForm.do";
             window.open(openInputUrl,'_self');
         }
 
@@ -251,7 +251,7 @@
     <section>
         <div class="container">
             <div class="section-heading">
-                <h2 class="h1 mb-0">김형수 강사님</h2>
+                <h2 class="h1 mb-0">교수님</h2>
                 <span class="sub-title">Q&A</span>
             </div>
 
@@ -277,7 +277,6 @@
                 </div>
             </div>
             </c:forEach>
-
 
             <button type="button" onclick="openInputJSP()" style="margin: 1em; float:right;" class="btn btn-outline-success">Question</button>
                 </div>
