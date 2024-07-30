@@ -1,6 +1,7 @@
 package org.chulgang.hrd.course.model.service;
 
 import org.chulgang.hrd.course.domain.Course;
+import org.chulgang.hrd.course.dto.GetCourseResponse;
 import org.chulgang.hrd.course.dto.GetCoursesResponse;
 import org.chulgang.hrd.course.model.repository.CourseRepository;
 import org.chulgang.hrd.course.model.testutil.CourseTestObjectFactory;
@@ -114,5 +115,33 @@ class CourseServiceTest {
                                 AVERAGE_SCORE3, REMAINED_SEAT3, parsedNow, parsedNow
                         )
                 );
+    }
+
+    @DisplayName("강좌 ID를 통해 원하는 강좌를 조회할 수 있다.")
+    @Test
+    void getCourse() {
+        // given
+        when(courseRepository.findById(anyLong())).thenReturn(
+                CourseTestObjectFactory.createCourse(
+                        COURSE_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1, LAST_DATE1,
+                        AVERAGE_SCORE1, REMAINED_SEAT1, now, now
+                )
+        );
+
+        // when
+        GetCourseResponse getCourseResponse = courseService.getCourse(COURSE_ID1);
+
+        // then
+        assertThat(getCourseResponse).isNotNull();
+        assertThat(getCourseResponse.getId()).isEqualTo(COURSE_ID1);
+        assertThat(getCourseResponse.getName()).isEqualTo(NAME1);
+        assertThat(getCourseResponse.getDescription()).isEqualTo(DESCRIPTION1);
+        assertThat(getCourseResponse.getPrice()).isEqualTo(PRICE1);
+        assertThat(getCourseResponse.getStartDate()).isEqualTo(PARSED_START_DATE1);
+        assertThat(getCourseResponse.getLastDate()).isEqualTo(PARSED_LAST_DATE1);
+        assertThat(getCourseResponse.getAverageScore()).isEqualTo(AVERAGE_SCORE1);
+        assertThat(getCourseResponse.getRemainedSeat()).isEqualTo(REMAINED_SEAT1);
+        assertThat(getCourseResponse.getCreatedAt()).isEqualTo(FormatConverter.parseToString(now));
+        assertThat(getCourseResponse.getModifiedAt()).isEqualTo(FormatConverter.parseToString(now));
     }
 }
