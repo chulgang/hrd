@@ -12,5 +12,5 @@ public class UsersSQL {
     static final String dupplicateByUserName ="select username from users where username = ?";
     static final String insertUserRole = "insert into user_role values(USER_ROLE_SEQ.nextval,? ,? )";
     static final String findByEmailAndPassword = "select id from users where email = ? and password = ?";
-   // static final String selectByUserRole = "insert into user_role values(USER_ROLE_SEQ.nextval,? ,? )";
+    public static final String findById = "select full_name from users where id = ?";
 }
