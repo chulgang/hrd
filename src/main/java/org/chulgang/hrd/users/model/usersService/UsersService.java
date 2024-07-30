@@ -35,6 +35,9 @@ public class UsersService {
     public int insertUserRole(String email ,String password,String role){
         return usersrepository.insertUserRole(email,password,role);
     }
+    public String findById(long id){
+        return usersrepository.findById(id);
+    }
 
     public static UsersService getInstance(){
         DbConnection.getConnection();
