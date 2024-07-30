@@ -4,6 +4,8 @@ public class RequestConstant {
     public static final String COURSE_DOMAIN_NAME = "course";
     public static final String COURSE_SERVICE_ATTRIBUTE_NAME = "courseService";
     public static final String RESERVATION_SERVICE_ATTRIBUTE_NAME = "reservationService";
+    public static final String PAYMENT_SERVICE_ATTRIBUTE_NAME = "paymentService";
+
 
     public static final String GET_COURSES_FIRST_REQUEST_URL = "/elearn/course/courses.do";
     public static final String GET_COURSES_SECOND_REQUEST_URL = "/elearn/courses.do";
