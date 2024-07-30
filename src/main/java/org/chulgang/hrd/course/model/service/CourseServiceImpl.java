@@ -23,7 +23,8 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public GetCoursesResponse getCourses(int size, int pageNumber) {
         DbConnection.initialize();
-        return GetCoursesResponse.from(courseRepository.findAll(size, pageNumber));
+        int pageCount = courseRepository.computePageCount(size);
+        return GetCoursesResponse.from(courseRepository.findAll(size, pageNumber), pageCount);
     }
 
     @Override

@@ -5,6 +5,8 @@ import org.chulgang.hrd.course.domain.Course;
 import java.util.List;
 
 public interface CourseRepository {
+    int computePageCount(int size);
+
     List<Course> findAll(int size, int pageNumber);
 
     Course findById(Long id);

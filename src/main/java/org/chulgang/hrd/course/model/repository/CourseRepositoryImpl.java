@@ -24,6 +24,29 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
+    public int computePageCount(int size) {
+        String sql = "select count(ID) from COURSE";
+        Statement statement = StatementGenerator.generateStatement();
+        ResultSet resultSet = DataSelector.getResultSet(statement, sql);
+
+        try {
+            if (resultSet.next()) {
+                int totalSize = resultSet.getInt(1);
+
+                if (totalSize % size == 0) {
+                    return totalSize / size;
+                }
+
+                return totalSize / size + 1;
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+        return -1;
+    }
+
+    @Override
     public List<Course> findAll(int size, int pageNumber) {
         int offset = size * (pageNumber - 1);
         String sql = String.format("SELECT * FROM (SELECT c.*, ROW_NUMBER() " +
