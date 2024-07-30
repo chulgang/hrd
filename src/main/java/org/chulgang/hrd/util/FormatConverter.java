@@ -90,7 +90,9 @@ public class FormatConverter {
         try {
             return Long.parseLong(number);
         } catch (NumberFormatException nfe) {
-            GlobalExceptionHandler.throwRuntimeException(new NumberFormatException(LONG_PARSE_EXCEPTION_MESSAGE));
+            GlobalExceptionHandler.throwRuntimeException(
+                    new NumberFormatException(String.format(LONG_PARSE_EXCEPTION_MESSAGE, number))
+            );
         }
 
         return -1;
@@ -100,7 +102,9 @@ public class FormatConverter {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException nfe) {
-            GlobalExceptionHandler.throwRuntimeException(new NumberFormatException(INTEGER_PARSE_EXCEPTION_MESSAGE));
+            GlobalExceptionHandler.throwRuntimeException(
+                    new NumberFormatException(String.format(INTEGER_PARSE_EXCEPTION_MESSAGE, number))
+            );
         }
 
         return -1;
@@ -110,7 +114,9 @@ public class FormatConverter {
         try {
             return Float.parseFloat(prime);
         } catch (NumberFormatException nfe) {
-            GlobalExceptionHandler.throwRuntimeException(new NumberFormatException(FLOAT_PARSE_EXCEPTION_MESSAGE));
+            GlobalExceptionHandler.throwRuntimeException(
+                    new NumberFormatException(String.format(FLOAT_PARSE_EXCEPTION_MESSAGE, prime))
+            );
         }
 
         return -1;
