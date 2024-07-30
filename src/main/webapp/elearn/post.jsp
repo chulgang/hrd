@@ -262,12 +262,12 @@
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#${postlist.writer_id}" aria-expanded="false" aria-controls="${postlist.writer_id}">
+                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#${postlist.id}" aria-expanded="false" aria-controls="${postlist.id}">
                                             ${postlist.subject}
                                     </button>
                                 </h5>
                             </div>
-                            <div id="${postlist.writer_id}" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                            <div id="${postlist.id}" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
                                 <div class="card-body">
                                     ${postlist.content}
                                 </div>
