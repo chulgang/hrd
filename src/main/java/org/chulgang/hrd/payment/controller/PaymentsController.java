@@ -1,0 +1,44 @@
+package org.chulgang.hrd.payment.controller;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.chulgang.hrd.aop.LoggingAspect;
+import org.chulgang.hrd.payment.dto.PaymentCardResponse;
+import org.chulgang.hrd.payment.model.service.PaymentService;
+import org.chulgang.hrd.util.DbConnection;
+
+import java.io.IOException;
+import java.util.List;
+
+import static org.chulgang.hrd.course.util.RequestConstant.PAYMENT_SERVICE_ATTRIBUTE_NAME;
+
+@WebServlet(urlPatterns = {"/elearn/payment-list.do"})
+public class PaymentsController extends HttpServlet {
+    private PaymentService paymentService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        paymentService = LoggingAspect.createProxy(PaymentService.class,
+                (PaymentService) config.getServletContext().getAttribute(PAYMENT_SERVICE_ATTRIBUTE_NAME));
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        DbConnection.initialize();
+        HttpSession session = request.getSession();
+        //User user = (User) session.getAttribute("user");
+        //Long userId = user.getuserId();
+        Long userId = 1L;
+        int pageNumber = 1;
+        List<PaymentCardResponse> payments = paymentService.getPagedPayments(userId, pageNumber);
+        request.setAttribute("payments", payments);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("paid-course-list.jsp");
+        dispatcher.forward(request, response);
+    }
+}
