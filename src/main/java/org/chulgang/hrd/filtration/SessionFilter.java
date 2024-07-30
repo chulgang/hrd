@@ -7,9 +7,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
-//@WebFilter(urlPatterns = {"/elearn/.jsp"})
+@WebFilter(urlPatterns = {"/*"})
 public class SessionFilter implements Filter {
+
+    private List<String> excludedUrls;
+    private int count;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
@@ -20,17 +25,19 @@ public class SessionFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
+        String path = ((HttpServletRequest) req).getRequestURI();
 
-        if(session != null || session.getAttribute("dto")==null){
-            res.sendRedirect("/elearn/index.jsp");
-            return;
+        if (path.contains("/elearn/login.jsp")||path.contains("/elearn/contact.jsp")||path.contains("/elearn/index.jsp")) {
+
+        } else {
+            if(session != null || session.getAttribute("dto")==null){
+                System.out.println("요한이 만든 필터 적용됨.");
+                if (count++ < 1) {
+                    res.sendRedirect("/elearn/index.jsp");
+                    return;
+                }
+            }
         }
-            System.out.println("요한이 만든 필터 적용됨.");
             chain.doFilter(request, response);
-    }
-
-    @Override
-    public void destroy() {
-        Filter.super.destroy();
     }
 }
