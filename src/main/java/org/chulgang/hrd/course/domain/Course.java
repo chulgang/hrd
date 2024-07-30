@@ -1,6 +1,7 @@
 package org.chulgang.hrd.course.domain;
 
 
+import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.util.FormatConverter;
 
 import java.sql.PreparedStatement;
@@ -90,6 +91,19 @@ public class Course {
         this.remainedSeat = remainedSeat;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
+    }
+
+    public static Course from(CreateCourseRequest createCourseRequest) {
+        return new Course(
+                createCourseRequest.getSubjectId(),
+                createCourseRequest.getTeacherId(),
+                createCourseRequest.getTimePeriodId(),
+                createCourseRequest.getName(),
+                createCourseRequest.getDescription(),
+                createCourseRequest.getPrice(),
+                createCourseRequest.getStartDate(),
+                createCourseRequest.getLastDate()
+        );
     }
 
     public static Course from(String[] data) {

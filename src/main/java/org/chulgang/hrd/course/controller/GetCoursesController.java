@@ -47,13 +47,13 @@ public class GetCoursesController extends HttpServlet {
         // TODO: 이미지 추가
 
         String size = request.getParameter(SIZE_PARAMETER_NAME);
-        int parsedSize = 0;
+        int parsedSize = 3;
         if (!FormatValidator.isNoValue(size)) {
             parsedSize = FormatConverter.parseToInt(size);
         }
 
         String pageNumber = request.getParameter(PAGE_NUMBER_PARAMETER_NAME);
-        int parsedPageNumber = 0;
+        int parsedPageNumber = 1;
         if (!FormatValidator.isNoValue(pageNumber)) {
             parsedPageNumber = FormatConverter.parseToInt(pageNumber);
         }
