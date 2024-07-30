@@ -36,10 +36,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 
         for (int i = 0; i < size; i++) {
             String[] data = DataSelector.getEntityData(resultSet);
-            if (i == 0 && data == null) {
-                return courses;
-            }
-            if (data[0] == null) {
+            if (data == null) {
                 break;
             }
 
@@ -58,7 +55,6 @@ public class CourseRepositoryImpl implements CourseRepository {
 
         Statement statement = StatementGenerator.generateStatement();
         ResultSet resultSet = DataSelector.getResultSet(statement, sql);
-        System.out.println("--------" + resultSet + "------------");
 
         String[] data = DataSelector.getEntityData(resultSet);
         if (data == null) {
