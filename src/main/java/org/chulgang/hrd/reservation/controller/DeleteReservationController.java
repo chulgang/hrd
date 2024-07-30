@@ -11,7 +11,7 @@ import org.chulgang.hrd.reservation.model.service.ReservationService;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"elearn/delete-reservation.do"})
+@WebServlet(urlPatterns = {"/elearn/delete-reservation.do"})
 public class DeleteReservationController extends HttpServlet {
     private ReservationService reservationService;
 
