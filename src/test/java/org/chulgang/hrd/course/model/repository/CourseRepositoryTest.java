@@ -1,6 +1,7 @@
 package org.chulgang.hrd.course.model.repository;
 
 import org.chulgang.hrd.course.domain.Course;
+import org.chulgang.hrd.course.exception.CourseIdNotFoundException;
 import org.chulgang.hrd.course.model.testutil.CourseTestConstant;
 import org.chulgang.hrd.course.model.testutil.CourseTestObjectFactory;
 import org.chulgang.hrd.util.ConnectionContainer;
@@ -12,8 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
+import static org.assertj.core.api.Assertions.*;
+import static org.chulgang.hrd.course.exception.ExceptionMessage.COURSE_ID_NOT_FOUND_EXCEPTION_MESSAGE;
 import static org.chulgang.hrd.util.ConfigConstant.DB_PROPERTY_KEY;
 import static org.chulgang.hrd.util.ConfigConstant.TEST_DB_PROPERTY;
 
@@ -149,5 +150,59 @@ class CourseRepositoryTest {
                                 CourseTestConstant.NAME1, CourseTestConstant.DESCRIPTION1, CourseTestConstant.PRICE1, CourseTestConstant.START_DATE1, CourseTestConstant.LAST_DATE1
                         )
                 );
+    }
+
+    @DisplayName("강좌 ID를 통해 해당하는 강좌를 조회할 수 있다.")
+    @Test
+    void findById() {
+        // given
+        Course createdCourse1 = CourseTestObjectFactory.createCourse(
+                CourseTestConstant.COURSE_ID1, CourseTestConstant.SUBJECT_ID1, CourseTestConstant.TEACHER_ID1, CourseTestConstant.TIME_PERIOD_ID1,
+                CourseTestConstant.NAME1, CourseTestConstant.DESCRIPTION1, CourseTestConstant.PRICE1, CourseTestConstant.START_DATE1, CourseTestConstant.LAST_DATE1
+        );
+
+        Course createdCourse2 = CourseTestObjectFactory.createCourse(
+                CourseTestConstant.COURSE_ID2, CourseTestConstant.SUBJECT_ID2, CourseTestConstant.TEACHER_ID2, CourseTestConstant.TIME_PERIOD_ID2,
+                CourseTestConstant.NAME2, CourseTestConstant.DESCRIPTION2, CourseTestConstant.PRICE2, CourseTestConstant.START_DATE2, CourseTestConstant.LAST_DATE2
+        );
+
+        Course createdCourse3 = CourseTestObjectFactory.createCourse(
+                CourseTestConstant.COURSE_ID3, CourseTestConstant.SUBJECT_ID3, CourseTestConstant.TEACHER_ID3, CourseTestConstant.TIME_PERIOD_ID3,
+                CourseTestConstant.NAME3, CourseTestConstant.DESCRIPTION3, CourseTestConstant.PRICE3, CourseTestConstant.START_DATE3, CourseTestConstant.LAST_DATE3
+        );
+
+        courseRepository.save(createdCourse1);
+        courseRepository.save(createdCourse2);
+        courseRepository.save(createdCourse3);
+
+        // when
+        Course foundCourse = courseRepository.findById(createdCourse2.getId());
+
+        // then
+        assertThat(foundCourse).isEqualTo(createdCourse2);
+    }
+
+    @DisplayName("존재하지 않는 강좌 ID를 통해 강좌를 조회하려 하면 CourseIdNotFoundException이 발생한다.")
+    @Test
+    void findByIdFromNonExistentCourse() {
+        // given
+        Course createdCourse1 = CourseTestObjectFactory.createCourse(
+                CourseTestConstant.COURSE_ID1, CourseTestConstant.SUBJECT_ID1, CourseTestConstant.TEACHER_ID1, CourseTestConstant.TIME_PERIOD_ID1,
+                CourseTestConstant.NAME1, CourseTestConstant.DESCRIPTION1, CourseTestConstant.PRICE1, CourseTestConstant.START_DATE1, CourseTestConstant.LAST_DATE1
+        );
+
+
+        Course createdCourse2 = CourseTestObjectFactory.createCourse(
+                CourseTestConstant.COURSE_ID3, CourseTestConstant.SUBJECT_ID3, CourseTestConstant.TEACHER_ID3, CourseTestConstant.TIME_PERIOD_ID3,
+                CourseTestConstant.NAME3, CourseTestConstant.DESCRIPTION3, CourseTestConstant.PRICE3, CourseTestConstant.START_DATE3, CourseTestConstant.LAST_DATE3
+        );
+
+        courseRepository.save(createdCourse1);
+        courseRepository.save(createdCourse2);
+
+        // when, then
+        assertThatThrownBy(() -> courseRepository.findById(CourseTestConstant.COURSE_ID2))
+                .isInstanceOf(CourseIdNotFoundException.class)
+                .hasMessage(String.format(COURSE_ID_NOT_FOUND_EXCEPTION_MESSAGE, CourseTestConstant.COURSE_ID2));
     }
 }
