@@ -1,6 +1,7 @@
 package org.chulgang.hrd.course.model.service;
 
 import org.chulgang.hrd.course.domain.Course;
+import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.dto.GetCourseResponse;
 import org.chulgang.hrd.course.dto.GetCoursesResponse;
 import org.chulgang.hrd.course.model.repository.CourseRepository;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.MockedStatic;
 
 import java.time.LocalDateTime;
@@ -143,5 +145,34 @@ class CourseServiceTest {
         assertThat(getCourseResponse.getRemainedSeat()).isEqualTo(REMAINED_SEAT1);
         assertThat(getCourseResponse.getCreatedAt()).isEqualTo(FormatConverter.parseToString(now));
         assertThat(getCourseResponse.getModifiedAt()).isEqualTo(FormatConverter.parseToString(now));
+    }
+
+    @DisplayName("강좌 양식을 전송해 새로운 강좌를 생성할 수 있다.")
+    @Test
+    void create() {
+        // given
+        CreateCourseRequest createCourseRequest = CourseTestObjectFactory.createCourseRequest(
+                SUBJECT_ID1, TEACHER_ID1, TIME_PERIOD_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1, LAST_DATE1
+        );
+        dbConnection.when(DbConnection::initialize).thenAnswer(invocation -> null);
+
+        // when
+        courseService.create(createCourseRequest);
+
+        // then
+        ArgumentCaptor<Course> courseCaptor = ArgumentCaptor.forClass(Course.class);
+        verify(courseRepository, times(1)).save(courseCaptor.capture());
+
+        Course savedCourse = courseCaptor.getValue();
+
+        assertThat(savedCourse).isNotNull();
+        assertThat(savedCourse.getSubjectId()).isEqualTo(SUBJECT_ID1);
+        assertThat(savedCourse.getTeacherId()).isEqualTo(TEACHER_ID1);
+        assertThat(savedCourse.getTimePeriodId()).isEqualTo(TIME_PERIOD_ID1);
+        assertThat(savedCourse.getName()).isEqualTo(NAME1);
+        assertThat(savedCourse.getDescription()).isEqualTo(DESCRIPTION1);
+        assertThat(savedCourse.getPrice()).isEqualTo(PRICE1);
+        assertThat(savedCourse.getStartDate()).isEqualTo(START_DATE1);
+        assertThat(savedCourse.getLastDate()).isEqualTo(LAST_DATE1);
     }
 }

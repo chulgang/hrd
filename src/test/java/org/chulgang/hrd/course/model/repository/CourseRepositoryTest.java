@@ -205,4 +205,21 @@ class CourseRepositoryTest {
                 .isInstanceOf(CourseIdNotFoundException.class)
                 .hasMessage(String.format(COURSE_ID_NOT_FOUND_EXCEPTION_MESSAGE, CourseTestConstant.COURSE_ID2));
     }
+
+    @DisplayName("새로운 강좌 튜플을 저장할 수 있다.")
+    @Test
+    void save() {
+        // given
+        Course createdCourse = CourseTestObjectFactory.createCourse(
+                CourseTestConstant.COURSE_ID1, CourseTestConstant.SUBJECT_ID1, CourseTestConstant.TEACHER_ID1, CourseTestConstant.TIME_PERIOD_ID1,
+                CourseTestConstant.NAME1, CourseTestConstant.DESCRIPTION1, CourseTestConstant.PRICE1, CourseTestConstant.START_DATE1, CourseTestConstant.LAST_DATE1
+        );
+
+        // when
+        courseRepository.save(createdCourse);
+        Course foundCourse = courseRepository.findById(createdCourse.getId());
+
+        // then
+        assertThat(foundCourse).isEqualTo(createdCourse);
+    }
 }

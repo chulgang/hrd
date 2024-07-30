@@ -7,7 +7,9 @@ import org.chulgang.hrd.util.ConnectionContainer;
 import org.chulgang.hrd.util.DataSelector;
 import org.chulgang.hrd.util.StatementGenerator;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,5 +71,23 @@ public class CourseRepositoryImpl implements CourseRepository {
         ConnectionContainer.close(statement);
 
         return Course.from(data);
+    }
+
+    @Override
+    public void save(Course course) {
+        String sql = "insert into COURSE(ID, SUBJECT_ID, TEACHER_ID, TIME_PERIOD_ID, NAME, DESCRIPTION, PRICE, "
+                + "START_DATE, LAST_DATE, CREATED_AT, REMAINED_SEAT) "
+                + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
+
+        PreparedStatement preparedStatement = StatementGenerator.generateStatement(sql);
+
+        try {
+            course.setTupleValues(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+        ConnectionContainer.close(preparedStatement);
     }
 }
