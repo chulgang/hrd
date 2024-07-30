@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CourseRepository {
     List<Course> findAll(int size, int pageNumber);
+
+    Course findById(Long id);
 }

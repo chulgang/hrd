@@ -1,6 +1,8 @@
 package org.chulgang.hrd.course.model.repository;
 
 import org.chulgang.hrd.course.domain.Course;
+import org.chulgang.hrd.course.exception.CourseIdNotFoundException;
+import org.chulgang.hrd.exception.GlobalExceptionHandler;
 import org.chulgang.hrd.util.ConnectionContainer;
 import org.chulgang.hrd.util.DataSelector;
 import org.chulgang.hrd.util.StatementGenerator;
@@ -9,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.chulgang.hrd.course.exception.ExceptionMessage.COURSE_ID_NOT_FOUND_EXCEPTION_MESSAGE;
 
 public class CourseRepositoryImpl implements CourseRepository {
     private static final CourseRepositoryImpl INSTANCE = new CourseRepositoryImpl();
@@ -44,5 +48,26 @@ public class CourseRepositoryImpl implements CourseRepository {
         ConnectionContainer.close(statement);
 
         return courses;
+    }
+
+    @Override
+    public Course findById(Long id) {
+        String sql = String.format("SELECT * FROM COURSE WHERE ID = %d", id);
+
+        Statement statement = StatementGenerator.generateStatement();
+        ResultSet resultSet = DataSelector.getResultSet(statement, sql);
+        System.out.println("--------" + resultSet + "------------");
+
+        String[] data = DataSelector.getEntityData(resultSet);
+        if (data == null) {
+            GlobalExceptionHandler.throwRuntimeException(
+                    new CourseIdNotFoundException(String.format(COURSE_ID_NOT_FOUND_EXCEPTION_MESSAGE, id))
+            );
+        }
+
+        ConnectionContainer.close(resultSet);
+        ConnectionContainer.close(statement);
+
+        return Course.from(data);
     }
 }

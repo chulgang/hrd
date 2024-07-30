@@ -1,5 +1,6 @@
 package org.chulgang.hrd.course.model.service;
 
+import org.chulgang.hrd.course.dto.GetCourseResponse;
 import org.chulgang.hrd.course.dto.GetCoursesResponse;
 import org.chulgang.hrd.course.model.repository.CourseRepository;
 import org.chulgang.hrd.course.model.repository.CourseRepositoryImpl;
@@ -21,5 +22,11 @@ public class CourseServiceImpl implements CourseService {
     public GetCoursesResponse getCourses(int size, int pageNumber) {
         DbConnection.initialize();
         return GetCoursesResponse.from(courseRepository.findAll(size, pageNumber));
+    }
+
+    @Override
+    public GetCourseResponse getCourse(Long id) {
+        DbConnection.initialize();
+        return GetCourseResponse.from(courseRepository.findById(id));
     }
 }
