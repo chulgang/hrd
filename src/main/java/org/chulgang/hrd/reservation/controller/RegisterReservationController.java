@@ -12,7 +12,7 @@ import org.chulgang.hrd.reservation.model.service.ReservationService;
 
 import java.io.IOException;
 
-import static org.chulgang.hrd.course.util.RequestConstant.COURSE_SERVICE_ATTRIBUTE_NAME;
+import static org.chulgang.hrd.course.util.RequestConstant.RESERVATION_SERVICE_ATTRIBUTE_NAME;
 
 @WebServlet(urlPatterns = {"/register-reservation"})
 public class RegisterReservationController extends HttpServlet {
@@ -23,13 +23,13 @@ public class RegisterReservationController extends HttpServlet {
         super.init(config);
 
         reservationService = LoggingAspect.createProxy(ReservationService.class,
-                (ReservationService) config.getServletContext().getAttribute(COURSE_SERVICE_ATTRIBUTE_NAME));
+                (ReservationService) config.getServletContext().getAttribute(RESERVATION_SERVICE_ATTRIBUTE_NAME));
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        //User user = (User) session.getAttribute("user");
+        //User user = (User) session.getAttribute("dto");
         //Long userId = user.getUserId();
         Long userId = 1L;
         //Long courseId = Long.parseLong(request.getParameter("courseId"));
