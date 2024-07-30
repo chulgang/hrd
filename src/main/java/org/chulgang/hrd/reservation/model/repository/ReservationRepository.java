@@ -10,4 +10,6 @@ public interface ReservationRepository {
 
     List<ReservationCardResponse> findReservationCardByMemberId(Long memberId, int pageNumber);
 
+    boolean deleteReservation(Long memberId, Long reservationId);
+
 }
