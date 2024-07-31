@@ -1,5 +1,6 @@
 package org.chulgang.hrd.payment.model.repository;
 
+import org.chulgang.hrd.payment.domain.PayedCourse;
 import org.chulgang.hrd.payment.dto.PaymentCardResponse;
 import org.chulgang.hrd.util.DbConnection;
 
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PaymentRepositoryImpl implements PaymentRepository {
     private static final PaymentRepositoryImpl INSTANCE = new PaymentRepositoryImpl();
@@ -19,18 +21,15 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
     @Override
     public boolean executePayment(Long userId, Long reservationId, int paymentAmount) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
 
         try {
-            connection = DbConnection.getConnection();
+            Connection connection = DbConnection.getConnection();
             connection.setAutoCommit(false);
 
             String selectCourseSql = "SELECT c.PRICE, c.REMAINED_SEAT, c.ID AS COURSE_ID FROM RESERVED_COURSE rc JOIN COURSE c ON rc.COURSE_ID = c.ID WHERE rc.RESERVATION_ID = ?";
-            preparedStatement = connection.prepareStatement(selectCourseSql);
+            PreparedStatement preparedStatement = connection.prepareStatement(selectCourseSql);
             preparedStatement.setLong(1, reservationId);
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 int price = resultSet.getInt("PRICE");
@@ -38,7 +37,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 Long courseId = resultSet.getLong("COURSE_ID");
 
                 if (remainedSeat <= 0) {
-                    throw new SQLException("No seats available");
+                    throw new SQLException("남은 자리가 없음");
                 }
 
                 String updateWalletSql = "UPDATE WALLET_HISTORY SET CURRENT_AMOUNT = CURRENT_AMOUNT - ?, USED_AMOUNT = USED_AMOUNT + ? WHERE USER_ID = ?";
@@ -63,7 +62,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 connection.commit();
                 return true;
             } else {
-                throw new SQLException("Reservation not found");
+                throw new SQLException("예약을 찾을 수 없음");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,5 +105,32 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         }
 
         return payments;
+    }
+
+    @Override
+    public Optional<PayedCourse> findPayedCourseById(Long payedCourseId) {
+        String selectPayedCourse = "SELECT * FROM PAYED_COURSE WHERE ID = ?";
+        try {
+            Connection connection = DbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(selectPayedCourse);
+            preparedStatement.setLong(1, payedCourseId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                PayedCourse payedCourse = new PayedCourse();
+                payedCourse.setId(resultSet.getLong("ID"));
+                payedCourse.setCourseId(resultSet.getLong("COURSE_ID"));
+                payedCourse.setReservationId(resultSet.getLong("RESERVATION_ID"));
+                payedCourse.setModifiedAt(resultSet.getTimestamp("MODIFIED_AT").toLocalDateTime());
+                payedCourse.setPayedAt(resultSet.getTimestamp("PAYED_AT").toLocalDateTime());
+                payedCourse.setPayedAmount(resultSet.getInt("PAYED_AMOUNT"));
+                payedCourse.setRefunded(resultSet.getBoolean("IS_REFUNDED"));
+                payedCourse.setRefundedAt(resultSet.getTimestamp("REFUNDED_AT") != null ? resultSet.getTimestamp("REFUNDED_AT").toLocalDateTime() : null);
+                payedCourse.setExpired(resultSet.getBoolean("IS_EXPIRED"));
+                return Optional.of(payedCourse);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }
