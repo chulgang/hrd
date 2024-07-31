@@ -75,9 +75,19 @@ public class GetCoursesControllerTest {
 
         // Then
         ArgumentCaptor<String> attributeCaptor = ArgumentCaptor.forClass(String.class);
-        ArgumentCaptor<GetCoursesResponse> valueCaptor = ArgumentCaptor.forClass(GetCoursesResponse.class);
-        verify(request).setAttribute(attributeCaptor.capture(), valueCaptor.capture());
-        assertThat(attributeCaptor.getValue()).isEqualTo("courses");
+        ArgumentCaptor<Object> valueCaptor = ArgumentCaptor.forClass(Object.class);
+        verify(request, times(3)).setAttribute(attributeCaptor.capture(), valueCaptor.capture());
+
+        List<String> capturedAttributes = attributeCaptor.getAllValues();
+        List<Object> capturedValues = valueCaptor.getAllValues();
+
+        assertThat(capturedAttributes.get(0)).isEqualTo(COURSES_ATTRIBUTE_NAME);
+        assertThat(capturedValues.get(0)).isEqualTo(getCoursesResponse);
+        assertThat(capturedAttributes.get(1)).isEqualTo(SIZE_PARAMETER_NAME);
+        assertThat(capturedValues.get(1)).isEqualTo(SIZE1);
+        assertThat(capturedAttributes.get(2)).isEqualTo(PAGE_NUMBER_PARAMETER_NAME);
+        assertThat(capturedValues.get(2)).isEqualTo(PAGE_NUMBER);
+
         verify(requestDispatcher).forward(request, response);
     }
 
@@ -85,12 +95,12 @@ public class GetCoursesControllerTest {
     @DisplayName("상위 경로의 요청으로 리다이렉트할 수 있다.")
     void doGetWithRedirect() throws ServletException, IOException {
         // Given
-        when(request.getRequestURI()).thenReturn("/elearn/course/courses.do");
+        when(request.getRequestURI()).thenReturn(GET_COURSES_FIRST_REQUEST_URL);
 
         // When
         getCoursesController.doGet(request, response);
 
         // Then
-        verify(response).sendRedirect("/elearn/courses.do");
+        verify(response).sendRedirect(GET_COURSES_SECOND_REQUEST_URL);
     }
 }

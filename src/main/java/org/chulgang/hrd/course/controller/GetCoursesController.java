@@ -59,6 +59,8 @@ public class GetCoursesController extends HttpServlet {
         }
 
         request.setAttribute(COURSES_ATTRIBUTE_NAME, courseService.getCourses(parsedSize, parsedPageNumber));
+        request.setAttribute(SIZE_PARAMETER_NAME, parsedSize);
+        request.setAttribute(PAGE_NUMBER_PARAMETER_NAME, parsedPageNumber);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(COURSES_VIEW);
         requestDispatcher.forward(request, response);

@@ -1,5 +1,6 @@
 package org.chulgang.hrd.course.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,11 +12,12 @@ import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.model.service.CourseService;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import static org.chulgang.hrd.course.util.RequestConstant.*;
 
 
-@WebServlet(REGISTER_COURSE_REQUEST_URL)
+@WebServlet(urlPatterns = {REGISTER_COURSE_FIRST_REQUEST_URL, REGISTER_COURSE_SECOND_REQUEST_URL, VALIDATION_URL})
 public class RegisterCourseController extends HttpServlet {
     private CourseService courseService;
 
@@ -29,6 +31,13 @@ public class RegisterCourseController extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getRequestURI().contains(String.format("%s/", COURSE_DOMAIN_NAME))) {
+            response.sendRedirect(REGISTER_COURSE_SECOND_REQUEST_URL);
+            return;
+        }
+
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(COURSE_REGISTER_VIEW);
+        requestDispatcher.forward(request, response);
     }
 
     @Override
@@ -38,7 +47,27 @@ public class RegisterCourseController extends HttpServlet {
         // TODO: 회원 추가
         // TODO: 이미지 추가
 
+        if (request.getRequestURI().equals(VALIDATION_URL)) {
+            validateDuplicateCourseName(request, response);
+            return;
+        }
+
         courseService.create(CreateCourseRequest.from(request));
         response.sendRedirect(GET_COURSES_FIRST_REQUEST_URL);
+    }
+
+    private void validateDuplicateCourseName(HttpServletRequest request, HttpServletResponse response) {
+        boolean isDuplicateName
+                = courseService.checkDuplicateCourseName(request.getParameter(COURSE_NAME_PARAMETER_NAME));
+        StringBuilder duplicateJson = new StringBuilder("{\"isDuplicateName\": \"");
+        duplicateJson.append(isDuplicateName);
+        duplicateJson.append("\"}");
+
+        try {
+            response.setContentType(JSON_CONTENT_TYPE);
+            PrintWriter pw = response.getWriter();
+            pw.print(duplicateJson.toString());
+        } catch (IOException ie) {
+        }
     }
 }

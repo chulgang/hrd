@@ -270,5 +270,28 @@ public class UsersRepository {
         }
         return 1;
     }
+    public String findById(long id){
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        String sql = UsersSQL.findById;
+        int flag = -1;
+        ResultSet rs = null;
+        String users_full_name ="";
+        try {
+            con = DbConnection.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setLong(1, id);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                users_full_name = rs.getString(1);
+            }
+            return users_full_name;
+        } catch (SQLException e) {
+            System.err.println(e+"selectByFullName SQLException");
+            e.printStackTrace();
+            flag = -1;
+        }
+        return null;
+    }
 }
 
