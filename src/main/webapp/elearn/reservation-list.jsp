@@ -93,7 +93,7 @@
                                 <div class="p-1-6 p-sm-1-9">
                                     <span class="badge-soft mb-3">남은좌석 ${reservation.remainedSeat}</span>
                                     <h4 class="font-weight-800 h5 mb-3">
-                                        <a href="event-details.html">${reservation.courseName}</a>
+                                        <a href="/elearn/reservation-detail.do?reservationCourseId=${reservation.reservationCourseId}">${reservation.courseName}</a>
                                     </h4>
                                     <p class="mb-3 alt-font font-weight-500">${reservation.courseDescription}</p>
                                     <div class="dotted-seprator pt-4 mt-4"></div>
