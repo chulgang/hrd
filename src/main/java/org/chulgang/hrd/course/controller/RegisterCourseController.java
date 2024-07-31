@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.chulgang.hrd.aop.LoggingAspect;
 import org.chulgang.hrd.classroom.dto.GetClassroomsResponse;
 import org.chulgang.hrd.classroom.model.service.ClassroomService;
-import org.chulgang.hrd.classroom.model.service.TimePeriodService;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.dto.GetSubjectsResponse;
 import org.chulgang.hrd.course.model.service.CourseService;
