@@ -39,6 +39,10 @@ public class UsersService {
         return usersrepository.findById(id);
     }
 
+    public int deleteById(long id){
+        return usersrepository.deleteById(id);
+    }
+
     public static UsersService getInstance(){
         DbConnection.getConnection();
         return service;

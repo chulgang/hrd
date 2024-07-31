@@ -264,7 +264,7 @@ public class UsersRepository {
 
             return users_id;
         } catch (SQLException e) {
-            System.err.println(e+"findByEmailAndPassword SQLException");
+            System.out.println(e+"findByEmailAndPassword SQLException");
             e.printStackTrace();
             flag = -1;
         }
@@ -292,6 +292,27 @@ public class UsersRepository {
             flag = -1;
         }
         return null;
+    }
+    public int deleteById(long id){
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        String sql = UsersSQL.deleteById;
+        int flag = -1;
+        ResultSet rs = null;
+        try {
+            con = DbConnection.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setLong(1, id);
+            pstmt.executeUpdate();
+            pstmt.executeUpdate();
+            flag = 1;
+            return flag;
+        } catch (SQLException e) {
+            System.err.println(e+"deleteById SQLException");
+            e.printStackTrace();
+            flag = -1;
+        }
+        return flag;
     }
 }
 
