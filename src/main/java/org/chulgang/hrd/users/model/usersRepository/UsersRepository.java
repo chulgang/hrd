@@ -304,7 +304,6 @@ public class UsersRepository {
             pstmt = con.prepareStatement(sql);
             pstmt.setLong(1, id);
             pstmt.executeUpdate();
-            pstmt.executeUpdate();
             flag = 1;
             return flag;
         } catch (SQLException e) {
