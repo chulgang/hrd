@@ -147,7 +147,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 "SELECT COUNT(*) " +
                 "FROM RESERVATION r " +
                 "JOIN PAYED_COURSE pc ON r.ID = pc.RESERVATION_ID " +
-                "WHERE r.USER_ID = " + userId;
+                "WHERE r.STUDENT_ID = " + userId;
         try {
             Connection connection = DbConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
