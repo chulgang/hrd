@@ -3,12 +3,17 @@ package org.chulgang.hrd.reservation.dto;
 import java.time.LocalDate;
 
 public class ReservationCardResponse {
+    private Long reservationCourseId;
     private String courseName;
     private String courseDescription;
     private LocalDate startDate;
     private int remainedSeat;
     private int price;
     private float averageScore;
+
+    public Long getReservationCourseId() { return reservationCourseId; }
+
+    public void setReservationCourseId(Long reservationCourseId) { this.reservationCourseId = reservationCourseId; }
 
     public String getCourseName() {
         return courseName;
