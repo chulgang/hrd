@@ -17,7 +17,13 @@
 
     <!-- title  -->
     <title>eLearn - Online Education Learning Template</title>
+    <script>
+        function delete_do() {
+            var delete_do = "post_delete.do?post_id=${post.id}";
+            window.open(delete_do, '_self');
 
+        }
+    </script>
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logos/favicon.png" />
     <link rel="apple-touch-icon" href="img/logos/apple-touch-icon-57x57.png" />
@@ -192,7 +198,7 @@
             <div style = "margin: 0 auto;" class="col-lg-6">
                 <div class="faq-form">
                     <h2 class="mb-4 text-primary">Update</h2>
-                    <form class="contact quform" name="f" action="post_insert.do" method="post">
+                    <form class="contact quform" name="f" action="post_update.do" method="post">
                         <div class="quform-elements">
                             <div>
 
@@ -201,7 +207,7 @@
                                     <div class="quform-element form-group">
                                         <label for="111">제목<span class="quform-required">*</span></label>
                                         <div class="quform-input">
-                                            <input class="form-control" id="111" type="text" name="subject" placeholder="제목" />
+                                            <input class="form-control" id="111" type="text" name="subject" placeholder="${post.subject}" />
                                         </div>
                                     </div>
                                 </div>
@@ -223,7 +229,7 @@
                                     <div class="quform-element form-group">
                                         <label for="222">내용<span class="quform-required">*</span></label>
                                         <div class="quform-input">
-                                            <textarea style="height: 150px; width:200%; max-width:200%;" class="form-control" id="222" name="content" placeholder="내용"></textarea>
+                                            <textarea style="height: 150px; width:200%; max-width:200%;" class="form-control" id="222" name="content" placeholder="${post.content}"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -260,8 +266,8 @@
 
                                 <div class="col-md-12">
                                     <div class="quform-submit-inner">
-                                        <button type="button" class="butn secondary" onclick="submit()" ><i class="far fa-paper-plane icon-arrow before"></i><span class="label">글쓰기</span><i class="far fa-paper-plane icon-arrow after"></i></button>
-                                        <button type="button" class="butn secondary" onclick="location.href='post_delete.do?post_id=${post.id}'"><i class="far fa-paper-plane icon-arrow before"></i><span class="label">삭제</span><i class="far fa-paper-plane icon-arrow after"></i></button>
+                                        <button type="button" class="butn secondary" onclick="submit()" ><i class="far fa-paper-plane icon-arrow before"></i><span class="label">수정</span><i class="far fa-paper-plane icon-arrow after"></i></button>
+                                        <button type="button" class="butn secondary" onclick="delete_do()"><i class="far fa-paper-plane icon-arrow before"></i><span class="label">삭제</span><i class="far fa-paper-plane icon-arrow after"></i></button>
                                     </div>
                                     <div class="quform-loading-wrap text-start"><span class="quform-loading"></span></div>
                                 </div>

@@ -51,7 +51,9 @@ public class PostServiceImpl implements PostService {
     public void delete_PostS(long postId) {
             postRepository.deletePost(postId);
     }
-
+    public void update_PostS(Post post) {
+        postRepository.update_posts(post);
+    }
     @Override
     public Post getSubjectAndContent(long postId) {
          return  postRepository.getSubjectAndContent(postId);

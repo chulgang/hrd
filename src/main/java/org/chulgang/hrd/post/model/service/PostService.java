@@ -17,5 +17,7 @@ public interface PostService {
 
     long getViewCountS(long postId);
     void delete_PostS(long postId);
-    Post getSubjectAndContent(long postId);
+    void update_PostS(Post post);
+
+        Post getSubjectAndContent(long postId);
 }
