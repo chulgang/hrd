@@ -5,6 +5,8 @@ import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import org.chulgang.hrd.classroom.model.service.ClassroomService;
 import org.chulgang.hrd.classroom.model.service.ClassroomServiceImpl;
+import org.chulgang.hrd.classroom.model.service.TimePeriodService;
+import org.chulgang.hrd.classroom.model.service.TimePeriodServiceImpl;
 import org.chulgang.hrd.course.model.service.CourseService;
 import org.chulgang.hrd.course.model.service.CourseServiceImpl;
 import org.chulgang.hrd.course.model.service.SubjectService;
@@ -28,6 +30,9 @@ public class AppContextListener implements ServletContextListener {
 
         ClassroomService classroomService = ClassroomServiceImpl.getInstance();
         sce.getServletContext().setAttribute(CLASSROOM_SERVICE_ATTRIBUTE_NAME, classroomService);
+
+        TimePeriodService timePeriodService = TimePeriodServiceImpl.getInstance();
+        sce.getServletContext().setAttribute(TIME_PERIOD_SERVICE_ATTRIBUTE_NAME, timePeriodService);
 
         ReservationService reservationService = ReservationServiceImpl.getInstance();
         sce.getServletContext().setAttribute(RESERVATION_SERVICE_ATTRIBUTE_NAME, reservationService);

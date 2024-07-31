@@ -2,9 +2,12 @@ package org.chulgang.hrd.course.util;
 
 public class RequestConstant {
     public static final String COURSE_DOMAIN_NAME = "course";
+    public static final String CLASSROOM_DOMAIN_NAME = "classroom";
+
     public static final String COURSE_SERVICE_ATTRIBUTE_NAME = "courseService";
     public static final String SUBJECT_SERVICE_ATTRIBUTE_NAME = "subjectService";
     public static final String CLASSROOM_SERVICE_ATTRIBUTE_NAME = "classroomService";
+    public static final String TIME_PERIOD_SERVICE_ATTRIBUTE_NAME = "timePeriodService";
     public static final String RESERVATION_SERVICE_ATTRIBUTE_NAME = "reservationService";
     public static final String PAYMENT_SERVICE_ATTRIBUTE_NAME = "paymentService";
 
@@ -18,6 +21,7 @@ public class RequestConstant {
     public static final String SIZE_PARAMETER_NAME = "size";
     public static final String PAGE_NUMBER_PARAMETER_NAME = "pageNumber";
     public static final String COURSE_NAME_PARAMETER_NAME = "courseName";
+    public static final String CLASSROOM_ID_PARAMETER_NAME = "classroomId";
 
     public static final String COURSES_VIEW = "courses-grid.jsp";
     public static final String COURSE_REGISTER_VIEW = "course-registration-form.jsp";
@@ -31,4 +35,8 @@ public class RequestConstant {
     public static final String REGISTER_COURSE_SECOND_REQUEST_URL = "/elearn/registration.do";
     public static final String VALIDATION_URL = "/elearn/course/validation.do";
     public static final String JSON_CONTENT_TYPE = "application/json;charset=utf-8";
+
+
+    public static final String GET_PERIODS_FIRST_REQUEST_URL = "/elearn/classroom/get-periods.do";
+    public static final String GET_PERIODS_SECOND_REQUEST_URL = "/elearn/get-periods.do";
 }

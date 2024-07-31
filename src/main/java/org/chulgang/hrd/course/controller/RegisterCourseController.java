@@ -10,15 +10,19 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.chulgang.hrd.aop.LoggingAspect;
 import org.chulgang.hrd.classroom.dto.GetClassroomsResponse;
 import org.chulgang.hrd.classroom.model.service.ClassroomService;
+import org.chulgang.hrd.classroom.model.service.TimePeriodService;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.dto.GetSubjectsResponse;
 import org.chulgang.hrd.course.model.service.CourseService;
 import org.chulgang.hrd.course.model.service.SubjectService;
+import org.chulgang.hrd.exception.GlobalExceptionHandler;
+import org.chulgang.hrd.exception.JsonSerializationFailedException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import static org.chulgang.hrd.course.util.RequestConstant.*;
+import static org.chulgang.hrd.exception.ExceptionMessage.JSON_SERIALIZATION_FAILED_EXCEPTION_MESSAGE;
 
 
 @WebServlet(urlPatterns = {REGISTER_COURSE_FIRST_REQUEST_URL, REGISTER_COURSE_SECOND_REQUEST_URL, VALIDATION_URL})
@@ -59,8 +63,6 @@ public class RegisterCourseController extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO: 강의실 추가
-        // TODO: 선택 시간대 추가
         // TODO: 회원 추가
         // TODO: 이미지 추가
 
@@ -84,7 +86,12 @@ public class RegisterCourseController extends HttpServlet {
             response.setContentType(JSON_CONTENT_TYPE);
             PrintWriter pw = response.getWriter();
             pw.print(duplicateJson.toString());
+            pw.flush();
         } catch (IOException ie) {
+            GlobalExceptionHandler.throwCheckedException(
+                    new JsonSerializationFailedException(
+                            String.format(JSON_SERIALIZATION_FAILED_EXCEPTION_MESSAGE, duplicateJson.toString()))
+            );
         }
     }
 }
