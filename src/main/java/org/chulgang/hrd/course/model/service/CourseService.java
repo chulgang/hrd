@@ -10,4 +10,6 @@ public interface CourseService {
     GetCourseResponse getCourse(Long id);
 
     void create(CreateCourseRequest createCourseRequest);
+
+    boolean checkDuplicateCourseName(String courseName);
 }
