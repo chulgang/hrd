@@ -110,6 +110,18 @@ public class FormatConverter {
         return -1;
     }
 
+    public static byte parseToByte(String number) {
+        try {
+            return Byte.parseByte(number);
+        } catch (NumberFormatException nfe) {
+            GlobalExceptionHandler.throwRuntimeException(
+                    new NumberFormatException(String.format(BYTE_PARSE_EXCEPTION_MESSAGE, number))
+            );
+        }
+
+        return -1;
+    }
+
     public static float parseToFloat(String prime) {
         try {
             return Float.parseFloat(prime);
@@ -120,6 +132,14 @@ public class FormatConverter {
         }
 
         return -1;
+    }
+
+    public static boolean parseToBoolean(byte number) {
+        if (number == 0) {
+            return false;
+        }
+
+        return true;
     }
 
     public static Blob parseToBlob(String str) {
