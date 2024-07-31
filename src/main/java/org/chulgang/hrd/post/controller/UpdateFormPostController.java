@@ -21,20 +21,18 @@ public class UpdateFormPostController extends HttpServlet {
             throws ServletException, IOException {
         DbConnection.initialize();
 
-        String view = "postUpdate.jsp";
-        String strPostId = request.getParameter("post_id");
-        System.out.println("strPostiD:::: " + strPostId);
-        long post_id = Long.parseLong(strPostId);
         HttpSession session =  request.getSession();
         UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
         PostService service = new PostServiceImpl();
-        Post post = service.getSubjectAndContent(post_id);
 
+        Post post = (Post) session.getAttribute("post");
 
-        request.setAttribute("post_id",post_id);
-        request.setAttribute("post",post);
+        session.setAttribute("post", post);
+        System.out.println("post: "+ post.getId());
+
         request.setAttribute("writer",user.getFull_name());
 
+        String view = "postUpdate.jsp";
         RequestDispatcher rd = request.getRequestDispatcher(view);
         rd.forward(request, response);
     }
