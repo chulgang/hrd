@@ -21,6 +21,10 @@ public class CourseTestConstant {
     public static final Long TIME_PERIOD_ID2 = 2L;
     public static final Long TIME_PERIOD_ID3 = 3L;
 
+    public static final String TIME_PERIOD_DESCRIPTION1 = "";
+    public static final String TIME_PERIOD_DESCRIPTION2 = "3L";
+    public static final String TIME_PERIOD_DESCRIPTION3 = "3L";
+
     public static final String NAME1 = "테스트 강의1";
     public static final String NAME2 = "테스트 강의2";
     public static final String NAME3 = "테스트 강의3";
