@@ -14,4 +14,6 @@ public interface PaymentRepository {
 
     Optional<PayedCourse> findPayedCourseById(Long payedCourseId);
 
+    int countPayments(Long userId);
+
 }
