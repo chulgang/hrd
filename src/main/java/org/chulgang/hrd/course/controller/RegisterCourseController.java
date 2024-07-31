@@ -9,7 +9,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.chulgang.hrd.aop.LoggingAspect;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
+import org.chulgang.hrd.course.dto.GetSubjectsResponse;
 import org.chulgang.hrd.course.model.service.CourseService;
+import org.chulgang.hrd.course.model.service.SubjectService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,6 +22,7 @@ import static org.chulgang.hrd.course.util.RequestConstant.*;
 @WebServlet(urlPatterns = {REGISTER_COURSE_FIRST_REQUEST_URL, REGISTER_COURSE_SECOND_REQUEST_URL, VALIDATION_URL})
 public class RegisterCourseController extends HttpServlet {
     private CourseService courseService;
+    private SubjectService subjectService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -27,6 +30,9 @@ public class RegisterCourseController extends HttpServlet {
 
         courseService = LoggingAspect.createProxy(CourseService.class,
                 (CourseService) config.getServletContext().getAttribute(COURSE_SERVICE_ATTRIBUTE_NAME));
+
+        subjectService = LoggingAspect.createProxy(SubjectService.class,
+                (SubjectService) config.getServletContext().getAttribute(SUBJECT_SERVICE_ATTRIBUTE_NAME));
     }
 
     @Override
@@ -36,6 +42,9 @@ public class RegisterCourseController extends HttpServlet {
             return;
         }
 
+        GetSubjectsResponse getSubjectsResponse = subjectService.getSubjects();
+
+        request.setAttribute(GET_SUBJECTS_ATTRIBUTE_NAME, getSubjectsResponse);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(COURSE_REGISTER_VIEW);
         requestDispatcher.forward(request, response);
     }
