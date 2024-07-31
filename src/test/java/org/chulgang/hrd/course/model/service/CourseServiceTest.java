@@ -175,4 +175,30 @@ class CourseServiceTest {
         assertThat(savedCourse.getStartDate()).isEqualTo(START_DATE1);
         assertThat(savedCourse.getLastDate()).isEqualTo(LAST_DATE1);
     }
+
+    @DisplayName("강좌명 중복 여부를 검증하고, 중복되는 경우 true를 반환할 수 있다.")
+    @Test
+    void checkDuplicateCourseNameWhenTrue() {
+        // given
+        when(courseRepository.existsByName(anyString())).thenReturn(true);
+
+        // when
+        boolean isDuplicateName = courseService.checkDuplicateCourseName(NAME1);
+
+        // then
+        assertThat(isDuplicateName).isTrue();
+    }
+
+    @DisplayName("강좌명 중복 여부를 검증하고, 중복되지 않는 경우 false를 반환할 수 있다.")
+    @Test
+    void checkDuplicateCourseNameWhenFalse() {
+        // given
+        when(courseRepository.existsByName(anyString())).thenReturn(false);
+
+        // when
+        boolean isDuplicateName = courseService.checkDuplicateCourseName(NAME1);
+
+        // then
+        assertThat(isDuplicateName).isFalse();
+    }
 }
