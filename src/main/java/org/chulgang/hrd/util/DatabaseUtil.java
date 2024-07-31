@@ -33,12 +33,12 @@ public class DatabaseUtil {
         basicDataSource.setUsername(properties.getProperty("db.username"));
         basicDataSource.setPassword(properties.getProperty("db.password"));
 
-        basicDataSource.setInitialSize(5);
-        basicDataSource.setMaxTotal(5);
-        basicDataSource.setMaxIdle(5);
+        basicDataSource.setInitialSize(10);
+        basicDataSource.setMaxTotal(20);
+        basicDataSource.setMaxIdle(10);
         basicDataSource.setMinIdle(5);
 
-        basicDataSource.setMaxWaitMillis(Duration.ofSeconds(2).toMillis());
+        basicDataSource.setMaxWaitMillis(Duration.ofSeconds(10).toMillis());
         basicDataSource.setValidationQuery("SELECT 1 FROM DUAL");
         basicDataSource.setTestOnBorrow(true);
 
