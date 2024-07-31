@@ -1,6 +1,7 @@
 package org.chulgang.hrd.reservation.model.repository;
 
 import org.chulgang.hrd.reservation.dto.ReservationCardResponse;
+import org.chulgang.hrd.reservation.entity.ReservationCourse;
 import org.chulgang.hrd.util.DbConnection;
 
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ReservationRepositoryImpl implements ReservationRepository {
     private static final ReservationRepositoryImpl INSTANCE = new ReservationRepositoryImpl();
@@ -43,7 +45,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     public List<ReservationCardResponse> findReservationCardByMemberId(Long memberId, int pageNumber) {
         List<ReservationCardResponse> reservedCourses = new ArrayList<>();
         String selectReservationCardSql =
-                "SELECT c.NAME, c.DESCRIPTION, c.START_DATE, c.REMAINED_SEAT, c.PRICE, c.AVERAGE_SCORE " +
+                "SELECT rc.ID , c.NAME, c.DESCRIPTION, c.START_DATE, c.REMAINED_SEAT, c.PRICE, c.AVERAGE_SCORE " +
                         "FROM RESERVED_COURSE rc " +
                         "JOIN RESERVATION r ON rc.RESERVATION_ID = r.ID " +
                         "JOIN COURSE c ON rc.COURSE_ID = c.ID " +
@@ -58,6 +60,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     ReservationCardResponse response = new ReservationCardResponse();
+                    response.setReservationCourseId(resultSet.getLong("ID"));
                     response.setCourseName(resultSet.getString("NAME"));
                     response.setCourseDescription(resultSet.getString("DESCRIPTION"));
                     response.setStartDate(resultSet.getDate("START_DATE").toLocalDate());
@@ -119,5 +122,29 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public Optional<ReservationCourse> findById(Long id) {
+        String sql = "SELECT * FROM RESERVATION_COURSE WHERE ID = ?";
+        try {
+            Connection connection = DbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    ReservationCourse reservationCourse = new ReservationCourse();
+                    reservationCourse.setId(resultSet.getLong("ID"));
+                    reservationCourse.setCourseId(resultSet.getLong("COURSE_ID"));
+                    reservationCourse.setReservationId(resultSet.getLong("RESERVATION_ID"));
+                    reservationCourse.setCreatedAt(resultSet.getTimestamp("CREATED_AT").toLocalDateTime());
+                    reservationCourse.setIsReserved(resultSet.getInt("IS_RESERVED"));
+                    return Optional.of(reservationCourse);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
     }
 }
