@@ -11,6 +11,8 @@ import org.chulgang.hrd.payment.model.service.PaymentService;
 import org.chulgang.hrd.payment.model.service.PaymentServiceImpl;
 import org.chulgang.hrd.reservation.model.service.ReservationService;
 import org.chulgang.hrd.reservation.model.service.ReservationServiceImpl;
+import org.chulgang.hrd.wallethistory.model.service.WalletHistoryService;
+import org.chulgang.hrd.wallethistory.model.service.WalletHistoryServiceImpl;
 
 import static org.chulgang.hrd.course.util.RequestConstant.*;
 
@@ -29,5 +31,9 @@ public class AppContextListener implements ServletContextListener {
 
         PaymentService paymentService = PaymentServiceImpl.getInstance();
         sce.getServletContext().setAttribute(PAYMENT_SERVICE_ATTRIBUTE_NAME, paymentService);
+
+        WalletHistoryService walletHistoryService = WalletHistoryServiceImpl.getInstance();
+        sce.getServletContext().setAttribute(WALLET_HISTORY_SERVICE_ATTRIBUTE_NAME, paymentService);
+
     }
 }

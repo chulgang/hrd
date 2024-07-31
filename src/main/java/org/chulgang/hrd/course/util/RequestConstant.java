@@ -6,6 +6,8 @@ public class RequestConstant {
     public static final String SUBJECT_SERVICE_ATTRIBUTE_NAME = "subjectService";
     public static final String RESERVATION_SERVICE_ATTRIBUTE_NAME = "reservationService";
     public static final String PAYMENT_SERVICE_ATTRIBUTE_NAME = "paymentService";
+    public static final String WALLET_HISTORY_SERVICE_ATTRIBUTE_NAME = "walletHistoryService";
+
 
     public static final String GET_SUBJECTS_ATTRIBUTE_NAME = "getSubjectsResponse";
 
