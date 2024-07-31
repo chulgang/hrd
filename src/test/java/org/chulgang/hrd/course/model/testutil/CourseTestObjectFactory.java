@@ -29,16 +29,17 @@ public class CourseTestObjectFactory extends Course {
             String description, int price, LocalDate startDate, LocalDate lastDate
     ) {
         return CreateCourseRequest.of(
-                subjectId, teacherId, timePeriodId, name, description, price, startDate, lastDate
+                subjectId, teacherId, timePeriodId, name, description, price, startDate, lastDate, 50
         );
     }
 
     public static GetCourseResponse createCourseResponse(
-            Long id, String name, String description, int price, LocalDate startDate, LocalDate lastDate,
-            float averageScore, int remainedSeat, LocalDateTime createdAt, LocalDateTime modifiedAt
+            Long id, Long subjectId, String name, String description, int price, LocalDate startDate,
+            LocalDate lastDate, float averageScore, int remainedSeat, LocalDateTime createdAt, LocalDateTime modifiedAt
     ) {
         return GetCourseResponse.of(
-                id, name, description, price, startDate, lastDate, averageScore, remainedSeat, createdAt, modifiedAt
+                id, subjectId, name, description, price, startDate,
+                lastDate, averageScore, remainedSeat, createdAt, modifiedAt
         );
     }
 }
