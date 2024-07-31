@@ -56,7 +56,7 @@ public class RegisterCourseController extends HttpServlet {
 
         request.setAttribute(GET_SUBJECTS_ATTRIBUTE_NAME, getSubjectsResponse);
         request.setAttribute(GET_CLASSROOMS_ATTRIBUTE_NAME, getClassroomsResponse);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(COURSE_REGISTER_VIEW);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(COURSE_REGISTRATION_VIEW);
         requestDispatcher.forward(request, response);
     }
 
@@ -70,8 +70,10 @@ public class RegisterCourseController extends HttpServlet {
             return;
         }
 
-        courseService.create(CreateCourseRequest.from(request));
-        response.sendRedirect(GET_COURSES_FIRST_REQUEST_URL);
+        boolean isSuccess = courseService.create(CreateCourseRequest.from(request));
+        request.setAttribute("isSuccess", isSuccess);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(COURSE_REGISTRATION_CONFIRM_VIEW);
+        requestDispatcher.forward(request, response);
     }
 
     private void validateDuplicateCourseName(HttpServletRequest request, HttpServletResponse response) {

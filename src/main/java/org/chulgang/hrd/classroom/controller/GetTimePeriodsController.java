@@ -47,11 +47,14 @@ public class GetTimePeriodsController extends HttpServlet {
         timePeriodsJson.append("[");
 
         for (int i = 0; i < getTimePeriodsResponse.size(); i++) {
+            Long id = getTimePeriodsResponse.get(i).getId();
             String description = getTimePeriodsResponse.get(i).getPeriod().getDescription();
             boolean isUsed = getTimePeriodsResponse.get(i).isUsed();
 
             timePeriodsJson.append("{")
-                    .append("\"description\":\"").append(description).append("\",")
+                    .append("\"id\":").append(id).append(",")
+                    .append("\"description\":\"")
+                    .append(description).append("\",")
                     .append("\"isUsed\":").append(isUsed)
                     .append("}");
 
@@ -60,8 +63,6 @@ public class GetTimePeriodsController extends HttpServlet {
             }
         }
         timePeriodsJson.append("]");
-
-        System.out.println("sadf" + timePeriodsJson + "0");
 
         try {
             response.setContentType(JSON_CONTENT_TYPE);

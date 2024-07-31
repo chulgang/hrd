@@ -41,4 +41,8 @@ public class GetClassroomResponse {
     public String getName() {
         return name;
     }
+
+    public int getSeatCount() {
+        return seatCount;
+    }
 }

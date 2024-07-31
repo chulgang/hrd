@@ -30,6 +30,10 @@ public class GetSubjectResponse {
         return new GetSubjectResponse(subject.getId(), subject.getName(), createdAt, modifiedAt);
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }

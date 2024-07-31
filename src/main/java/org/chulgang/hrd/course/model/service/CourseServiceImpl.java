@@ -9,14 +9,14 @@ import org.chulgang.hrd.course.model.repository.CourseRepositoryImpl;
 import org.chulgang.hrd.util.DbConnection;
 
 public class CourseServiceImpl implements CourseService {
-    private static final CourseServiceImpl INSTANCE = new CourseServiceImpl(CourseRepositoryImpl.getInstance());
+    private static final CourseService INSTANCE = new CourseServiceImpl(CourseRepositoryImpl.getInstance());
     private final CourseRepository courseRepository;
 
     public CourseServiceImpl(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
 
-    public static CourseServiceImpl getInstance() {
+    public static CourseService getInstance() {
         return INSTANCE;
     }
 
@@ -34,9 +34,9 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void create(CreateCourseRequest createCourseRequest) {
+    public boolean create(CreateCourseRequest createCourseRequest) {
         DbConnection.initialize();
-        courseRepository.save(Course.from(createCourseRequest));
+        return courseRepository.save(Course.from(createCourseRequest));
     }
 
     @Override

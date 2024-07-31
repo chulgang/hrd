@@ -31,7 +31,7 @@ public class Course {
 
     private Course(
             Long subjectId, Long teacherId, Long timePeriodId, String name,
-            String description, int price, LocalDate startDate, LocalDate lastDate
+            String description, int price, LocalDate startDate, LocalDate lastDate, int remainedSeat
     ) {
         this.subjectId = subjectId;
         this.teacherId = teacherId;
@@ -41,6 +41,7 @@ public class Course {
         this.price = price;
         this.startDate = startDate;
         this.lastDate = lastDate;
+        this.remainedSeat = remainedSeat;
     }
 
     private Course(
@@ -102,12 +103,14 @@ public class Course {
                 createCourseRequest.getDescription(),
                 createCourseRequest.getPrice(),
                 createCourseRequest.getStartDate(),
-                createCourseRequest.getLastDate()
+                createCourseRequest.getLastDate(),
+                createCourseRequest.getRemainedSeat()
         );
     }
 
     public static Course from(String[] data) {
         LocalDateTime modifiedAt = data[12] == null ? null : FormatConverter.parseToDateTime(data[12]);
+        float averageScore = data[9] == null ? 0.0f : FormatConverter.parseToFloat(data[9]);
 
         return new Course(
                 Long.parseLong(data[0]),
@@ -119,7 +122,7 @@ public class Course {
                 FormatConverter.parseToInt(data[6]),
                 FormatConverter.parseToDate(data[7]),
                 FormatConverter.parseToDate(data[8]),
-                FormatConverter.parseToFloat(data[9]),
+                averageScore,
                 FormatConverter.parseToInt(data[10]),
                 FormatConverter.parseToDateTime(data[11]),
                 modifiedAt
@@ -168,6 +171,19 @@ public class Course {
     }
 
     public void setTupleValues(PreparedStatement preparedStatement) throws SQLException {
+        if (isIdNull()) {
+            preparedStatement.setLong(1, subjectId);
+            preparedStatement.setLong(2, teacherId);
+            preparedStatement.setLong(3, timePeriodId);
+            preparedStatement.setString(4, name);
+            preparedStatement.setString(5, description);
+            preparedStatement.setInt(6, price);
+            preparedStatement.setObject(7, startDate);
+            preparedStatement.setObject(8, lastDate);
+            preparedStatement.setInt(9, remainedSeat);
+            return;
+        }
+
         preparedStatement.setLong(1, id);
         preparedStatement.setLong(2, subjectId);
         preparedStatement.setLong(3, teacherId);
@@ -230,5 +246,9 @@ public class Course {
 
     public LocalDateTime getModifiedAt() {
         return modifiedAt;
+    }
+
+    public boolean isIdNull() {
+        return id == null;
     }
 }
