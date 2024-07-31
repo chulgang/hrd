@@ -58,7 +58,7 @@
 
         <!-- PAGE TITLE
         ================================================== -->
-        <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9" data-background="img/bg/bg-04.jpg">
+        <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9" >
             <div class="container">
                 <div class="row text-center">
                     <div class="col-md-12">
