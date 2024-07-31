@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 public class DupplicateController extends HttpServlet{
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        DbConnection.initialize();
         UsersService service = UsersService.getInstance();
         String username = request.getParameter("username");
         int get_username_result = service.dupplicate(username);
