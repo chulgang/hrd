@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="p-1-6 p-sm-1-9">
-                                    <span class="badge-soft mb-3">남은좌석  ${reservation.remainedSeat} </span>
+                                    <span class="badge-soft mb-3">남은좌석 ${reservation.remainedSeat}</span>
                                     <h4 class="font-weight-800 h5 mb-3">
                                         <a href="event-details.html">${reservation.courseName}</a>
                                     </h4>
@@ -116,6 +116,25 @@
                         </div>
                     </div>
                 </c:forEach>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="text-center mt-6 mt-lg-7">
+                        <div class="pagination text-extra-dark-gray">
+                            <ul>
+                                <c:if test="${currentPage > 1}">
+                                    <li><a href="/elearn/reservation-list.do?page=${currentPage - 1}" class="me-3"><i class="fas fa-long-arrow-alt-left"></i></a></li>
+                                </c:if>
+                                <c:forEach begin="1" end="${totalPages}" var="i">
+                                    <li class="${currentPage == i ? 'active' : ''}"><a href="/elearn/reservation-list.do?page=${i}" class="me-2">${i}</a></li>
+                                </c:forEach>
+                                <c:if test="${currentPage < totalPages}">
+                                    <li><a href="/elearn/reservation-list.do?page=${currentPage + 1}" class="me-3"><i class="fas fa-long-arrow-alt-right"></i></a></li>
+                                </c:if>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
