@@ -22,4 +22,10 @@ public class SubjectServiceImpl implements SubjectService {
         DbConnection.initialize();
         return GetSubjectsResponse.from(subjectRepository.findAll());
     }
+
+    @Override
+    public String getSubject(Long id) {
+        DbConnection.initialize();
+        return subjectRepository.findNameById(id);
+    }
 }

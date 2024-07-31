@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 public class GetCourseResponse {
     private Long id;
+    private Long subjectId;
     private String name;
     private String description;
     private int price;
@@ -20,6 +21,7 @@ public class GetCourseResponse {
 
     private GetCourseResponse(
             Long id,
+            Long subjectId,
             String name,
             String description,
             int price,
@@ -31,6 +33,7 @@ public class GetCourseResponse {
             String modifiedAt
     ) {
         this.id = id;
+        this.subjectId = subjectId;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -55,6 +58,7 @@ public class GetCourseResponse {
 
         return new GetCourseResponse(
                 course.getId(),
+                course.getSubjectId(),
                 course.getName(),
                 course.getDescription(),
                 course.getPrice(),
@@ -68,8 +72,8 @@ public class GetCourseResponse {
     }
 
     public static GetCourseResponse of(
-            Long id, String name, String description, int price, LocalDate startDate, LocalDate lastDate,
-            float averageScore, int remainedSeat, LocalDateTime createdAt, LocalDateTime modifiedAt
+            Long id, Long subjectId, String name, String description, int price, LocalDate startDate,
+            LocalDate lastDate, float averageScore, int remainedSeat, LocalDateTime createdAt, LocalDateTime modifiedAt
     ) {
         String parsedStartDate = FormatConverter.parseToString(startDate);
         String parsedLastDate = FormatConverter.parseToString(lastDate);
@@ -77,13 +81,17 @@ public class GetCourseResponse {
         String parsedModifiedAt = FormatConverter.parseToString(modifiedAt);
 
         return new GetCourseResponse(
-                id, name, description, price, parsedStartDate, parsedLastDate,
+                id, subjectId, name, description, price, parsedStartDate, parsedLastDate,
                 averageScore, remainedSeat, parsedCreatedAt, parsedModifiedAt
         );
     }
 
     public Long getId() {
         return id;
+    }
+
+    public Long getSubjectId() {
+        return subjectId;
     }
 
     public String getName() {
