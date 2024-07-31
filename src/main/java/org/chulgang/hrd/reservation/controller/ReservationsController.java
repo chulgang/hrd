@@ -31,7 +31,6 @@ public class ReservationsController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DbConnection.initialize();
         HttpSession session = request.getSession();
         //User user = (User) session.getAttribute("user");
         //Long userId = user.getuserId();

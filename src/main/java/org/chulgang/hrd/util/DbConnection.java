@@ -36,7 +36,7 @@ public class DbConnection {
             connectionThreadLocal.set(connection);
 
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-            connection.setAutoCommit(true);
+            connection.setAutoCommit(false);
             log.debug(ORACLE_CONNECTION_SUCCESS_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,6 +52,7 @@ public class DbConnection {
     }
 
     public static Connection getConnection() {
+        initialize();
         return connectionThreadLocal.get();
     }
 

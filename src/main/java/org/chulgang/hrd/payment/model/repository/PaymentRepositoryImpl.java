@@ -67,6 +67,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            DbConnection.reset();
         }
     }
 
@@ -103,6 +105,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
 
         return payments;
@@ -131,6 +135,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
         return Optional.empty();
     }
@@ -151,6 +157,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
         return 0;
     }
