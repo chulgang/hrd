@@ -104,7 +104,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
                 "SELECT COUNT(*) " +
                 "FROM RESERVATION r " +
                 "JOIN RESERVED_COURSE rc ON r.ID = rc.RESERVATION_ID " +
-                "WHERE r.USER_ID = " + userId;
+                "WHERE r.STUDENT_ID = " + userId;
         try {
             Connection connection = DbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
