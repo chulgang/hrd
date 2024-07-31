@@ -37,6 +37,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
         return false;
     }
@@ -72,6 +74,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
         return reservedCourses;
     }
@@ -99,6 +103,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
 
         return false;
@@ -120,6 +126,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
         return 0;
     }
@@ -144,6 +152,8 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
         return Optional.empty();
     }
