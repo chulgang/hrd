@@ -38,7 +38,7 @@ public class AppContextListener implements ServletContextListener {
         sce.getServletContext().setAttribute(PAYMENT_SERVICE_ATTRIBUTE_NAME, paymentService);
 
         WalletHistoryService walletHistoryService = WalletHistoryServiceImpl.getInstance();
-        sce.getServletContext().setAttribute(WALLET_HISTORY_SERVICE_ATTRIBUTE_NAME, paymentService);
+        sce.getServletContext().setAttribute(WALLET_HISTORY_SERVICE_ATTRIBUTE_NAME, walletHistoryService);
 
     }
 }
