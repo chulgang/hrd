@@ -27,7 +27,6 @@ public class PostRepositoryImpl implements PostRepository {
             while (rs.next()) {
                 long id = rs.getInt(1);
                 long writer_id = rs.getLong(2);
-                System.out.println("writer_id: " + writer_id);
                 String subject = rs.getString(3);
                 String content = rs.getString(4);
                 long view_count = rs.getLong(5);

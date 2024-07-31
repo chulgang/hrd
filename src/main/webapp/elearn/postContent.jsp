@@ -31,7 +31,11 @@
   }
 
   </script>
-
+  <style>
+    .accordion-style1 .btn-link:after {
+      display: none;
+    }
+  </style>
   <!-- favicon -->
   <link rel="shortcut icon" href="img/logos/favicon.png"/>
   <link rel="apple-touch-icon" href="img/logos/apple-touch-icon-57x57.png"/>
@@ -272,27 +276,39 @@
               <div class="card">
                 <div class="card-header" id="headingOne">
                   <h5 class="mb-0">
-                    <button class="btn btn-link" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                      Neque porro quisquam est qui dolorem ?
+                    <button class="btn btn-link" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                      ${post.subject}
                     </button>
                   </h5>
                 </div>
                 <div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-bs-parent="#accordion1">
                   <div class="card-body">
-                    ${post_content}
+                    ${post.content}
+                    ${post.writer_id}
+                    <p>
+                      userid = ${user_Id}
+                    </p>
                   </div>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
 
 
-      <button type="button" style="margin: 1em; float:right;" class="btn btn-outline-success">
-        <a href="post_updateForm.do?post_id=${postlist.id}&post_content=${postlist.content}" class="button">수정</a>
-      </button>
+      <c:choose>
+        <c:when test="${user_Id eq post.writer_id}">
+          <button type="button" style="margin: 1em; float:right;" class="btn btn-outline-success">
+            <a href="post_updateForm.do?post_id=${post.id}&post_subject=${post.subject}&post_content=${post.content}" class="button">수정</a>
+          </button>
+        </c:when>
+        <c:otherwise>
+          <!-- user_id와 post.writer_id가 다른 경우 실행될 내용 -->
+          없서 냥냥
+        </c:otherwise>
+      </c:choose>
+
+
     </div>
   </section>
 
