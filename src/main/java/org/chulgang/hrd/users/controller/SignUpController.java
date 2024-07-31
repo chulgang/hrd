@@ -37,18 +37,9 @@ public class SignUpController extends HttpServlet {
                 service.insertUserRole(email,password,teacher);
             }
         }
-
-
-        // PrintWriter pw = response.getWriter();
+        // 나중에 쓸 예정 PrintWriter pw = response.getWriter();
         //pw.println("<script>location.href='../index.jsp';</script>");
         response.sendRedirect("../index.jsp");
-        System.out.println("result: " + email);
-        System.out.println("result: " + username);
-        System.out.println("result: " + password);
-        System.out.println("result: " + full_name);
-        System.out.println("result: " + phone);
-        System.out.println("student: " + student);
-        System.out.println("teacher: " + teacher);
 
 
     }
