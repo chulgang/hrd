@@ -15,7 +15,6 @@ import java.io.IOException;
 public class SignUpController extends HttpServlet {
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        DbConnection.initialize();
         UsersService service = UsersService.getInstance();
 
         String email = request.getParameter("email");

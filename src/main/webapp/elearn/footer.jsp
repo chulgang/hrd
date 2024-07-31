@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-6 col-lg-3 mb-2-5 mb-lg-0">
                     <a href="index.jsp" class="footer-logo">
-                        <img src="img/logos/footer-light-logo.png" class="mb-4" alt="Footer Logo">
+                       <h2 style="color:#ff7029">철강 HRD</h2>
                     </a>
                     <p class="mb-1-6 text-white">
                         오프라인 시범예약 사이트입니다.

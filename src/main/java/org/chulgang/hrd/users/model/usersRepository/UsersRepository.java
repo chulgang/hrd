@@ -35,6 +35,8 @@ public class UsersRepository {
             System.err.println(e+"Board write  insert SQLException");
             e.printStackTrace();
             flag = -1;
+        }finally {
+            DbConnection.reset();
         }
         return flag;
     }
@@ -74,6 +76,8 @@ public class UsersRepository {
         } catch (SQLException e) {
             System.out.println(e+"loginByEmailSQLException");
             e.printStackTrace();
+        }finally {
+            DbConnection.reset();
         }
         return null;
     }
@@ -110,7 +114,9 @@ public class UsersRepository {
         } catch (SQLException e) {
             System.err.println(e+"loginByUsernameSQLException");
             e.printStackTrace();
-            }
+            }finally {
+            DbConnection.reset();
+        }
         return null;
     }
     public int modifyMyPage(String email, String username, String password, String full_name , String phone){
@@ -135,6 +141,8 @@ public class UsersRepository {
             System.err.println(e+"modifyMyPageSQLException");
             e.printStackTrace();
             flag = -1;
+        }finally {
+            DbConnection.reset();
         }
         return flag;
     }
@@ -164,6 +172,8 @@ public class UsersRepository {
             System.err.println(e+"findByPassword SQLException");
             e.printStackTrace();
             flag = -1;
+        }finally {
+            DbConnection.reset();
         }
         return null;
     }
@@ -193,6 +203,8 @@ public class UsersRepository {
             System.err.println(e+"findByPassword SQLException");
             e.printStackTrace();
             flag = -1;
+        }finally {
+            DbConnection.reset();
         }
         return null;
     }
@@ -220,6 +232,8 @@ public class UsersRepository {
             System.err.println(e+"findByPassword SQLException");
             e.printStackTrace();
             flag = -1;
+        }finally {
+            DbConnection.reset();
         }
      return 1;
     }
@@ -243,6 +257,8 @@ public class UsersRepository {
             System.err.println(e+"insertUserRole SQLException");
             e.printStackTrace();
             return -1;
+        }finally {
+            DbConnection.reset();
         }
     }
     public long findByEmailAndPassword(String email,String password){
@@ -267,6 +283,8 @@ public class UsersRepository {
             System.out.println(e+"findByEmailAndPassword SQLException");
             e.printStackTrace();
             flag = -1;
+        }finally {
+            DbConnection.reset();
         }
         return 1;
     }
@@ -290,6 +308,8 @@ public class UsersRepository {
             System.err.println(e+"selectByFullName SQLException");
             e.printStackTrace();
             flag = -1;
+        }finally {
+            DbConnection.reset();
         }
         return null;
     }
@@ -310,6 +330,8 @@ public class UsersRepository {
             System.err.println(e+"deleteById SQLException");
             e.printStackTrace();
             flag = -1;
+        }finally {
+            DbConnection.reset();
         }
         return flag;
     }

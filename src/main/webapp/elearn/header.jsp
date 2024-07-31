@@ -43,7 +43,7 @@
                         <nav class="navbar navbar-expand-lg navbar-light p-0">
                             <div class="navbar-header navbar-header-custom">
                                 <!-- start logo -->
-                                <a href="index.jsp" class="navbar-brand"><img id="logo" src="img/logos/logo-inner.png" alt="logo" /></a>
+                                <a href="index.jsp" class="navbar-brand"><h2 style="color:#ff7029">철강 HRD</h2></a>
                                 <!-- end logo -->
                             </div>
 
@@ -114,10 +114,7 @@
 
                             <!-- start attribute navigation -->
                             <div class="attr-nav align-items-xl-center ms-xl-auto main-font">
-                                <ul>
-                                    <li class="search"><a href="#!"><i class="fas fa-search"></i></a></li>
-                                    <li class="d-none d-xl-inline-block"><a href="contact.jsp" class="butn md text-white"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">Apply Now</span><i class="fas fa-plus-circle icon-arrow after"></i></a></li>
-                                </ul>
+
                             </div>
                             <!-- end attribute navigation -->
                         </nav>

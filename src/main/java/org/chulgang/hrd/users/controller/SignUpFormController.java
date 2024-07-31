@@ -12,7 +12,7 @@ import java.io.IOException;
 public class SignUpFormController extends HttpServlet{
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        response.sendRedirect("contact.jsp");
+        response.sendRedirect("../contact.jsp");
 
     }
 }

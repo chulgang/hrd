@@ -18,7 +18,6 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        DbConnection.initialize();
         UsersService service = UsersService.getInstance();
 
         UsersLoginResponse dto = null;
