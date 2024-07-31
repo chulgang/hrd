@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.chulgang.hrd.aop.LoggingAspect;
+import org.chulgang.hrd.classroom.dto.GetClassroomsResponse;
+import org.chulgang.hrd.classroom.model.service.ClassroomService;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.dto.GetSubjectsResponse;
 import org.chulgang.hrd.course.model.service.CourseService;
@@ -23,6 +25,7 @@ import static org.chulgang.hrd.course.util.RequestConstant.*;
 public class RegisterCourseController extends HttpServlet {
     private CourseService courseService;
     private SubjectService subjectService;
+    private ClassroomService classroomService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -33,6 +36,9 @@ public class RegisterCourseController extends HttpServlet {
 
         subjectService = LoggingAspect.createProxy(SubjectService.class,
                 (SubjectService) config.getServletContext().getAttribute(SUBJECT_SERVICE_ATTRIBUTE_NAME));
+
+        classroomService = LoggingAspect.createProxy(ClassroomService.class,
+                (ClassroomService) config.getServletContext().getAttribute(CLASSROOM_SERVICE_ATTRIBUTE_NAME));
     }
 
     @Override
@@ -43,8 +49,10 @@ public class RegisterCourseController extends HttpServlet {
         }
 
         GetSubjectsResponse getSubjectsResponse = subjectService.getSubjects();
+        GetClassroomsResponse getClassroomsResponse = classroomService.getClassrooms();
 
         request.setAttribute(GET_SUBJECTS_ATTRIBUTE_NAME, getSubjectsResponse);
+        request.setAttribute(GET_CLASSROOMS_ATTRIBUTE_NAME, getClassroomsResponse);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(COURSE_REGISTER_VIEW);
         requestDispatcher.forward(request, response);
     }
