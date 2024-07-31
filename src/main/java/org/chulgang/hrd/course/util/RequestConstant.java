@@ -25,7 +25,8 @@ public class RequestConstant {
     public static final String CLASSROOM_ID_PARAMETER_NAME = "classroomId";
 
     public static final String COURSES_VIEW = "courses-grid.jsp";
-    public static final String COURSE_REGISTER_VIEW = "course-registration-form.jsp";
+    public static final String COURSE_REGISTRATION_VIEW = "course-registration-form.jsp";
+    public static final String COURSE_REGISTRATION_CONFIRM_VIEW = "course-registration-confirm.jsp";
 
     public static final String GET_COURSE_FIRST_REQUEST_URL = "/elearn/course/course-details.do";
     public static final String GET_COURSE_SECOND_REQUEST_URL = "/elearn/course-details.do";

@@ -14,10 +14,11 @@ public class CreateCourseRequest {
     private int price;
     private LocalDate startDate;
     private LocalDate lastDate;
+    private int remainedSeat;
 
     private CreateCourseRequest(
             Long subjectId, Long teacherId, Long timePeriodId, String name,
-            String description, int price, LocalDate startDate, LocalDate lastDate
+            String description, int price, LocalDate startDate, LocalDate lastDate, int remainedSeat
     ) {
         this.subjectId = subjectId;
         this.teacherId = teacherId;
@@ -27,25 +28,30 @@ public class CreateCourseRequest {
         this.price = price;
         this.startDate = startDate;
         this.lastDate = lastDate;
+        this.remainedSeat = remainedSeat;
     }
 
     public static CreateCourseRequest from(HttpServletRequest request) {
+        System.out.println(request.getParameter("seatCount") + "sadfsadfsd");
         return new CreateCourseRequest(
                 Long.parseLong(request.getParameter("subjectId")),
-                Long.parseLong(request.getParameter("teacherId")),
-                Long.parseLong(request.getParameter("timePeriodId")),
-                request.getParameter("name"),
-                request.getParameter("description"),
+                // Long.parseLong(request.getParameter("teacherId")),
+                1L,
+                Long.parseLong(request.getParameter("time-period")),
+                request.getParameter("courseName"),
+                request.getParameter("course-description"),
                 FormatConverter.parseToInt(request.getParameter("price")),
-                FormatConverter.parseToDate(request.getParameter("startDate")),
-                FormatConverter.parseToDate(request.getParameter("lastDate"))
+                FormatConverter.parseToDate(request.getParameter("start-date")),
+                FormatConverter.parseToDate(request.getParameter("last-date")),
+                FormatConverter.parseToInt(request.getParameter("seatCount"))
         );
     }
 
     public static CreateCourseRequest of(Long subjectId, Long teacherId, Long timePeriodId, String name,
-                                         String description, int price, LocalDate startDate, LocalDate lastDate) {
+                                         String description, int price,
+                                         LocalDate startDate, LocalDate lastDate, int remainedSeat) {
         return new CreateCourseRequest(
-                subjectId, teacherId, timePeriodId, name, description, price, startDate, lastDate
+                subjectId, teacherId, timePeriodId, name, description, price, startDate, lastDate, remainedSeat
         );
     }
 
@@ -79,5 +85,9 @@ public class CreateCourseRequest {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getRemainedSeat() {
+        return remainedSeat;
     }
 }

@@ -17,9 +17,9 @@ import java.util.List;
 import static org.chulgang.hrd.course.exception.ExceptionMessage.COURSE_ID_NOT_FOUND_EXCEPTION_MESSAGE;
 
 public class CourseRepositoryImpl implements CourseRepository {
-    private static final CourseRepositoryImpl INSTANCE = new CourseRepositoryImpl();
+    private static final CourseRepository INSTANCE = new CourseRepositoryImpl();
 
-    public static CourseRepositoryImpl getInstance() {
+    public static CourseRepository getInstance() {
         return INSTANCE;
     }
 
@@ -93,10 +93,16 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
-    public void save(Course course) {
+    public boolean save(Course course) {
         String sql = "insert into COURSE(ID, SUBJECT_ID, TEACHER_ID, TIME_PERIOD_ID, NAME, DESCRIPTION, PRICE, "
                 + "START_DATE, LAST_DATE, CREATED_AT, REMAINED_SEAT) "
                 + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
+
+        if (course.isIdNull()) {
+            sql = "insert into COURSE(SUBJECT_ID, TEACHER_ID, TIME_PERIOD_ID, NAME, DESCRIPTION, PRICE, "
+                    + "START_DATE, LAST_DATE, CREATED_AT, REMAINED_SEAT) "
+                    + "values(?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
+        }
 
         PreparedStatement preparedStatement = StatementGenerator.generateStatement(sql);
 
@@ -105,9 +111,11 @@ public class CourseRepositoryImpl implements CourseRepository {
             preparedStatement.executeUpdate();
         } catch (SQLException se) {
             se.printStackTrace();
+            return false;
         }
 
         ConnectionContainer.close(preparedStatement);
+        return true;
     }
 
     @Override
