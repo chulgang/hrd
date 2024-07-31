@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface ReservationService {
 
-    boolean registerReservation(Long memberId, Long courseId);
+    boolean registerReservation(Long userId, Long courseId);
 
     List<ReservationCardResponse> getPagedReservations(Long id , int pageNumber);
 
     ReservationCourseDetailResponse getReservationCourseDetail(Long courseId);
 
-    boolean deleteReservation(Long memberId, Long reservationId);
+    boolean deleteReservation(Long reservationCourseId);
 
     int getTotalReservations(Long userId);
 

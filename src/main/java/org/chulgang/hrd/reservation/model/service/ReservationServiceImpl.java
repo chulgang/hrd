@@ -23,10 +23,9 @@ public class ReservationServiceImpl implements ReservationService {
         return INSTANCE;
     }
 
-
     @Override
-    public boolean registerReservation(Long memberId, Long courseId) {
-        return reservationRepository.registerReservation(memberId, courseId);
+    public boolean registerReservation(Long userId, Long courseId) {
+        return reservationRepository.registerReservation(userId, courseId);
     }
 
     @Override
@@ -47,8 +46,8 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public boolean deleteReservation(Long memberId, Long reservationId) {
-        return reservationRepository.deleteReservation(memberId, reservationId);
+    public boolean deleteReservation(Long reservationCourseId) {
+        return reservationRepository.deleteReservation(reservationCourseId);
     }
 
     @Override

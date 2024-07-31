@@ -21,15 +21,12 @@ public class DeleteReservationController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        //User user = (User) session.getAttribute("user");
-        //Long userId = user.getUserId();
-        Long reservationId = Long.parseLong(request.getParameter("reservationId"));
-        boolean isDeleted = reservationService.deleteReservation(1L, reservationId);
+        Long reservationCourseId = Long.parseLong(request.getParameter("reservationCourseId"));
+        boolean isDeleted = reservationService.deleteReservation(reservationCourseId);
         if (isDeleted) {
-            response.sendRedirect(request.getContextPath() + "/reservation-list");
+            response.sendRedirect(request.getContextPath() + "/reservation-list.do");
         } else {
-            response.sendRedirect(request.getContextPath() + "/reservation-delete-failure");
+            response.sendRedirect(request.getContextPath() + "/reservation-delete-failure.do");
         }
     }
 }

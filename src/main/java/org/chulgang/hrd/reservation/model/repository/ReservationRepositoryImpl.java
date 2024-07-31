@@ -81,32 +81,20 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     }
 
     @Override
-    public boolean deleteReservation(Long memberId, Long reservationId) {
-        String deleteReservationSQL = "DELETE FROM RESERVATION WHERE ID = ? AND STUDENT_ID = ?";
-        String deleteReservedCourseSQL = "DELETE FROM RESERVED_COURSE WHERE RESERVATION_ID = ?";
+    public boolean deleteReservation(Long reservationId) {
+        String deleteReservedCourseSQL = "DELETE FROM RESERVED_COURSE WHERE ID = ?";
 
         try {
             Connection connection = DbConnection.getConnection();
-            PreparedStatement deleteReservationStmt = connection.prepareStatement(deleteReservationSQL);
-            PreparedStatement deleteReservedCourseStmt = connection.prepareStatement(deleteReservedCourseSQL);
-
-            connection.setAutoCommit(false);
-            deleteReservedCourseStmt.setLong(1, reservationId);
-            deleteReservedCourseStmt.executeUpdate();
-            deleteReservationStmt.setLong(1, reservationId);
-            deleteReservationStmt.setLong(2, memberId);
-            int rowsDeleted = deleteReservationStmt.executeUpdate();
-            connection.commit();
-            connection.setAutoCommit(true);
-
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteReservedCourseSQL);
+            preparedStatement.setLong(1, reservationId);
+            int rowsDeleted = preparedStatement.executeUpdate();
             return rowsDeleted > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DbConnection.reset();
         }
-
         return false;
     }
 
