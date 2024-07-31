@@ -261,7 +261,6 @@
                                 <div class="col-md-12">
                                     <div class="quform-submit-inner">
                                         <button type="button" class="butn secondary" onclick="submit()" ><i class="far fa-paper-plane icon-arrow before"></i><span class="label">글쓰기</span><i class="far fa-paper-plane icon-arrow after"></i></button>
-                                        <button type="button" class="butn secondary" onclick="location.href='post.do'"><i class="far fa-paper-plane icon-arrow before"></i><span class="label">삭제</span><i class="far fa-paper-plane icon-arrow after"></i></button>
                                     </div>
                                     <div class="quform-loading-wrap text-start"><span class="quform-loading"></span></div>
                                 </div>

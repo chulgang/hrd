@@ -8,7 +8,6 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import static org.chulgang.hrd.post.model.sql.PostSQL.deletePost;
-import static org.chulgang.hrd.post.model.sql.PostSQL.selectPosts;
 
 public class PostRepositoryImpl implements PostRepository {
 
@@ -200,6 +199,34 @@ public class PostRepositoryImpl implements PostRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void update_posts(Post post){
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        String sql = PostSQL.updatePost;
+
+        try {
+            con = DbConnection.getConnection();
+            pstmt = con.prepareStatement(sql);
+
+            pstmt.setString(1, post.getSubject());
+            pstmt.setString(2, post.getContent());
+            pstmt.setLong(3, post.getId());
+
+            int i = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("SQL Exception: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            try {
+                pstmt.close();
+                con.close();
+            } catch (SQLException se) {
+                System.out.println("insert_post" + se);
+            }
+        }
     }
 }
 
