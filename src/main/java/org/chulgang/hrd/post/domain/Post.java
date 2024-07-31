@@ -8,44 +8,44 @@ public class Post {
     private long writer_id;
     private String subject;
     private String content;
-    private int view_count;
+    private int view;
     private LocalDateTime created_at;
     private LocalDateTime modified_at;
 
     public Post(long id, long writer_id, String subject, String content,
-                int view_count, LocalDateTime created_at, LocalDateTime modified_at) {
+                int view, LocalDateTime created_at, LocalDateTime modified_at) {
         this.id = id;
         this.writer_id = writer_id;
         this.subject = subject;
         this.content = content;
-        this.view_count = view_count;
+        this.view = view;
         this.created_at = created_at;
         this.modified_at = modified_at;
     }
     public Post(String subject, String content,
-                int view_count) {
+                int view) {
         this.writer_id = writer_id;
         this.subject = subject;
         this.content = content;
-        this.view_count = view_count;
+        this.view = view;
 
     }
     public Post(long id, long writer_id, String subject, String content,
-                int view_count) {
+                int view) {
         this.id = id;
         this.writer_id = writer_id;
         this.subject = subject;
         this.content = content;
-        this.view_count = view_count;
+        this.view = view;
 
     }
 
     public Post(long writer_id, String subject, String content,
-                int view_count) {
+                int view) {
         this.writer_id = writer_id;
         this.subject = subject;
         this.content = content;
-        this.view_count = view_count;
+        this.view = view;
 
     }
 
@@ -89,12 +89,12 @@ public class Post {
         this.content = content;
     }
 
-    public int getView_count() {
-        return view_count;
+    public int getView() {
+        return view;
     }
 
-    public void setView_count(int view_count) {
-        this.view_count = view_count;
+    public void setView(int view) {
+        this.view = view;
     }
 
     public LocalDateTime getCreated_at() {

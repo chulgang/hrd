@@ -55,12 +55,12 @@ public class PostRepositoryImpl implements PostRepository {
             System.out.println("getWriter_id"+ post.getWriter_id());
             System.out.println("getSubject"+ post.getSubject());
             System.out.println("getSubject"+post.getContent());
-            System.out.println("getViewCount"+post.getView_count());
+            System.out.println("getViewCount"+post.getView());
 
             pstmt.setLong(1, post.getWriter_id());
             pstmt.setString(2, post.getSubject());
             pstmt.setString(3, post.getContent());
-            pstmt.setInt(4,post.getView_count());
+            pstmt.setInt(4,post.getView());
 
             int i = pstmt.executeUpdate();
             System.out.println("Rows affected: " + i);
