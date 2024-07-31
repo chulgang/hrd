@@ -109,4 +109,23 @@ public class CourseRepositoryImpl implements CourseRepository {
 
         ConnectionContainer.close(preparedStatement);
     }
+
+    @Override
+    public boolean existsByName(String courseName) {
+        String sql = String.format("SELECT COUNT(ID) FROM COURSE WHERE NAME = '%s'", courseName);
+
+        Statement statement = StatementGenerator.generateStatement();
+        ResultSet resultSet = DataSelector.getResultSet(statement, sql);
+
+        try {
+            if (resultSet.next()) {
+                int idCount = resultSet.getInt(1);
+                return idCount > 0;
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+        return true;
+    }
 }

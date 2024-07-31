@@ -38,4 +38,10 @@ public class CourseServiceImpl implements CourseService {
         DbConnection.initialize();
         courseRepository.save(Course.from(createCourseRequest));
     }
+
+    @Override
+    public boolean checkDuplicateCourseName(String courseName) {
+        DbConnection.initialize();
+        return courseRepository.existsByName(courseName);
+    }
 }

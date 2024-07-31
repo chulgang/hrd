@@ -12,4 +12,6 @@ public interface CourseRepository {
     Course findById(Long id);
 
     void save(Course course);
+
+    boolean existsByName(String courseName);
 }
