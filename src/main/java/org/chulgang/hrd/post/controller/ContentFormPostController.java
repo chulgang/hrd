@@ -11,17 +11,20 @@ import org.chulgang.hrd.users.dto.UsersLoginResponse;
 
 import java.io.IOException;
 
-@WebServlet("/elearn/post_insertForm.do")
-public class    InsertFormPostController extends HttpServlet {
+@WebServlet("/elearn/post_contentForm.do")
+public class ContentFormPostController extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
 
-        session.setAttribute("dto",user);
-        request.setAttribute("Full_name",user.getFull_name());
+        String post_id = request.getParameter("post_id");
+        String post_content = request.getParameter("post_content");
+        System.out.println("content control"+post_id);
+        System.out.println("content control"+post_content);
 
-        String view = "postInput.jsp";
+        request.setAttribute("post_id", post_id);
+        request.setAttribute("post_content", post_content);
+
+        String view = "postContent.jsp";
         RequestDispatcher rd = request.getRequestDispatcher(view);
         rd.forward(request, response);
     }

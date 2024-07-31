@@ -15,10 +15,16 @@
     <!-- title  -->
     <title>eLearn - Online Education Learning Template</title>
     <script>
-        function openInputJSP() {
-            var openInputUrl = "post_insertForm.do";
-            window.open(openInputUrl,'_self');
-        }
+
+    function openInputJSP() {
+        var openInputUrl = "post_insertForm.do";
+        window.open(openInputUrl, '_self');
+    }
+
+    function openInputJSP() {
+        var openInputUrl = "post_insertForm.do";
+        window.open(openInputUrl,'_self');
+    }
 
     </script>
 
@@ -262,16 +268,19 @@
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#${postlist.id}" aria-expanded="false" aria-controls="${postlist.id}">
+                                    <button id ="viewCountButton" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#${postlist.id}" aria-expanded="false" aria-controls="${postlist.id}">
                                             ${postlist.subject}
                                     </button>
                                 </h5>
                             </div>
+
                             <div id="${postlist.id}" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
                                 <div class="card-body">
-                                    ${postlist.content}
+
+                                    <a href="post_contentForm.do?post_id=${postlist.id}&post_content=${postlist.content}" class="button">${postlist.content}</a>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

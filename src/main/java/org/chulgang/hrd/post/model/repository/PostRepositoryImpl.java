@@ -30,53 +30,133 @@ public class PostRepositoryImpl implements PostRepository {
                 System.out.println("writer_id: " + writer_id);
                 String subject = rs.getString(3);
                 String content = rs.getString(4);
-                int view = rs.getInt(5);
+                long view_count = rs.getLong(5);
 
-                viewpost = new Post(id, writer_id, subject, content, view);
+                viewpost = new Post(id, writer_id, subject, content, view_count);
                 posts.add(viewpost);
             }
             return posts;
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("ㅎㅇㅎㅇ");
             return null;
         }
     }
 
-    public void insert_posts(Post post){
+    public ArrayList<Post> content_posts(long writerId) {
+        ArrayList<Post> posts = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String sql = "SELECT p.id, p.writer_id, p.subject, p.content, p.view_count " +
+                "FROM post p " +
+                "INNER JOIN users u ON p.writer_id = u.id " +
+                "WHERE p.writer_id = ?";
+
+        try {
+            con = DbConnection.getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setLong(1, writerId);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                long id = rs.getLong("id");
+                long writer_id = rs.getLong("writer_id");
+                String subject = rs.getString("subject");
+                String content = rs.getString("content");
+                long view_count = rs.getLong("view_count");
+
+                Post view_post = new Post(id, writer_id, subject, content, view_count);
+                posts.add(view_post);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return posts;
+    }
+
+
+    public void insert_posts(Post post) {
         Connection con = null;
         PreparedStatement pstmt = null;
         String sql = PostSQL.insertPost;
 
-        try{
-            con=DbConnection.getConnection();
-            pstmt=con.prepareStatement(sql);
+        try {
+            con = DbConnection.getConnection();
+            pstmt = con.prepareStatement(sql);
 
-            System.out.println("getWriter_id"+ post.getWriter_id());
-            System.out.println("getSubject"+ post.getSubject());
-            System.out.println("getSubject"+post.getContent());
-            System.out.println("getViewCount"+post.getView());
+            System.out.println("getWriter_id" + post.getWriter_id());
+            System.out.println("getSubject" + post.getSubject());
+            System.out.println("getSubject" + post.getContent());
+            System.out.println("getViewCount" + post.getView_count());
 
             pstmt.setLong(1, post.getWriter_id());
             pstmt.setString(2, post.getSubject());
             pstmt.setString(3, post.getContent());
-            pstmt.setInt(4,post.getView());
+            pstmt.setLong(4, post.getView_count());
 
             int i = pstmt.executeUpdate();
             System.out.println("Rows affected: " + i);
         } catch (SQLException e) {
             System.err.println("SQL Exception: " + e.getMessage());
             e.printStackTrace();
-        }finally{
-            try{
+        } finally {
+            try {
                 pstmt.close();
                 con.close();
-            }catch(SQLException se) {
-                System.out.println("insert_post"+se);
+            } catch (SQLException se) {
+                System.out.println("insert_post" + se);
             }
         }
     }
+
+    public void incrementViewCount(long postId) throws SQLException {
+        DbConnection.initialize();
+        Connection con = null;
+        String query = "UPDATE post SET view_count = view_count + 1 WHERE id = ?";
+        try {
+             con= DbConnection.getConnection();
+        PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setLong(1, postId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    public long getViewCount(long postId) throws SQLException {
+        DbConnection.initialize();
+        Connection con = null;
+        String query = "SELECT view_count FROM post WHERE id = ?";
+
+        try {
+            con= DbConnection.getConnection();
+            PreparedStatement stmt = con.prepareStatement(query);
+
+            stmt.setLong(1, postId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("view_count");
+            } else {
+                return 0; // Default if post not found
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+}
 
 
 //
