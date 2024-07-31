@@ -123,13 +123,13 @@
                         <div class="pagination text-extra-dark-gray">
                             <ul>
                                 <c:if test="${currentPage > 1}">
-                                    <li><a href="/elearn/reservation-list.do?page=${currentPage - 1}" class="me-3"><i class="fas fa-long-arrow-alt-left"></i></a></li>
+                                    <li><a href="reservation-list.do?page=${currentPage - 1}" class="me-3"><i class="fas fa-long-arrow-alt-left"></i></a></li>
                                 </c:if>
                                 <c:forEach begin="1" end="${totalPages}" var="i">
-                                    <li class="${currentPage == i ? 'active' : ''}"><a href="/elearn/reservation-list.do?page=${i}" class="me-2">${i}</a></li>
+                                    <li class="${currentPage == i ? 'active' : ''}"><a href="reservation-list.do?page=${i}" class="me-2">${i}</a></li>
                                 </c:forEach>
                                 <c:if test="${currentPage < totalPages}">
-                                    <li><a href="/elearn/reservation-list.do?page=${currentPage + 1}" class="me-3"><i class="fas fa-long-arrow-alt-right"></i></a></li>
+                                    <li><a href="reservation-list.do?page=${currentPage + 1}" class="me-3"><i class="fas fa-long-arrow-alt-right"></i></a></li>
                                 </c:if>
                             </ul>
                         </div>
