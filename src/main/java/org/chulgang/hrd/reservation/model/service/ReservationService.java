@@ -12,4 +12,6 @@ public interface ReservationService {
 
     boolean deleteReservation(Long memberId, Long reservationId);
 
+    int getTotalReservations(Long userId);
+
 }

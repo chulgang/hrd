@@ -12,4 +12,7 @@ public interface PaymentService {
     List<PaymentCardResponse> getPagedPayments(Long userId, int pageNumber);
 
     PaidCourseDetailResponse getPaidCourseDetail(Long courseId);
+
+    int getTotalPayments(Long userId);
+
 }
