@@ -12,4 +12,5 @@ public interface ReservationRepository {
 
     boolean deleteReservation(Long memberId, Long reservationId);
 
+    int countReservations(Long userId);
 }

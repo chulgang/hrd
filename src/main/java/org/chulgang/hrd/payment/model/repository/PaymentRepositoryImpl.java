@@ -78,7 +78,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
         try {
             Connection connection = DbConnection.getConnection();
-            String sql = "SELECT c.NAME, c.DESCRIPTION, pc.PAYED_AMOUNT, pc.IS_REFUNDED, c.START_DATE, c.LAST_DATE " +
+            String sql =
+                    "SELECT c.NAME, c.DESCRIPTION, pc.PAYED_AMOUNT, pc.IS_REFUNDED, c.START_DATE, c.LAST_DATE " +
                     "FROM PAYED_COURSE pc " +
                     "JOIN COURSE c ON pc.COURSE_ID = c.ID " +
                     "JOIN RESERVATION r ON pc.RESERVATION_ID = r.ID " +
@@ -132,5 +133,25 @@ public class PaymentRepositoryImpl implements PaymentRepository {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    @Override
+    public int countPayments(Long userId) {
+        String sql =
+                "SELECT COUNT(*) " +
+                "FROM RESERVATION r " +
+                "JOIN PAYED_COURSE pc ON r.ID = pc.RESERVATION_ID " +
+                "WHERE r.USER_ID = " + userId;
+        try {
+            Connection connection = DbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

@@ -35,9 +35,18 @@ public class PaymentsController extends HttpServlet {
         //User user = (User) session.getAttribute("user");
         //Long userId = user.getuserId();
         Long userId = 1L;
-        int pageNumber = 1;
-        List<PaymentCardResponse> payments = paymentService.getPagedPayments(userId, pageNumber);
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+
+        List<PaymentCardResponse> payments = paymentService.getPagedPayments(userId, page);
+        int totalPages = paymentService.getTotalPayments(userId);
+
         request.setAttribute("payments", payments);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("paid-course-list.jsp");
         dispatcher.forward(request, response);
     }

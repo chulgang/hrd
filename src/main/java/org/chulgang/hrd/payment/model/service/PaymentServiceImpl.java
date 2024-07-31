@@ -44,4 +44,9 @@ public class PaymentServiceImpl implements PaymentService {
         }
         return null;
     }
+
+    @Override
+    public int getTotalPayments(Long userId) {
+        return (int) Math.ceil((double)  paymentRepository.countPayments(userId) / 10);
+    }
 }

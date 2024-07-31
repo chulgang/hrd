@@ -36,11 +36,19 @@ public class ReservationsController extends HttpServlet {
         //User user = (User) session.getAttribute("user");
         //Long userId = user.getuserId();
         Long userId = 1L;
-        int pageNumber = 1;
-        List<ReservationCardResponse> reservations = reservationService.getPagedReservations(userId, pageNumber);
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+
+        List<ReservationCardResponse> reservations = reservationService.getPagedReservations(userId, page);
+        int totalPages = reservationService.getTotalReservations(userId);
+
         request.setAttribute("reservations", reservations);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("reservation-list.jsp");
         dispatcher.forward(request, response);
     }
-
 }

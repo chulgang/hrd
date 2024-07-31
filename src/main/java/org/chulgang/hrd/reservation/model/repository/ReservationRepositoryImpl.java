@@ -100,4 +100,24 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 
         return false;
     }
+
+    @Override
+    public int countReservations(Long userId) {
+        String sql =
+                "SELECT COUNT(*) " +
+                "FROM RESERVATION r " +
+                "JOIN RESERVED_COURSE rc ON r.ID = rc.RESERVATION_ID " +
+                "WHERE r.USER_ID = " + userId;
+        try {
+            Connection connection = DbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

@@ -33,4 +33,9 @@ public class ReservationServiceImpl implements ReservationService {
     public boolean deleteReservation(Long memberId, Long reservationId) {
         return reservationRepository.deleteReservation(memberId, reservationId);
     }
+
+    @Override
+    public int getTotalReservations(Long userId) {
+        return (int) Math.ceil((double)  reservationRepository.countReservations(userId) / 10);
+    }
 }
