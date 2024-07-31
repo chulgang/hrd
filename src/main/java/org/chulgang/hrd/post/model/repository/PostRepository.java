@@ -6,4 +6,6 @@ import java.util.ArrayList;
 
 interface PostRepository {
     ArrayList<Post> posts();
+    void deletePost(long postId);
+    Post getSubjectAndContent(long postId);
 }

@@ -46,4 +46,15 @@ public class PostServiceImpl implements PostService {
             return 0; // Default if error occurs
         }
     }
+
+    @Override
+    public void delete_PostS(long postId) {
+            postRepository.deletePost(postId);
+    }
+
+    @Override
+    public Post getSubjectAndContent(long postId) {
+         return  postRepository.getSubjectAndContent(postId);
+        }
+
 }

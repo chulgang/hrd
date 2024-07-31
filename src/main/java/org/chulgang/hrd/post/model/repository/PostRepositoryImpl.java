@@ -7,10 +7,13 @@ import org.chulgang.hrd.util.DbConnection;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static org.chulgang.hrd.post.model.sql.PostSQL.deletePost;
+import static org.chulgang.hrd.post.model.sql.PostSQL.selectPosts;
 
 public class PostRepositoryImpl implements PostRepository {
 
     public ArrayList<Post> posts() {
+
         ArrayList<Post> posts = new ArrayList<>();
 
         Connection con = null;
@@ -155,7 +158,50 @@ public class PostRepositoryImpl implements PostRepository {
         }
         return -1;
     }
+    //게시글 삭제 메소드 추가함
+    @Override
+    public void deletePost(long postId) {
+        DbConnection.initialize();
+        Connection con = null;
+        String query = deletePost;
+        PreparedStatement pstmt =null;
+        try {
+            con= DbConnection.getConnection();
+            pstmt = con.prepareStatement(query);
+            pstmt.setLong(1, postId);
+            pstmt.executeUpdate();
+            System.out.println("삭제성공");
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //게시글 제목 및 내용 가져오는 메소드
+    @Override
+    public Post getSubjectAndContent(long postId) {
+        Connection con = null;
+        String query = PostSQL.selectPosts;
+        System.out.println("query::" + query);
+        ResultSet rs = null;
+        PreparedStatement pstmt =null;
 
+        System.out.println("postId  getSubjectAndContent::" + postId);
+        try {
+            con= DbConnection.getConnection();
+            pstmt = con.prepareStatement(query);
+            pstmt.setLong(1, postId);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Post post = new Post();
+                post.setSubject(rs.getString(1));
+                post.setContent(rs.getString(2));
+                return post;
+            }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
 
 
