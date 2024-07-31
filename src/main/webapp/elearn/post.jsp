@@ -276,8 +276,9 @@
 
                             <div id="${postlist.id}" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
                                 <div class="card-body">
-
-                                    <a href="post_contentForm.do?post_id=${postlist.id}&post_content=${postlist.content}" class="button">${postlist.content}</a>
+                                    ${postlist.writer_id}
+                                    <p>현재 로그인한 사용자 : ${user_Id}</p>
+                                    <a href="post_contentForm.do?post_id=${postlist.id}&post_writer_id=${postlist.writer_id}&post_content=${postlist.content}&post_subject=${postlist.subject}" class="button">${postlist.content}</a>
                                 </div>
                             </div>
 

@@ -27,18 +27,33 @@ public class PostController extends HttpServlet {
                 HttpSession session = request.getSession();
                 UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
 
-
                 PostService service = new PostServiceImpl();
                 ArrayList<Post> postlist = service.postsS();
-                ArrayList<Post> content_postlist = service.content_postsS(user.getId());
+                ArrayList<Post> content_postlist = service.content_postsS(user.getId()); //로그인한 사람의 내용만 보이도록
 
-                request.setAttribute("Full_name",user.getFull_name());
+                request.setAttribute("user_Id",user.getId());
                 request.setAttribute("postlist", postlist);
                 request.setAttribute("content_postlist", content_postlist);
 
-                String view = "post.jsp";
+                if(session.getAttribute("post") == null) {
+                    String view = "post.jsp";
 
-                RequestDispatcher rd = request.getRequestDispatcher(view);
-                rd.forward(request, response);
+                    RequestDispatcher rd = request.getRequestDispatcher(view);
+                    rd.forward(request, response);
+                } else {
+                    Post post = (Post) session.getAttribute("post");
+
+                    System.out.println("Post controller: "+ post.getId());
+                    System.out.println("Post_Writer_id controller: "+ post.getWriter_id());
+                    System.out.println("Post_subject controller: "+ post.getSubject());
+                    System.out.println("Post_Content controller: "+ post.getContent());
+
+                    String view = "post.jsp";
+
+                    RequestDispatcher rd = request.getRequestDispatcher(view);
+                    rd.forward(request, response);
+                }
+
+
     }
 }
