@@ -16,4 +16,6 @@ public interface PostService {
     void incrementViewCountS(long postId);
 
     long getViewCountS(long postId);
+    void delete_PostS(long postId);
+    Post getSubjectAndContent(long postId);
 }
