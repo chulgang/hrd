@@ -91,18 +91,10 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#!">Blog</a>
+                                    <a href="#!">예약확인</a>
                                     <ul>
-                                        <li><a href="blog-grid.html">Blog Grid</a>
-                                            <ul>
-                                                <li><a href="blog-grid-two-columns.html">2 Columns</a></li>
-                                                <li><a href="blog-grid-two-columns-left-sidebar.html">2 Col – Left Sidebar</a></li>
-                                                <li><a href="blog-grid-two-columns-right-sidebar.html">2 Col – Right Sidebar</a></li>
-                                                <li><a href="blog-grid.html">3 Columns - Standard</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="blog-list.html">Blog List</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
+                                        <li><a href="reservation-list.do">예약 대기</a></li>
+                                        <li><a href="payment-list.do">수강 강좌</a></li>
                                     </ul>
                                 </li>
 
