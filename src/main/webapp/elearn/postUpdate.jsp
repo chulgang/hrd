@@ -169,7 +169,7 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <h1>Question</h1>
+                    <h1>Update</h1>
                 </div>
                 <div class="col-md-12">
                     <ul>
@@ -191,7 +191,7 @@
         <div class="container">
             <div style = "margin: 0 auto;" class="col-lg-6">
                 <div class="faq-form">
-                    <h2 class="mb-4 text-primary">Question</h2>
+                    <h2 class="mb-4 text-primary">Update</h2>
                     <form class="contact quform" name="f" action="post_insert.do" method="post">
                         <div class="quform-elements">
                             <div>

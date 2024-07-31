@@ -27,10 +27,15 @@ public class PostController extends HttpServlet {
                 HttpSession session = request.getSession();
                 UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
 
+
                 PostService service = new PostServiceImpl();
                 ArrayList<Post> postlist = service.postsS();
+                ArrayList<Post> content_postlist = service.content_postsS(user.getId());
+
                 request.setAttribute("Full_name",user.getFull_name());
                 request.setAttribute("postlist", postlist);
+                request.setAttribute("content_postlist", content_postlist);
+
                 String view = "post.jsp";
 
                 RequestDispatcher rd = request.getRequestDispatcher(view);
