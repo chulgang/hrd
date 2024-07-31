@@ -11,7 +11,7 @@ public class Post {
     private long view_count;
     private LocalDateTime created_at;
     private LocalDateTime modified_at;
-
+    public Post(){}
     public Post(long id, long writer_id, String subject, String content,
                 long view_count, LocalDateTime created_at, LocalDateTime modified_at) {
         this.id = id;
