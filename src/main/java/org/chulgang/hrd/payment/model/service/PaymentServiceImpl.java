@@ -1,6 +1,8 @@
 package org.chulgang.hrd.payment.model.service;
 
-import org.chulgang.hrd.course.dto.GetCourseResponse;
+import org.chulgang.hrd.course.dto.CourseResponseForPayment;
+import org.chulgang.hrd.course.model.service.CoursePaymentService;
+import org.chulgang.hrd.course.model.service.CoursePaymentServiceImpl;
 import org.chulgang.hrd.course.model.service.CourseService;
 import org.chulgang.hrd.course.model.service.CourseServiceImpl;
 import org.chulgang.hrd.payment.domain.PayedCourse;
@@ -13,25 +15,28 @@ import org.chulgang.hrd.reservation.model.service.ReservationServiceImpl;
 import org.chulgang.hrd.wallethistory.model.service.WalletHistoryService;
 import org.chulgang.hrd.wallethistory.model.service.WalletHistoryServiceImpl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 public class PaymentServiceImpl implements PaymentService {
     private static final PaymentServiceImpl INSTANCE = new PaymentServiceImpl(
             PaymentRepositoryImpl.getInstance(), WalletHistoryServiceImpl.getInstance(),
-            ReservationServiceImpl.getInstance(), CourseServiceImpl.getInstance());
+            ReservationServiceImpl.getInstance(), CourseServiceImpl.getInstance(), CoursePaymentServiceImpl.getInstance());
     private final PaymentRepository paymentRepository;
     private final WalletHistoryService walletHistoryService;
     private final ReservationService reservationService;
     private final CourseService courseService;
+    private final CoursePaymentService coursePaymentService;
 
-    public PaymentServiceImpl(PaymentRepository paymentRepository,
-                              WalletHistoryService walletHistoryService,
-                              ReservationService reservationService, CourseService courseService) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository, WalletHistoryService walletHistoryService, ReservationService reservationService,
+                              CourseService courseService, CoursePaymentService coursePaymentService) {
         this.paymentRepository = paymentRepository;
         this.walletHistoryService = walletHistoryService;
         this.reservationService = reservationService;
         this.courseService = courseService;
+        this.coursePaymentService = coursePaymentService;
     }
 
     public static PaymentServiceImpl getInstance() {
@@ -67,13 +72,10 @@ public class PaymentServiceImpl implements PaymentService {
         Optional<PayedCourse> payedCourseOptional = paymentRepository.findPayedCourseById(courseId);
         if (payedCourseOptional.isPresent()) {
             PayedCourse payedCourse = payedCourseOptional.get();
-            //CourseResponseForPayment courseResponseForPayment = coursePaymentService.getCourseForPayment(courseId);
-
-
-        } else {
-            //todo : 에러
+            CourseResponseForPayment courseResponseForPayment = coursePaymentService.getCourseForPayment(courseId);
+            return buildPaidCourseDetailResponse(payedCourse, courseResponseForPayment);
         }
-        return null;
+        return new PaidCourseDetailResponse();
     }
 
     @Override
@@ -100,5 +102,28 @@ public class PaymentServiceImpl implements PaymentService {
         reservationService.updateReservationStatus(payedCourse.getReservationId(), 0);
 
         return true;
+    }
+
+    private PaidCourseDetailResponse buildPaidCourseDetailResponse(PayedCourse payedCourse, CourseResponseForPayment courseResponseForPayment) {
+        PaidCourseDetailResponse response = new PaidCourseDetailResponse();
+        response.setPaymentId(payedCourse.getId());
+        response.setCourseId(payedCourse.getCourseId());
+        response.setReservationId(payedCourse.getReservationId());
+//        response.setSubjectName(courseResponseForPayment.getSubjectName());
+//        response.setCourseName(courseResponseForPayment.getCourseName());
+//        response.setDescription(courseResponseForPayment.getCourseDescription());
+//        response.setPrice(courseResponseForPayment.getPrice());
+//        response.setStartDate(parseDate(courseResponseForPayment.getStartDate()));
+//        response.setLastDate(parseDate(courseResponseForPayment.getLastDate()));
+//        response.setPeriod(courseResponseForPayment.getPeriod().toString());
+//        response.setClassRoomName(courseResponseForPayment.getClassroomName());
+//        response.setAverageScore(courseResponseForPayment.getAverageScore());
+        response.setIsRefunded(payedCourse.isRefunded() ? 1 : 0);
+        return response;
+    }
+
+    private LocalDate parseDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.parse(date, formatter);
     }
 }
