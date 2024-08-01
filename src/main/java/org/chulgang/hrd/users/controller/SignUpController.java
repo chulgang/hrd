@@ -14,7 +14,7 @@ import org.chulgang.hrd.wallethistory.model.service.WalletHistoryServiceImpl;
 import java.io.IOException;
 
 
-@WebServlet("/elearn/users/signUp.do")
+@WebServlet("/elearn/signUp.do")
 public class SignUpController extends HttpServlet {
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -54,7 +54,7 @@ public class SignUpController extends HttpServlet {
         }
         // 나중에 쓸 예정 PrintWriter pw = response.getWriter();
         //pw.println("<script>location.href='../index.jsp';</script>");
-        response.sendRedirect("../index.jsp");
+        response.sendRedirect("index.jsp");
 
 
     }

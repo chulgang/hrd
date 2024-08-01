@@ -23,7 +23,7 @@
         <!-- start top search -->
         <div class="top-search bg-primary">
             <div class="container">
-                <form class="search-form" action="search.html" method="GET" accept-charset="utf-8">
+                <for class="search-form" action="search.html" method="GET" accept-charset="utf-8">
                     <div class="input-group">
                                 <span class="input-group-addon cursor-pointer">
                                     <button class="search-form_submit fas fa-search text-white" type="submit"></button>
@@ -31,7 +31,7 @@
                         <input type="text" class="search-form_input form-control" name="s" autocomplete="off" placeholder="Type & hit enter...">
                         <span class="input-group-addon close-search mt-1"><i class="fas fa-times"></i></span>
                     </div>
-                </form>
+                </for>
             </div>
         </div>
         <!-- end top search -->
@@ -100,12 +100,12 @@
                                 <li><a href="post_listForm.do">Q&A</a></li>
                                 <c:choose>
                                     <c:when test="${empty dto}">
-                                        <li><a href="contact.jsp">회원가입</a></li>
-                                        <li><a href="login.jsp">로그인</a></li>
+                                        <li><a href="signUpForm.do">회원가입</a></li>
+                                        <li><a href="loginForm.do">로그인</a></li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li><a href="users/myPageForm.do">마이페이지</a></li>
-                                        <li><a href="users/logout.do">로그아웃</a></li>
+                                        <li><a href="myPageForm.do">마이페이지</a></li>
+                                        <li><a href="logout.do">로그아웃</a></li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>
