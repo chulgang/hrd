@@ -48,7 +48,7 @@ public class GetCourseControllerTest {
         when(request.getRequestDispatcher(COURSE_DETAIL_VIEW)).thenReturn(requestDispatcher);
 
         GetCourseResponse getCourseResponse = CourseTestObjectFactory.createCourseResponse(
-                COURSE_ID1, SUBJECT_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1,
+                COURSE_ID1, SUBJECT_ID1, TEACHER_ID1, TIME_PERIOD_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1,
                 LAST_DATE1, AVERAGE_SCORE1, REMAINED_SEAT1, now, now
         );
         when(courseService.getCourse(COURSE_ID1)).thenReturn(getCourseResponse);

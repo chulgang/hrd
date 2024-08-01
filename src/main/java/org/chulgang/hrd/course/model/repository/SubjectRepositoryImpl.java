@@ -5,6 +5,7 @@ import org.chulgang.hrd.course.exception.SubjectIdNotFoundException;
 import org.chulgang.hrd.exception.GlobalExceptionHandler;
 import org.chulgang.hrd.util.ConnectionContainer;
 import org.chulgang.hrd.util.DataSelector;
+import org.chulgang.hrd.util.DbConnection;
 import org.chulgang.hrd.util.StatementGenerator;
 
 import java.sql.ResultSet;
@@ -41,6 +42,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 
         ConnectionContainer.close(resultSet);
         ConnectionContainer.close(statement);
+        DbConnection.reset();
 
         return subjects;
     }
@@ -61,6 +63,7 @@ public class SubjectRepositoryImpl implements SubjectRepository {
             GlobalExceptionHandler.throwRuntimeException(
                     new SubjectIdNotFoundException(String.format(SUBJECT_ID_NOT_FOUND_EXCEPTION_MESSAGE, id)));
         }
+        DbConnection.reset();
 
         return null;
     }

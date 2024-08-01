@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 public class GetCourseResponse {
     private Long id;
     private Long subjectId;
+    private Long teacherId;
+    private Long timePeriodId;
     private String name;
     private String description;
     private int price;
@@ -22,6 +24,8 @@ public class GetCourseResponse {
     private GetCourseResponse(
             Long id,
             Long subjectId,
+            Long teacherId,
+            Long timePeriodId,
             String name,
             String description,
             int price,
@@ -34,6 +38,8 @@ public class GetCourseResponse {
     ) {
         this.id = id;
         this.subjectId = subjectId;
+        this.teacherId = teacherId;
+        this.timePeriodId = timePeriodId;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -59,6 +65,8 @@ public class GetCourseResponse {
         return new GetCourseResponse(
                 course.getId(),
                 course.getSubjectId(),
+                course.getTeacherId(),
+                course.getTimePeriodId(),
                 course.getName(),
                 course.getDescription(),
                 course.getPrice(),
@@ -72,8 +80,9 @@ public class GetCourseResponse {
     }
 
     public static GetCourseResponse of(
-            Long id, Long subjectId, String name, String description, int price, LocalDate startDate,
-            LocalDate lastDate, float averageScore, int remainedSeat, LocalDateTime createdAt, LocalDateTime modifiedAt
+            Long id, Long subjectId, Long teacherId, Long timePeriodId, String name,
+            String description, int price, LocalDate startDate, LocalDate lastDate,
+            float averageScore, int remainedSeat, LocalDateTime createdAt, LocalDateTime modifiedAt
     ) {
         String parsedStartDate = FormatConverter.parseToString(startDate);
         String parsedLastDate = FormatConverter.parseToString(lastDate);
@@ -81,8 +90,8 @@ public class GetCourseResponse {
         String parsedModifiedAt = FormatConverter.parseToString(modifiedAt);
 
         return new GetCourseResponse(
-                id, subjectId, name, description, price, parsedStartDate, parsedLastDate,
-                averageScore, remainedSeat, parsedCreatedAt, parsedModifiedAt
+                id, subjectId, teacherId, timePeriodId, name, description, price, parsedStartDate,
+                parsedLastDate, averageScore, remainedSeat, parsedCreatedAt, parsedModifiedAt
         );
     }
 
@@ -92,6 +101,14 @@ public class GetCourseResponse {
 
     public Long getSubjectId() {
         return subjectId;
+    }
+
+    public Long getTimePeriodId() {
+        return timePeriodId;
+    }
+
+    public Long getTeacherId() {
+        return teacherId;
     }
 
     public String getName() {
