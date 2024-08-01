@@ -171,29 +171,20 @@ public class Course {
     }
 
     public void setTupleValues(PreparedStatement preparedStatement) throws SQLException {
-        if (isIdNull()) {
-            preparedStatement.setLong(1, subjectId);
-            preparedStatement.setLong(2, teacherId);
-            preparedStatement.setLong(3, timePeriodId);
-            preparedStatement.setString(4, name);
-            preparedStatement.setString(5, description);
-            preparedStatement.setInt(6, price);
-            preparedStatement.setObject(7, startDate);
-            preparedStatement.setObject(8, lastDate);
-            preparedStatement.setInt(9, remainedSeat);
-            return;
+        int index = 1;
+        if (!isIdNull()) {
+            preparedStatement.setLong(index++, id);
         }
 
-        preparedStatement.setLong(1, id);
-        preparedStatement.setLong(2, subjectId);
-        preparedStatement.setLong(3, teacherId);
-        preparedStatement.setLong(4, timePeriodId);
-        preparedStatement.setString(5, name);
-        preparedStatement.setString(6, description);
-        preparedStatement.setInt(7, price);
-        preparedStatement.setObject(8, startDate);
-        preparedStatement.setObject(9, lastDate);
-        preparedStatement.setInt(10, remainedSeat);
+        preparedStatement.setLong(index++, subjectId);
+        preparedStatement.setLong(index++, teacherId);
+        preparedStatement.setLong(index++, timePeriodId);
+        preparedStatement.setString(index++, name);
+        preparedStatement.setString(index++, description);
+        preparedStatement.setInt(index++, price);
+        preparedStatement.setObject(index++, startDate);
+        preparedStatement.setObject(index++, lastDate);
+        preparedStatement.setInt(index, remainedSeat);
     }
 
     public Long getId() {

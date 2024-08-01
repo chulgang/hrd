@@ -1,9 +1,12 @@
 package org.chulgang.hrd.course.dto;
 
 import jakarta.servlet.http.HttpServletRequest;
+import org.chulgang.hrd.users.dto.UsersLoginResponse;
 import org.chulgang.hrd.util.FormatConverter;
 
 import java.time.LocalDate;
+
+import static org.chulgang.hrd.course.util.RequestConstant.LOGIN_SESSION_ATTRIBUTE_NAME;
 
 public class CreateCourseRequest {
     private Long subjectId;
@@ -32,11 +35,14 @@ public class CreateCourseRequest {
     }
 
     public static CreateCourseRequest from(HttpServletRequest request) {
-        System.out.println(request.getParameter("seatCount") + "sadfsadfsd");
+        UsersLoginResponse usersLoginResponse
+                = (UsersLoginResponse) request.getSession().getAttribute(LOGIN_SESSION_ATTRIBUTE_NAME);
+        System.out.println(usersLoginResponse.getId() + "--------------------");
+        System.out.println(usersLoginResponse.getEmail() + "--------------------");
+
         return new CreateCourseRequest(
                 Long.parseLong(request.getParameter("subjectId")),
-                // Long.parseLong(request.getParameter("teacherId")),
-                1L,
+                usersLoginResponse.getId(),
                 Long.parseLong(request.getParameter("time-period")),
                 request.getParameter("courseName"),
                 request.getParameter("course-description"),
