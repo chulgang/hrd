@@ -15,6 +15,7 @@ import org.chulgang.hrd.util.FormatConverter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 
 import static org.chulgang.hrd.course.util.RequestConstant.*;
 import static org.chulgang.hrd.exception.ExceptionMessage.JSON_SERIALIZATION_FAILED_EXCEPTION_MESSAGE;
@@ -40,8 +41,16 @@ public class GetTimePeriodsController extends HttpServlet {
 
         String classroomId = request.getParameter(CLASSROOM_ID_PARAMETER_NAME);
         Long parsedClassroomId = FormatConverter.parseToLong(classroomId);
-        GetTimePeriodsResponse getTimePeriodsResponse
-                = timePeriodService.getTimePeriodsByClassroomId(parsedClassroomId);
+
+        String startDate = request.getParameter(START_DATE_PARAMETER_NAME);
+        LocalDate parsedStartDate = FormatConverter.parseToDate(startDate);
+
+        String lastDate = request.getParameter(LAST_DATE_PARAMETER_NAME);
+        LocalDate parsedLastDate = FormatConverter.parseToDate(lastDate);
+
+        GetTimePeriodsResponse getTimePeriodsResponse = timePeriodService.getUsableTimePeriodsByClassroomId(
+                parsedClassroomId, parsedStartDate, parsedLastDate
+        );
 
         StringBuilder timePeriodsJson = new StringBuilder();
         timePeriodsJson.append("[");
