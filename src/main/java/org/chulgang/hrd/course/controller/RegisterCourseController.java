@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.chulgang.hrd.aop.LoggingAspect;
 import org.chulgang.hrd.classroom.dto.GetClassroomsResponse;
 import org.chulgang.hrd.classroom.model.service.ClassroomService;
@@ -16,6 +17,8 @@ import org.chulgang.hrd.course.model.service.CourseService;
 import org.chulgang.hrd.course.model.service.SubjectService;
 import org.chulgang.hrd.exception.GlobalExceptionHandler;
 import org.chulgang.hrd.exception.JsonSerializationFailedException;
+import org.chulgang.hrd.users.dto.UsersLoginResponse;
+import org.chulgang.hrd.users.model.usersService.UsersService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,6 +32,7 @@ public class RegisterCourseController extends HttpServlet {
     private CourseService courseService;
     private SubjectService subjectService;
     private ClassroomService classroomService;
+    private UsersService usersService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -62,11 +66,17 @@ public class RegisterCourseController extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO: 회원 추가
         // TODO: 이미지 추가
 
         if (request.getRequestURI().equals(VALIDATION_URL)) {
             validateDuplicateCourseName(request, response);
+            return;
+        }
+
+        HttpSession httpSession = request.getSession();
+        UsersLoginResponse usersLoginResponse = (UsersLoginResponse) httpSession.getAttribute("dto");
+        if (usersLoginResponse == null) {
+            response.sendRedirect(LOGIN_FAILED_VIEW);
             return;
         }
 

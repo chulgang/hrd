@@ -27,6 +27,7 @@ public class RequestConstant {
     public static final String CLASSROOM_ID_PARAMETER_NAME = "classroomId";
 
     public static final String COURSES_VIEW = "courses-grid.jsp";
+    public static final String LOGIN_FAILED_VIEW = "login-failed.jsp";
     public static final String COURSE_REGISTRATION_VIEW = "course-registration-form.jsp";
     public static final String COURSE_REGISTRATION_CONFIRM_VIEW = "course-registration-confirm.jsp";
 
