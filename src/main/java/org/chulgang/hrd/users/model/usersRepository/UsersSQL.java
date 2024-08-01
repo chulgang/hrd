@@ -16,7 +16,9 @@ public class UsersSQL {
     public static final String deleteById = "delete from users where id = ?";
  // 다른 엔티티있어서 필요없음   public static final String findByUsersId = "select current_amount from wallet_history where id = ?";
     public static final String findRoleByUserId ="select role from user_role r join users u on r.user_id = u.id where u.id = ?";
-    public static final String findSeq ="select max(rownum) from users";
+    public static final String findSeq ="SELECT MAX(ROWNUM) FROM USERS";
+
+
 
 
 }

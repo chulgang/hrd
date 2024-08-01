@@ -105,7 +105,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <li><a href="users/myPageForm.do">마이페이지</a></li>
-                                        <li><a href="logout.do">로그아웃</a></li>
+                                        <li><a href="users/logout.do">로그아웃</a></li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>
