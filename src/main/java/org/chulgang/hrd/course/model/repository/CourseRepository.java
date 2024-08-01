@@ -14,4 +14,6 @@ public interface CourseRepository {
     boolean save(Course course);
 
     boolean existsByName(String courseName);
+
+    int findRemainedSeatById(Long id);
 }

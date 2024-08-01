@@ -6,7 +6,6 @@ import org.chulgang.hrd.course.dto.GetCourseResponse;
 import org.chulgang.hrd.course.dto.GetCoursesResponse;
 import org.chulgang.hrd.course.model.repository.CourseRepository;
 import org.chulgang.hrd.course.model.repository.CourseRepositoryImpl;
-import org.chulgang.hrd.util.DbConnection;
 
 public class CourseServiceImpl implements CourseService {
     private static final CourseService INSTANCE = new CourseServiceImpl(CourseRepositoryImpl.getInstance());
@@ -22,26 +21,27 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public GetCoursesResponse getCourses(int size, int pageNumber) {
-        DbConnection.initialize();
         int pageCount = courseRepository.computePageCount(size);
         return GetCoursesResponse.from(courseRepository.findAll(size, pageNumber), pageCount);
     }
 
     @Override
     public GetCourseResponse getCourse(Long id) {
-        DbConnection.initialize();
         return GetCourseResponse.from(courseRepository.findById(id));
     }
 
     @Override
     public boolean create(CreateCourseRequest createCourseRequest) {
-        DbConnection.initialize();
         return courseRepository.save(Course.from(createCourseRequest));
     }
 
     @Override
     public boolean checkDuplicateCourseName(String courseName) {
-        DbConnection.initialize();
         return courseRepository.existsByName(courseName);
+    }
+
+    @Override
+    public int getRemainedSeat(Long id) {
+        return courseRepository.findRemainedSeatById(id);
     }
 }
