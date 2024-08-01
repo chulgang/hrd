@@ -16,4 +16,6 @@ public interface CourseRepository {
     boolean existsByName(String courseName);
 
     int findRemainedSeatById(Long id);
+
+    void updateRemainedSeatById(Long id, int newRemainedSeat);
 }
