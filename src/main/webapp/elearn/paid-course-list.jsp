@@ -58,7 +58,7 @@
     <!-- PAGE TITLE
     ================================================== -->
     <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark"
-             data-overlay-dark="9" data-background="img/bg/bg-04.jpg">
+             data-overlay-dark="9" >
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12">
@@ -66,8 +66,8 @@
                 </div>
                 <div class="col-md-12">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="#!">Event List</a></li>
+                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="#!">Paid List</a></li>
                     </ul>
                 </div>
             </div>
