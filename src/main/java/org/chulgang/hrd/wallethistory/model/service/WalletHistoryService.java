@@ -17,4 +17,6 @@ public interface WalletHistoryService {
     void deductFromWallet(Long userId, Integer amount);
 
     void rechargeWallet(Long userId, int amount);
+
+    Integer currentAmountByUser(Long userId);
 }
