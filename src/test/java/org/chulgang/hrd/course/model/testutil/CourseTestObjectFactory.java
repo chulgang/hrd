@@ -34,11 +34,12 @@ public class CourseTestObjectFactory extends Course {
     }
 
     public static GetCourseResponse createCourseResponse(
-            Long id, Long subjectId, String name, String description, int price, LocalDate startDate,
-            LocalDate lastDate, float averageScore, int remainedSeat, LocalDateTime createdAt, LocalDateTime modifiedAt
+            Long id, Long subjectId, Long teacherId, Long timePeriodId, String name,
+            String description, int price, LocalDate startDate, LocalDate lastDate,
+            float averageScore, int remainedSeat, LocalDateTime createdAt, LocalDateTime modifiedAt
     ) {
         return GetCourseResponse.of(
-                id, subjectId, name, description, price, startDate,
+                id, subjectId, teacherId, timePeriodId, name, description, price, startDate,
                 lastDate, averageScore, remainedSeat, createdAt, modifiedAt
         );
     }
