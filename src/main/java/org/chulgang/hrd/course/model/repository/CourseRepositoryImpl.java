@@ -2,9 +2,11 @@ package org.chulgang.hrd.course.model.repository;
 
 import org.chulgang.hrd.course.domain.Course;
 import org.chulgang.hrd.course.exception.CourseIdNotFoundException;
+import org.chulgang.hrd.course.exception.SubjectIdNotFoundException;
 import org.chulgang.hrd.exception.GlobalExceptionHandler;
 import org.chulgang.hrd.util.ConnectionContainer;
 import org.chulgang.hrd.util.DataSelector;
+import org.chulgang.hrd.util.DbConnection;
 import org.chulgang.hrd.util.StatementGenerator;
 
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.chulgang.hrd.course.exception.ExceptionMessage.COURSE_ID_NOT_FOUND_EXCEPTION_MESSAGE;
+import static org.chulgang.hrd.course.exception.ExceptionMessage.SUBJECT_ID_NOT_FOUND_EXCEPTION_MESSAGE;
 
 public class CourseRepositoryImpl implements CourseRepository {
     private static final CourseRepository INSTANCE = new CourseRepositoryImpl();
@@ -41,6 +44,8 @@ public class CourseRepositoryImpl implements CourseRepository {
             }
         } catch (SQLException se) {
             se.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
 
         return -1;
@@ -68,6 +73,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 
         ConnectionContainer.close(resultSet);
         ConnectionContainer.close(statement);
+        DbConnection.reset();
 
         return courses;
     }
@@ -88,6 +94,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 
         ConnectionContainer.close(resultSet);
         ConnectionContainer.close(statement);
+        DbConnection.reset();
 
         return Course.from(data);
     }
@@ -115,6 +122,7 @@ public class CourseRepositoryImpl implements CourseRepository {
         }
 
         ConnectionContainer.close(preparedStatement);
+        DbConnection.reset();
         return true;
     }
 
@@ -128,6 +136,7 @@ public class CourseRepositoryImpl implements CourseRepository {
         try {
             if (resultSet.next()) {
                 int idCount = resultSet.getInt(1);
+                DbConnection.reset();
                 return idCount > 0;
             }
         } catch (SQLException se) {
@@ -135,5 +144,26 @@ public class CourseRepositoryImpl implements CourseRepository {
         }
 
         return true;
+    }
+
+    @Override
+    public int findRemainedSeatById(Long id) {
+        String sql = "select REMAINED_SEAT from COURSE where id = " + id;
+
+        Statement statement = StatementGenerator.generateStatement();
+        ResultSet resultSet = DataSelector.getResultSet(statement, sql);
+
+        try {
+            int remainedSeat = resultSet.getInt(1);
+            ConnectionContainer.close(resultSet);
+            ConnectionContainer.close(statement);
+            DbConnection.reset();
+            return remainedSeat;
+        } catch (SQLException se) {
+            GlobalExceptionHandler.throwRuntimeException(
+                    new SubjectIdNotFoundException(String.format(SUBJECT_ID_NOT_FOUND_EXCEPTION_MESSAGE, id)));
+        }
+
+        return -1;
     }
 }

@@ -12,4 +12,6 @@ public interface CourseService {
     boolean create(CreateCourseRequest createCourseRequest);
 
     boolean checkDuplicateCourseName(String courseName);
+
+    int getRemainedSeat(Long id);
 }
