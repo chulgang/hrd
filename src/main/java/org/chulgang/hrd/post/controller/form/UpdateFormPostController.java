@@ -1,4 +1,4 @@
-package org.chulgang.hrd.post.controller;
+package org.chulgang.hrd.post.controller.form;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -11,7 +11,6 @@ import org.chulgang.hrd.post.domain.Post;
 import org.chulgang.hrd.post.model.service.PostService;
 import org.chulgang.hrd.post.model.service.PostServiceImpl;
 import org.chulgang.hrd.users.dto.UsersLoginResponse;
-import org.chulgang.hrd.util.DbConnection;
 
 import java.io.IOException;
 
@@ -19,7 +18,7 @@ import java.io.IOException;
 public class UpdateFormPostController extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DbConnection.initialize();
+        
 
         HttpSession session =  request.getSession();
         UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");

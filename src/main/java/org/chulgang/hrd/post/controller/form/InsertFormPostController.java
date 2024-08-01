@@ -1,4 +1,4 @@
-package org.chulgang.hrd.post.controller;
+package org.chulgang.hrd.post.controller.form;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -12,7 +12,7 @@ import org.chulgang.hrd.users.dto.UsersLoginResponse;
 import java.io.IOException;
 
 @WebServlet("/elearn/post_insertForm.do")
-public class    InsertFormPostController extends HttpServlet {
+public class InsertFormPostController extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
