@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import org.chulgang.hrd.aop.LoggingAspect;
 import org.chulgang.hrd.reservation.dto.ReservationCardResponse;
 import org.chulgang.hrd.reservation.model.service.ReservationService;
+import org.chulgang.hrd.users.dto.UsersLoginResponse;
 import org.chulgang.hrd.util.DbConnection;
 
 import java.io.IOException;
@@ -32,9 +33,8 @@ public class ReservationsController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        //User user = (User) session.getAttribute("user");
-        //Long userId = user.getuserId();
-        Long userId = 1L;
+        UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
+        Long userId = user.getId();
         int page = 1;
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
