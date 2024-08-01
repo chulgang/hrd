@@ -97,7 +97,7 @@
   <section>
     <div class="container">
       <div class="section-heading">
-        <h2 class="h1 mb-0">교수님</h2>
+        <h2 class="h1 mb-0">${full_name}</h2>
         <span class="sub-title">Q&A</span>
       </div>
 

@@ -2,6 +2,7 @@ package org.chulgang.hrd.post.model.service;
 
 import org.chulgang.hrd.post.domain.Post;
 import org.chulgang.hrd.post.model.repository.PostRepositoryImpl;
+import org.chulgang.hrd.users.model.usersRepository.UsersRepository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,33 +20,35 @@ public class PostServiceImpl implements PostService {
         postRepository = new PostRepositoryImpl();
     }
 
-    public ArrayList<Post> postsS() {
-        return postRepository.posts();
+    public ArrayList<Post> postsS(String full_name) {
+        return postRepository.posts(full_name);
     }
-    public ArrayList<Post> content_postsS(long writer_id) {
-        return postRepository.content_posts(writer_id);
+
+    @Override
+    public ArrayList<Post> list_postsS() {
+        return postRepository.list_posts();
     }
 
     public void insert_PostS(Post post) {
         postRepository.insert_posts(post);
     }
-
-    public void incrementViewCountS(long postId)  {
-        try {
-            postRepository.incrementViewCount(postId);
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle exception as appropriate
-        }
-    }
-
-    public long getViewCountS(long postId) {
-        try {
-            return postRepository.getViewCount(postId);
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle exception as appropriate
-            return 0; // Default if error occurs
-        }
-    }
+//
+//    public void incrementViewCountS(long postId)  {
+//        try {
+//            postRepository.incrementViewCount(postId);
+//        } catch (SQLException e) {
+//            e.printStackTrace(); // Handle exception as appropriate
+//        }
+//    }
+//
+//    public long getViewCountS(long postId) {
+//        try {
+//            return postRepository.getViewCount(postId);
+//        } catch (SQLException e) {
+//            e.printStackTrace(); // Handle exception as appropriate
+//            return 0; // Default if error occurs
+//        }
+//    }
 
     @Override
     public void delete_PostS(long postId) {

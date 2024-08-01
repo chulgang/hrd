@@ -84,7 +84,7 @@
     <section>
         <div class="container">
             <div class="section-heading">
-                <h2 class="h1 mb-0">교수님</h2>
+                <h2 class="h1 mb-0">${full_name}</h2>
                 <span class="sub-title">Q&A</span>
             </div>
 
@@ -115,7 +115,7 @@
             </c:forEach>
             <c:choose>
                 <c:when test="${empty user_Id}">
-                    ${user}
+                   333333333333333333
                 </c:when>
                 <c:otherwise>
                     <button type="button" onclick="openInputJSP()" style="margin: 1em; float:right;" class="btn btn-outline-success">Question</button>

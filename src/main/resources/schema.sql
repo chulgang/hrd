@@ -150,6 +150,7 @@ CREATE TABLE POST (
                       SUBJECT VARCHAR2(100) NULL,
                       CONTENT VARCHAR2(4000) NOT NULL,
                       VIEW_COUNT NUMBER(10,0) NOT NULL,
+                      FULL_NAME VARCHAR2(20),
                       CREATED_AT DATE NOT NULL,
                       MODIFIED_AT DATE NULL,
                       CONSTRAINT PK_POST PRIMARY KEY (ID),

@@ -7,24 +7,25 @@ import org.chulgang.hrd.util.DbConnection;
 import java.sql.*;
 import java.util.ArrayList;
 
-import static org.chulgang.hrd.post.model.sql.PostSQL.deletePost;
+import static org.chulgang.hrd.post.model.sql.PostSQL.*;
 
 public class PostRepositoryImpl implements PostRepository {
 
-    public ArrayList<Post> posts() {
-
+    public ArrayList<Post> posts(String full_name) {
         ArrayList<Post> posts = new ArrayList<>();
 
         Connection con = null;
-        Statement stmt = null;
+        PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String sql = PostSQL.Posts;
+        String sql = PostSQL.viewPosts;
+
         Post viewpost = null;
 
         try {
             con = DbConnection.getConnection();
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, full_name);
+            rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 long id = rs.getInt(1);
@@ -45,45 +46,38 @@ public class PostRepositoryImpl implements PostRepository {
         }
     }
 
-    public ArrayList<Post> content_posts(long writerId) {
+    public ArrayList<Post> list_posts() {
         ArrayList<Post> posts = new ArrayList<>();
+
         Connection con = null;
-        PreparedStatement pstmt = null;
+        Statement stmt = null;
         ResultSet rs = null;
-        String sql = "SELECT p.id, p.writer_id, p.subject, p.content, p.view_count " +
-                "FROM post p " +
-                "INNER JOIN users u ON p.writer_id = u.id " +
-                "WHERE p.writer_id = ?";
+        String sql = PostSQL.viewPostList;
+        Post viewpost = null;
 
         try {
             con = DbConnection.getConnection();
-            pstmt = con.prepareStatement(sql);
-            pstmt.setLong(1, writerId);
-            rs = pstmt.executeQuery();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                long id = rs.getLong("id");
-                long writer_id = rs.getLong("writer_id");
-                String subject = rs.getString("subject");
-                String content = rs.getString("content");
-                long view_count = rs.getLong("view_count");
-
-                Post view_post = new Post(id, writer_id, subject, content, view_count);
-                posts.add(view_post);
+                String full_name = rs.getString(2);
+                viewpost = new Post(full_name);
+                posts.add(viewpost);
             }
-        } catch (SQLException e) {
+            return posts;
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         } finally {
             DbConnection.reset();
         }
-        return posts;
     }
-
 
     public void insert_posts(Post post) {
         Connection con = null;
         PreparedStatement pstmt = null;
-        String sql = PostSQL.insertPost;
+        String sql = insertPost;
 
         try {
             con = DbConnection.getConnection();
@@ -94,10 +88,12 @@ public class PostRepositoryImpl implements PostRepository {
             System.out.println("getSubject" + post.getContent());
             System.out.println("getViewCount" + post.getView_count());
 
+
             pstmt.setLong(1, post.getWriter_id());
             pstmt.setString(2, post.getSubject());
             pstmt.setString(3, post.getContent());
             pstmt.setLong(4, post.getView_count());
+            pstmt.setString(5, post.getFull_name());
 
             int i = pstmt.executeUpdate();
             System.out.println("Rows affected: " + i);
@@ -109,47 +105,47 @@ public class PostRepositoryImpl implements PostRepository {
         }
     }
 
-    public void incrementViewCount(long postId) throws SQLException {
-
-        Connection con = null;
-        String query = "UPDATE post SET view_count = view_count + 1 WHERE id = ?";
-        try {
-            con= DbConnection.getConnection();
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setLong(1, postId);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            DbConnection.reset();
-        }
-    }
-
-    public long getViewCount(long postId) throws SQLException {
-
-        Connection con = null;
-        String query = "SELECT view_count FROM post WHERE id = ?";
-
-        try {
-            con= DbConnection.getConnection();
-            PreparedStatement stmt = con.prepareStatement(query);
-
-            stmt.setLong(1, postId);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt("view_count");
-            } else {
-                return 0; // Default if post not found
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }finally {
-            DbConnection.reset();
-        }
-        return -1;
-    }
-    //게시글 삭제 메소드 추가함
+//    public void incrementViewCount(long postId) throws SQLException {
+//
+//        Connection con = null;
+//        String query = "UPDATE post SET view_count = view_count + 1 WHERE id = ?";
+//        try {
+//            con= DbConnection.getConnection();
+//            PreparedStatement stmt = con.prepareStatement(query);
+//            stmt.setLong(1, postId);
+//            stmt.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }finally {
+//            DbConnection.reset();
+//        }
+//    }
+//
+//    public long getViewCount(long postId) throws SQLException {
+//
+//        Connection con = null;
+//        String query = "SELECT view_count FROM post WHERE id = ?";
+//
+//        try {
+//            con= DbConnection.getConnection();
+//            PreparedStatement stmt = con.prepareStatement(query);
+//
+//            stmt.setLong(1, postId);
+//            ResultSet rs = stmt.executeQuery();
+//
+//            if (rs.next()) {
+//                return rs.getInt("view_count");
+//            } else {
+//                return 0; // Default if post not found
+//            }
+//        }catch (SQLException e) {
+//            e.printStackTrace();
+//        }finally {
+//            DbConnection.reset();
+//        }
+//        return -1;
+//    }
+//    //게시글 삭제 메소드 추가함
     @Override
     public void deletePost(long postId) {
 
@@ -172,7 +168,7 @@ public class PostRepositoryImpl implements PostRepository {
     @Override
     public Post getSubjectAndContent(long postId) {
         Connection con = null;
-        String query = PostSQL.selectPosts;
+        String query = selectPosts;
         System.out.println("query::" + query);
         ResultSet rs = null;
         PreparedStatement pstmt =null;
@@ -201,7 +197,7 @@ public class PostRepositoryImpl implements PostRepository {
     public void update_posts(Post post){
         Connection con = null;
         PreparedStatement pstmt = null;
-        String sql = PostSQL.updatePost;
+        String sql = updatePost;
 
         try {
             con = DbConnection.getConnection();

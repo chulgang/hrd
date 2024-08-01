@@ -25,24 +25,43 @@ public class PostController extends HttpServlet {
 
                 HttpSession session = request.getSession();
                 UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
+
                 PostService service = new PostServiceImpl();
-                ArrayList<Post> postlist = service.postsS();
+                ArrayList<Post> postlist;
+                String full_name= request.getParameter("full_name");
 
-                request.setAttribute("postlist", postlist);
-                if(user == null) {
+                request.setAttribute("full_name", full_name);
+                session.setAttribute("full_name", full_name);
+                String a = (String) session.getAttribute("full_name");
+                System.out.println(a);
+
+
+                System.out.println("PostController@@@@@@@@@@@@@@@@@@:"+a);
+
+                if(user==null || user.getFull_name() ==null || session.getAttribute("full_name") == null || full_name==null ) {
+                    System.out.println("user=null");
                     String view = "post.jsp";
-
+                    postlist = service.postsS(full_name);
+                    request.setAttribute("postlist", postlist);
                     RequestDispatcher rd = request.getRequestDispatcher(view);
                     rd.forward(request, response);
-                } else if(session.getAttribute("post") == null) {
+                } else if(session.getAttribute("post") == null || session.getAttribute("full_name") == null) {
+                    System.out.println("else if");
                     String view = "post.jsp";
                     System.out.println("session.getAttribute(post) == null");
+                    postlist = service.postsS(full_name);
+                    request.setAttribute("postlist", postlist);
+
                     System.out.println("user_id: "+user.getUsername());
                     request.setAttribute("user_Id", user.getId());
                     RequestDispatcher rd = request.getRequestDispatcher(view);
                     rd.forward(request, response);
                 } else {
+                    System.out.println("else");
                     Post post = (Post) session.getAttribute("post");
+                    full_name = (String) session.getAttribute("full_name");
+                    postlist = service.postsS(full_name);
+                    request.setAttribute("postlist", postlist);
 
                     request.setAttribute("user_Id", user.getId());
                     System.out.println("Post controller: "+ post.getId());
