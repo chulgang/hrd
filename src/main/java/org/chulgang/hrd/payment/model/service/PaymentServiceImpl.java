@@ -1,5 +1,6 @@
 package org.chulgang.hrd.payment.model.service;
 
+import org.chulgang.hrd.course.dto.GetCourseResponse;
 import org.chulgang.hrd.course.model.service.CourseService;
 import org.chulgang.hrd.course.model.service.CourseServiceImpl;
 import org.chulgang.hrd.payment.domain.PayedCourse;
@@ -66,7 +67,9 @@ public class PaymentServiceImpl implements PaymentService {
         Optional<PayedCourse> payedCourseOptional = paymentRepository.findPayedCourseById(courseId);
         if (payedCourseOptional.isPresent()) {
             PayedCourse payedCourse = payedCourseOptional.get();
-            //todo : 강좌 결합
+            //CourseResponseForPayment courseResponseForPayment = coursePaymentService.getCourseForPayment(courseId);
+
+
         } else {
             //todo : 에러
         }
