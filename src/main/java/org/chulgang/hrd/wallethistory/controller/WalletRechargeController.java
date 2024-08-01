@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.chulgang.hrd.aop.LoggingAspect;
+import org.chulgang.hrd.users.dto.UsersLoginResponse;
 import org.chulgang.hrd.wallethistory.model.service.WalletHistoryService;
 
 import java.io.IOException;
@@ -28,14 +29,14 @@ public class WalletRechargeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        //User user = (User) session.getAttribute("user");
-        //Long userId = user.getUserId();
 
-        Long userId = 1L;
+        UsersLoginResponse users = (UsersLoginResponse) session.getAttribute("dto");
+        Long userId = users.getId();
         int amount = Integer.parseInt(request.getParameter("amount"));
 
         try {
             walletHistoryService.rechargeWallet(userId, amount);
+            request.setAttribute("current_amount", walletHistoryService.currentAmountByUser(userId));
             response.sendRedirect(request.getContextPath() + "/wallet-recharge-success");
         } catch (Exception e) {
             response.sendRedirect(request.getContextPath() + "/404");
