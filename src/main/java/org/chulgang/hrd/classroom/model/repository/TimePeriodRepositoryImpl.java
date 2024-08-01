@@ -34,8 +34,8 @@ public class TimePeriodRepositoryImpl implements TimePeriodRepository {
         ResultSet resultSet = null;
         try {
             preparedStatement.setLong(1, classroomId);
-            preparedStatement.setDate(2, Date.valueOf(startDate));
-            preparedStatement.setDate(3, Date.valueOf(lastDate));
+            preparedStatement.setDate(2, Date.valueOf(lastDate));
+            preparedStatement.setDate(3, Date.valueOf(startDate));
             resultSet = preparedStatement.executeQuery();
         } catch (SQLException se) {
             se.printStackTrace();
@@ -48,7 +48,6 @@ public class TimePeriodRepositoryImpl implements TimePeriodRepository {
             if (data == null) {
                 break;
             }
-
             timePeriods.add(TimePeriod.from(data));
         }
 

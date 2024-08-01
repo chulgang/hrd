@@ -576,9 +576,7 @@
                         var options = '<option value="">시간대를 선택해 주세요</option>';
                         if (response.length > 0) {
                             $.each(response, function (index, timePeriod) {
-                                if (!timePeriod.isUsed) {
-                                    options += '<option value="' + timePeriod.id + '">' + timePeriod.description + '</option>';
-                                }
+                                options += '<option value="' + timePeriod.id + '">' + timePeriod.description + '</option>';
                             });
                         }
                         $('#time-period').html(options);
