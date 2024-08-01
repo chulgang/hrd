@@ -1,5 +1,6 @@
 package org.chulgang.hrd.course.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -47,21 +48,25 @@ public class RegisterCourseControllerTest {
     @DisplayName("강좌 등록 요청을 처리할 수 있다.")
     @Test
     void doPost() throws ServletException, IOException {
-        // Given
+        // given
         when(request.getRequestURI()).thenReturn(REGISTER_COURSE_FIRST_REQUEST_URL);
         when(request.getParameter("subjectId")).thenReturn(String.valueOf(SUBJECT_ID1));
         when(request.getParameter("teacherId")).thenReturn(String.valueOf(TEACHER_ID1));
-        when(request.getParameter("timePeriodId")).thenReturn(String.valueOf(TIME_PERIOD_ID1));
-        when(request.getParameter("name")).thenReturn(NAME1);
-        when(request.getParameter("description")).thenReturn(DESCRIPTION1);
+        when(request.getParameter("time-period")).thenReturn(String.valueOf(TIME_PERIOD_ID1));
+        when(request.getParameter("courseName")).thenReturn(NAME1);
+        when(request.getParameter("course-description")).thenReturn(DESCRIPTION1);
         when(request.getParameter("price")).thenReturn(String.valueOf(PRICE1));
-        when(request.getParameter("startDate")).thenReturn(START_DATE1.toString());
-        when(request.getParameter("lastDate")).thenReturn(LAST_DATE1.toString());
+        when(request.getParameter("start-date")).thenReturn(START_DATE1.toString());
+        when(request.getParameter("last-date")).thenReturn(LAST_DATE1.toString());
+        when(request.getParameter("seatCount")).thenReturn(String.valueOf(REMAINED_SEAT1));
 
-        // When
+        RequestDispatcher mockDispatcher = mock(RequestDispatcher.class);
+        when(request.getRequestDispatcher(COURSE_REGISTRATION_CONFIRM_VIEW)).thenReturn(mockDispatcher);
+
+        // when
         registerCourseController.doPost(request, response);
 
-        // Then
+        // then
         ArgumentCaptor<CreateCourseRequest> captor = ArgumentCaptor.forClass(CreateCourseRequest.class);
         verify(courseService, times(1)).create(captor.capture());
         CreateCourseRequest capturedRequest = captor.getValue();
@@ -76,7 +81,8 @@ public class RegisterCourseControllerTest {
         assertThat(capturedRequest.getStartDate()).isEqualTo(START_DATE1);
         assertThat(capturedRequest.getLastDate()).isEqualTo(LAST_DATE1);
 
-        verify(response).sendRedirect("/elearn/course/courses.do");
+        verify(request, times(1)).getRequestDispatcher(COURSE_REGISTRATION_CONFIRM_VIEW);
+        verify(mockDispatcher, times(1)).forward(request, response);
     }
 
     @DisplayName("강좌명 중복 여부를 검증하고, 중복되는 경우 true를 반환할 수 있다.")
