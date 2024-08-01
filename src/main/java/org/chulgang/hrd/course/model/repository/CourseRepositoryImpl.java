@@ -166,4 +166,21 @@ public class CourseRepositoryImpl implements CourseRepository {
 
         return -1;
     }
+
+    @Override
+    public void updateRemainedSeatById(Long id, int newRemainedSeat) {
+        String sql = "update COURSE set REMAINED_SEAT = ? where ID = ?";
+        PreparedStatement preparedStatement = StatementGenerator.generateStatement(sql);
+
+        try {
+            preparedStatement.setInt(1, newRemainedSeat);
+            preparedStatement.setLong(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+        ConnectionContainer.close(preparedStatement);
+        DbConnection.reset();
+    }
 }

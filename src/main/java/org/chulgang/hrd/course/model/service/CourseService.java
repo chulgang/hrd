@@ -14,4 +14,6 @@ public interface CourseService {
     boolean checkDuplicateCourseName(String courseName);
 
     int getRemainedSeat(Long id);
+
+    void updateRemainedSeat(Long id, int newRemainedSeat);
 }

@@ -44,4 +44,9 @@ public class CourseServiceImpl implements CourseService {
     public int getRemainedSeat(Long id) {
         return courseRepository.findRemainedSeatById(id);
     }
+
+    @Override
+    public void updateRemainedSeat(Long id, int newRemainedSeat) {
+        courseRepository.updateRemainedSeatById(id, newRemainedSeat);
+    }
 }
