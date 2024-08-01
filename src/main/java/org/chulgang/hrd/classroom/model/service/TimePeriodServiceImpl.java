@@ -1,6 +1,6 @@
 package org.chulgang.hrd.classroom.model.service;
 
-import org.chulgang.hrd.classroom.domain.Period;
+import org.chulgang.hrd.classroom.dto.GetTimePeriodResponse;
 import org.chulgang.hrd.classroom.dto.GetTimePeriodsResponse;
 import org.chulgang.hrd.classroom.model.repository.TimePeriodRepository;
 import org.chulgang.hrd.classroom.model.repository.TimePeriodRepositoryImpl;
@@ -23,7 +23,7 @@ public class TimePeriodServiceImpl implements TimePeriodService {
     }
 
     @Override
-    public Period getTimePeriod(Long id) {
-        return Period.valueOf(timePeriodRepository.findPeriodById(id));
+    public GetTimePeriodResponse getTimePeriod(Long id) {
+        return GetTimePeriodResponse.from(timePeriodRepository.findById(id));
     }
 }
