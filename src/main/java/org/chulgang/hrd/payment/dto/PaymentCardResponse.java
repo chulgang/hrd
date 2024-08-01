@@ -3,12 +3,22 @@ package org.chulgang.hrd.payment.dto;
 import java.time.LocalDate;
 
 public class PaymentCardResponse {
+
+    private Long reservationCourseId;
     private String courseName;
     private String courseDescription;
     private int payedAmount;
     private boolean isRefunded;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    public Long getReservationCourseId() {
+        return reservationCourseId;
+    }
+
+    public void setReservationCourseId(Long reservationCourseId) {
+        this.reservationCourseId = reservationCourseId;
+    }
 
     public String getCourseName() {
         return courseName;

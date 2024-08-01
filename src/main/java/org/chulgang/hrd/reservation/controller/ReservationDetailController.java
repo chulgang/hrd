@@ -7,9 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.chulgang.hrd.aop.LoggingAspect;
-import org.chulgang.hrd.payment.dto.PaidCourseDetailResponse;
 import org.chulgang.hrd.reservation.dto.ReservationCourseDetailResponse;
 import org.chulgang.hrd.reservation.model.service.ReservationService;
 

@@ -1,5 +1,6 @@
 package org.chulgang.hrd.reservation.controller;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,12 +12,18 @@ import org.chulgang.hrd.reservation.model.service.ReservationService;
 
 import java.io.IOException;
 
+import static org.chulgang.hrd.course.util.RequestConstant.RESERVATION_SERVICE_ATTRIBUTE_NAME;
+
 @WebServlet(urlPatterns = {"/elearn/delete-reservation.do"})
 public class DeleteReservationController extends HttpServlet {
     private ReservationService reservationService;
 
-    public DeleteReservationController(ReservationService reservationService) {
-        this.reservationService = LoggingAspect.createProxy(ReservationService.class, reservationService);
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+
+        reservationService = LoggingAspect.createProxy(ReservationService.class,
+                (ReservationService) config.getServletContext().getAttribute(RESERVATION_SERVICE_ATTRIBUTE_NAME));
     }
 
     @Override
@@ -26,7 +33,7 @@ public class DeleteReservationController extends HttpServlet {
         if (isDeleted) {
             response.sendRedirect(request.getContextPath() + "/reservation-list.do");
         } else {
-            response.sendRedirect(request.getContextPath() + "/reservation-delete-failure.do");
+            response.sendRedirect(request.getContextPath() + "/reservation-list.do");
         }
     }
 }

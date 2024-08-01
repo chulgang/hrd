@@ -89,8 +89,8 @@
                         <div class="col-md-12 text-center ">
                             <div class="card card-style4 border border-width-2 border-color-primary p-1-9 p-xl-5">
                                 <div class="border-bottom pb-1-9 mb-1-9">
-                                    <h6 class="mb-4 text-uppercase letter-spacing-2 text-primary">price</h6>
-                                    <h4 class="display-5 display-xxl-4 mb-0 lh-1">120,000원</h4>
+                                    <h6 class="mb-4 text-uppercase letter-spacing-2 text-primary">${reservationCourse.subjectName}</h6>
+                                    <h4 class="display-5 display-xxl-4 mb-0 lh-1">${reservationCourse.courseName}</h4>
                                 </div>
                                 <div class="col-12">
                                     <div class="row bg-secondary border-radius-5 mb-1-9 p-1-9">
@@ -99,7 +99,7 @@
                                                 <i class="ti-tag text-white display-18"></i>
                                                 <div class="ms-3">
                                                     <h4 class="mb-1 h5 text-white">강좌명:</h4>
-                                                    <span class="text-white opacity9">jsp/servlet 강의</span>
+                                                    <span class="text-white opacity9">${reservationCourse.courseName}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,7 +108,7 @@
                                                 <i class="ti-user text-white display-18"></i>
                                                 <div class="ms-3">
                                                     <h4 class="mb-1 h5 text-white">강사명:</h4>
-                                                    <span class="text-white opacity9">김형수</span>
+                                                    <span class="text-white opacity9">${reservationCourse.teacherName}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,7 +117,7 @@
                                                 <i class="ti-timer text-white display-18"></i>
                                                 <div class="ms-3">
                                                     <h4 class="mb-1 h5 text-white">개강일:</h4>
-                                                    <span class="text-white opacity9">12, Feb 2023</span>
+                                                    <span class="text-white opacity9">${reservationCourse.startDate}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,25 +126,13 @@
                                                 <i class="ti-money text-white display-18"></i>
                                                 <div class="ms-3">
                                                     <h4 class="mb-1 h5 text-white">가격:</h4>
-                                                    <span class="text-white opacity9">120,000</span>
+                                                    <span class="text-white opacity9">${reservationCourse.price}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <h3>Project Overview</h3>
-                                    <p class="mb-1-4">There are many variations of passages of Lorem Ipsum
-                                        available,
-                                        but the majority
-                                        have suffered alteration in some form, by injected humour, or randomised
-                                        words
-                                        which don’t look
-                                        even slightly believable. If you are going to use a passage of Lorem Ipsum,
-                                        you
-                                        need to be sure
-                                        there isn’t anything embarrassing hidden in the middle of text. All the
-                                        Lorem
-                                        Ipsum generators
-                                        on the Internet tend to repeat predefined chunks as necessary</p>
+                                    <h3>강의 상세</h3>
+                                    <p class="mb-1-4">${reservationCourse.description}</p>
 
                                     <div class="row mt-n1-9">
                                         <div class="col-lg-6 mt-1-9">
@@ -175,14 +163,20 @@
                                 </div>
                                 <div class="mt-1-9">
                                     <div>
-                                        <a href="contact.html" class="butn bg-secondary"><i
-                                                class="far fa-gem icon-arrow before"></i><span
-                                                class="label">결제하기</span><i
-                                                class="far fa-gem icon-arrow after"></i></a>
-                                        <a href="contact.html" class="butn"><i
-                                                class="far fa-gem icon-arrow before"></i><span
-                                                class="label">예약취소</span><i
-                                                class="far fa-gem icon-arrow after"></i></a>
+                                        <form id="paymentForm${reservationCourse.reservationCourseId}" method="POST" action="/elearn/execute-payment.do">
+                                            <input type="hidden" name="reservationId" value="${reservationCourse.reservationCourseId}">
+                                            <input type="hidden" name="courseId" value="${reservationCourse.courseId}">
+                                            <input type="hidden" name="paymentAmount" value="${reservationCourse.price}">
+                                            <a href="#" class="butn bg-secondary" onclick="document.getElementById('paymentForm${reservationCourse.reservationCourseId}').submit();">
+                                                <i class="far fa-gem icon-arrow before"></i><span class="label">결제하기</span><i class="far fa-gem icon-arrow after"></i>
+                                            </a>
+                                        </form>
+                                        <form id="cancelForm${reservationCourse.reservationCourseId}" method="POST" action="/elearn/delete-reservation.do">
+                                            <input type="hidden" name="reservationCourseId" value="${reservationCourse.reservationCourseId}">
+                                            <a href="#" class="butn bg-secondary" onclick="document.getElementById('cancelForm${reservationCourse.reservationCourseId}').submit();">
+                                                <i class="far fa-gem icon-arrow before"></i><span class="label">예약취소</span><i class="far fa-gem icon-arrow after"></i>
+                                            </a>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

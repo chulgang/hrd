@@ -15,7 +15,8 @@ public class PaidCourseDetailResponse {
     private LocalDate lastDate;
     private String period;
     private String classRoomName;
-    private boolean idRefunded;
+    private float averageScore;
+    private int isRefunded;
 
     public Long getPaymentId() {
         return paymentId;
@@ -105,11 +106,19 @@ public class PaidCourseDetailResponse {
         this.classRoomName = classRoomName;
     }
 
-    public boolean isIdRefunded() {
-        return idRefunded;
+    public float getAverageScore() {
+        return averageScore;
     }
 
-    public void setIdRefunded(boolean idRefunded) {
-        this.idRefunded = idRefunded;
+    public void setAverageScore(float averageScore) {
+        this.averageScore = averageScore;
+    }
+
+    public int getIsRefunded() {
+        return isRefunded;
+    }
+
+    public void setIsRefunded(int isRefunded) {
+        this.isRefunded = isRefunded;
     }
 }
