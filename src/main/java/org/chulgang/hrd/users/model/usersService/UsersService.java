@@ -38,6 +38,9 @@ public class UsersService {
     public String findById(long id){
         return usersrepository.findById(id);
     }
+   /* public String findRoleByUserId(long users_id){
+        return usersrepository.findRoleByUserId(users_id);
+    }*/
 
     public int deleteById(long id){
         return usersrepository.deleteById(id);

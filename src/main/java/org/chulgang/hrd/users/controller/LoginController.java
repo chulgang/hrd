@@ -38,6 +38,7 @@ public class LoginController extends HttpServlet {
             request.setAttribute("flag", flag);
             HttpSession session =request.getSession();
             dto = service.loginByEmail(email,password);
+            System.out.println("로그인컨트롤 롤:: "+ dto.getRole());
             session.setAttribute("dto",dto);
             response.sendRedirect("../index.jsp");
         }else if(!email.contains("@")){
@@ -45,6 +46,7 @@ public class LoginController extends HttpServlet {
             request.setAttribute("flag", flag);
             HttpSession session =request.getSession();
             dto= service.loginByUsername(email,password);
+            System.out.println("로그인컨트롤 롤:: "+ dto.getRole());
             session.setAttribute("dto",dto);
             response.sendRedirect("../index.jsp");
         }

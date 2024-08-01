@@ -43,7 +43,7 @@
                         <nav class="navbar navbar-expand-lg navbar-light p-0">
                             <div class="navbar-header navbar-header-custom">
                                 <!-- start logo -->
-                                <a href="index.jsp" class="navbar-brand"><h2 style="color:#ff7029">철강 HRD</h2></a>
+                                <a href="index.jsp" class="navbar-brand"><h2 style="color:#ff7029">HRD</h2></a>
                                 <!-- end logo -->
                             </div>
 
@@ -105,7 +105,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <li><a href="users/myPageForm.do">마이페이지</a></li>
-                                        <li><a href="users/logout.do">로그아웃</a></li>
+                                        <li><a href="logout.do">로그아웃</a></li>
                                     </c:otherwise>
                                 </c:choose>
                             </ul>

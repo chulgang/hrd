@@ -97,6 +97,10 @@
                     <div class="col-lg-6" style = "margin: 0 auto;">
                         <div class="faq-form">
                             <h2 class="mb-4 text-primary">마이페이지</h2>
+                            <div >
+                                <button class="butn secondary" style="background-color:#ef5c72" type="button"><a href="chargeForm.do" class="far fa-paper-plane icon-arrow before">충전하기</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>나의캐시:&nbsp&nbsp</span><span>${current_amount}원</span></button>
+                            </div>
+                            <br>
                             <form class="contact quform" name="f" action="myPage.do" method="post" >
                                 <div class="quform-elements">
 
