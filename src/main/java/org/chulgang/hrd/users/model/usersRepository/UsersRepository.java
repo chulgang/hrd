@@ -53,8 +53,6 @@ public class UsersRepository {
             pstmt.setString(1, email);
             pstmt.setString(2, password);
             rs = pstmt.executeQuery();
-            rs.next();
-
 
             while(rs.next()){
                 dto.setId(rs.getInt(1));
