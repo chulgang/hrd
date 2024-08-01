@@ -57,6 +57,7 @@ public class UsersRepository {
             user_seq = findSeq();
 
             String get_role = findRoleByUserId(user_seq);
+            System.out.println("레포에서 로그인 롤 : " + get_role);
             while (rs.next()) {
                 dto.setId(rs.getInt(1));
                 dto.setEmail(rs.getString(2));
@@ -99,7 +100,11 @@ public class UsersRepository {
             pstmt.setString(2, password);
             rs = pstmt.executeQuery();
             user_seq = findSeq();
+            System.out.println("레포에서 user_seq : " + user_seq);
+
             String get_role = findRoleByUserId(user_seq);
+            System.out.println("레포에서 로그인 롤 : " + get_role);
+
             while (rs.next()) {
                 dto.setId(rs.getLong(1));
                 dto.setEmail(rs.getString(2));

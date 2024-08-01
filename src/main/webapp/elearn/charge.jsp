@@ -86,7 +86,7 @@
             <div class="col-lg-6" style = "margin: 0 auto;">
                 <div class="faq-form">
                     <h2 class="mb-4 text-primary">충전하기</h2>
-                    <form class="contact quform" name="f" action="/elearn/wallet-recharge" method="post">
+                    <form class="contact quform" name="f" action="../wallet-recharge" method="post">
                         <div class="quform-elements">
                             <br class="row">
 
