@@ -8,11 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/elearn/users/signUpForm.do")
+@WebServlet("/elearn/signUpForm.do")
 public class SignUpFormController extends HttpServlet{
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        response.sendRedirect("../contact.jsp");
+        response.sendRedirect("contact.jsp");
 
     }
 }

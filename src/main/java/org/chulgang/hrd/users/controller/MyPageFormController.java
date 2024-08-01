@@ -13,7 +13,7 @@ import org.chulgang.hrd.wallethistory.model.service.WalletHistoryServiceImpl;
 
 import java.io.IOException;
 
-@WebServlet("/elearn/users/myPageForm.do")
+@WebServlet("/elearn/myPageForm.do")
 public class MyPageFormController extends HttpServlet{
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -30,7 +30,7 @@ public class MyPageFormController extends HttpServlet{
         System.out.println("current_amount::::   " + current_amount);
         request.setAttribute("dto",dto);
         request.setAttribute("current_amount",current_amount);
-        RequestDispatcher rd = request.getRequestDispatcher("../myPage.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("myPage.jsp");
         rd.forward(request, response);
 
     }

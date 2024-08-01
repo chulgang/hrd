@@ -80,7 +80,7 @@
                                         <a href="login.jsp" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="users/myPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="myPageForm.doPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                         <a href="logout.do?">로그아웃</a>
                                     </c:otherwise>
                                 </c:choose>
@@ -100,7 +100,7 @@
                                         <a href="courses-list.html" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="users/myPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="myPageForm.doPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
 
                                         <a href="logout.do?">로그아웃</a>
                                     </c:otherwise>
@@ -122,7 +122,7 @@
                                         <a href="courses-list.html" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="users/myPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="myPageForm.doPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
 
                                     </c:otherwise>
                                 </c:choose>

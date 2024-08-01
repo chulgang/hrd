@@ -27,7 +27,7 @@ public class SessionFilter implements Filter {
         HttpSession session = req.getSession(false);
         String path = ((HttpServletRequest) req).getRequestURI();
 
-        if (path.contains("/elearn/login.jsp")||path.contains("/elearn/contact.jsp")||path.contains("/elearn/index.jsp")||path.contains("/elearn/users/login.do")) {
+        if (path.contains("login.do")||path.contains("signUpForm.do")||path.contains("/elearn/index.jsp")||path.contains("loginForm.do")) {
 
         } else {
             if(session != null || session.getAttribute("dto")==null){
