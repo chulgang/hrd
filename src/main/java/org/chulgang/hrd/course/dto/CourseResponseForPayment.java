@@ -52,4 +52,48 @@ public class CourseResponseForPayment {
                 getCourseResponse.getAverageScore()
         );
     }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public String getClassroomName() {
+        return classroomName;
+    }
+
+    public String getCourseDescription() {
+        return courseDescription;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getLastDate() {
+        return lastDate;
+    }
+
+    public Period getPeriod() {
+        return period;
+    }
+
+    public int getRemainedSeat() {
+        return remainedSeat;
+    }
+
+    public float getAverageScore() {
+        return averageScore;
+    }
 }
