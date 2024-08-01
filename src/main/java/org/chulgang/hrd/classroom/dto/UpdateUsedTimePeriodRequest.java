@@ -37,15 +37,17 @@ public class UpdateUsedTimePeriodRequest {
     }
 
     public boolean updateDates(TimePeriod timePeriod) {
-        if (startDate.isAfter(timePeriod.getStartDate()) && lastDate.isBefore(timePeriod.getLastDate())) {
+        LocalDate originalStartDate = timePeriod.getStartDate();
+        LocalDate originalLastDate = timePeriod.getLastDate();
+
+        if (startDate.isAfter(originalStartDate) && lastDate.isBefore(originalLastDate)) {
             return false;
         }
-
-        if (startDate.isAfter(timePeriod.getStartDate())) {
-            startDate = timePeriod.getStartDate();
+        if (startDate.isAfter(originalStartDate)) {
+            startDate = originalStartDate;
         }
-        if (lastDate.isBefore(timePeriod.getLastDate())) {
-            lastDate = timePeriod.getLastDate();
+        if (lastDate.isBefore(originalLastDate)) {
+            lastDate = originalLastDate;
         }
         return true;
     }
