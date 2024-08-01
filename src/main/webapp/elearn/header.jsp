@@ -97,7 +97,7 @@
                                         <li><a href="payment-list.do">수강 강좌</a></li>
                                     </ul>
                                 </li>
-
+                                <li><a href="post_listForm.do">Q&A</a></li>
                                 <c:choose>
                                     <c:when test="${empty dto}">
                                         <li><a href="contact.jsp">회원가입</a></li>
