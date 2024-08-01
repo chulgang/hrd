@@ -28,7 +28,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         try {
             Connection connection = DbConnection.getConnection();
             String sql =
-                    "SELECT c.NAME, c.DESCRIPTION, pc.PAYED_AMOUNT, pc.IS_REFUNDED, c.START_DATE, c.LAST_DATE " +
+                    "SELECT pc.ID, c.NAME, c.DESCRIPTION, pc.PAYED_AMOUNT, pc.IS_REFUNDED, c.START_DATE, c.LAST_DATE " +
                     "FROM PAYED_COURSE pc " +
                     "JOIN COURSE c ON pc.COURSE_ID = c.ID " +
                     "JOIN RESERVATION r ON pc.RESERVATION_ID = r.ID " +
@@ -42,6 +42,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
             while (resultSet.next()) {
                 PaymentCardResponse payment = new PaymentCardResponse();
+                payment.setPayedCourseId(resultSet.getLong("ID"));
                 payment.setCourseName(resultSet.getString("NAME"));
                 payment.setCourseDescription(resultSet.getString("DESCRIPTION"));
                 payment.setPayedAmount(resultSet.getInt("PAYED_AMOUNT"));

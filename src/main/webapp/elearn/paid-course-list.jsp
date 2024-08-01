@@ -92,7 +92,7 @@
                             <div class="col-md-7">
                                 <div class="p-1-6 p-sm-1-9">
                                     <span class="badge-soft mb-3">${payment.courseName}</span>
-                                    <h4 class="font-weight-800 h5 mb-3"><a href="/elearn/paid-course-detail.do?payedCourseId=${payment.reservationCourseId}">${payment.courseName}</a></h4>
+                                    <h4 class="font-weight-800 h5 mb-3"><a href="/elearn/paid-course-detail.do?payedCourseId=${payment.payedCourseId}">${payment.courseName}</a></h4>
                                     <p class="mb-3 alt-font font-weight-500">${payment.courseDescription}</p>
                                     <div class="dotted-seprator pt-4 mt-4"></div>
                                     <div class="d-flex justify-content-between align-items-center">
