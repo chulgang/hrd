@@ -11,7 +11,7 @@ public class UsersService {
         usersrepository = new UsersRepository();
     }
 
-    public int signUp(String email, String username, String password, String full_name , String phone){
+    public long signUp(String email, String username, String password, String full_name , String phone){
         return usersrepository.signUp(email, username, password, full_name, phone);
     }
     public int modifyMyPage(String email, String username, String password, String full_name , String phone){
