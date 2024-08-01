@@ -14,7 +14,7 @@ import java.io.IOException;
 
 import static org.chulgang.hrd.course.util.RequestConstant.PAYMENT_SERVICE_ATTRIBUTE_NAME;
 
-@WebServlet(urlPatterns = {"/elearn/execute-payment"})
+@WebServlet(urlPatterns = {"/elearn/execute-payment.do"})
 public class ExecutePaymentController extends HttpServlet {
     private PaymentService paymentService;
 
