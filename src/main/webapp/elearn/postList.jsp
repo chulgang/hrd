@@ -84,13 +84,13 @@
                         <div class="team-style1 text-center">
                             <img src="img/team/team-01.jpg" class="border-radius-5" alt="...">
                             <div class="team-info">
-                                <h3 class="text-primary mb-1 h4">Murilo Souza</h3>
+                                <h3 href="post.do" class="text-primary mb-1 h4">Murilo Souza</h3>
                                 <span class="font-weight-600 text-secondary">Web Designer</span>
                             </div>
                             <div class="team-overlay">
                                 <div class="d-table h-100 w-100">
                                     <div class="d-table-cell align-middle">
-                                        <h3><a href="instructors-details.html" class="text-white">About Murilo Souza</a></h3>
+                                        <h3><a href="post.do" class="text-white">김형수 교수님</a></h3>
                                         <p class="text-white mb-0">I preserve each companion certification and I'm an authorized AWS solutions architect professional.</p>
                                         <ul class="social-icon-style1">
                                             <li><a href="#!"><i class="fab fa-facebook-f"></i></a></li>
