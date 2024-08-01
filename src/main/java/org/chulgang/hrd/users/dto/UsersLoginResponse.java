@@ -9,20 +9,32 @@ public class UsersLoginResponse {
     private String password;
     private String full_name;
     private String phone;
+    private String role;
     private LocalDateTime create_at;
     private LocalDateTime modified_at;
 
-    public UsersLoginResponse(){}
-    public UsersLoginResponse(long id, String email, String username, String password, String full_name, String phone, LocalDateTime create_at, LocalDateTime modified_at) {
+    public UsersLoginResponse(long id, String email, String username, String password, String full_name, String phone, String role, LocalDateTime create_at, LocalDateTime modified_at) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
         this.full_name = full_name;
         this.phone = phone;
+        this.role = role;
         this.create_at = create_at;
         this.modified_at = modified_at;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public UsersLoginResponse(){}
+
 
     public LocalDateTime getModified_at() {
         return modified_at;
