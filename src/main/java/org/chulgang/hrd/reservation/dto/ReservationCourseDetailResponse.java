@@ -7,7 +7,9 @@ public class ReservationCourseDetailResponse {
     //과목 이름/ 강좌 이름/ 강사 이름/ 수강 시작일/ 수강 종료일/ 가격/ 시간대/ 강의실 이름/ 평점 평균
 
     private Long reservationCourseId;
+    private Long courseId;
     private String courseName;
+    private String subjectName;
     private String teacherName;
     private LocalDate startDate;
     private LocalDate lastDate;
@@ -15,5 +17,6 @@ public class ReservationCourseDetailResponse {
     private String period;
     private String roomName;
     private float averageScore;
+    private String description;
 
 }
