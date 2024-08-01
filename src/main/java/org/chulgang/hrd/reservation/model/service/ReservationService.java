@@ -1,6 +1,5 @@
 package org.chulgang.hrd.reservation.model.service;
 
-import org.chulgang.hrd.payment.dto.PaidCourseDetailResponse;
 import org.chulgang.hrd.reservation.dto.ReservationCardResponse;
 import org.chulgang.hrd.reservation.dto.ReservationCourseDetailResponse;
 
@@ -18,4 +17,5 @@ public interface ReservationService {
 
     int getTotalReservations(Long userId);
 
+    void updateReservationStatus(Long reservationId, int status);
 }

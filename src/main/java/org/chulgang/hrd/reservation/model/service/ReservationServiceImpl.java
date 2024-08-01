@@ -54,4 +54,9 @@ public class ReservationServiceImpl implements ReservationService {
     public int getTotalReservations(Long userId) {
         return (int) Math.ceil((double) reservationRepository.countReservations(userId) / 10);
     }
+
+    @Override
+    public void updateReservationStatus(Long reservationId, int status) {
+        reservationRepository.updateReservationStatus(reservationId, status);
+    }
 }
