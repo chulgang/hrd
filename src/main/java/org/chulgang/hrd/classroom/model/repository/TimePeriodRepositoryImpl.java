@@ -1,14 +1,20 @@
 package org.chulgang.hrd.classroom.model.repository;
 
 import org.chulgang.hrd.classroom.domain.TimePeriod;
+import org.chulgang.hrd.classroom.exception.TimePeriodIdNotFoundException;
+import org.chulgang.hrd.exception.GlobalExceptionHandler;
 import org.chulgang.hrd.util.ConnectionContainer;
 import org.chulgang.hrd.util.DataSelector;
+import org.chulgang.hrd.util.DbConnection;
 import org.chulgang.hrd.util.StatementGenerator;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.chulgang.hrd.classroom.exception.ExceptionMessage.TIME_PERIOD_ID_NOT_FOUND_EXCEPTION_MESSAGE;
 
 public class TimePeriodRepositoryImpl implements TimePeriodRepository {
     private static final TimePeriodRepository INSTANCE = new TimePeriodRepositoryImpl();
@@ -36,7 +42,30 @@ public class TimePeriodRepositoryImpl implements TimePeriodRepository {
 
         ConnectionContainer.close(resultSet);
         ConnectionContainer.close(statement);
+        DbConnection.reset();
 
         return timePeriods;
+    }
+
+    @Override
+    public String findPeriodById(Long id) {
+        String sql = "select TIME_PERIOD from TIME_PERIOD where id = " + id;
+
+        Statement statement = StatementGenerator.generateStatement();
+        ResultSet resultSet = DataSelector.getResultSet(statement, sql);
+
+        try {
+            if (resultSet.next()) {
+                ConnectionContainer.close(resultSet);
+                ConnectionContainer.close(statement);
+                DbConnection.reset();
+                return resultSet.getString(1);
+            }
+        } catch (SQLException e) {
+            GlobalExceptionHandler.throwRuntimeException(
+                    new TimePeriodIdNotFoundException(String.format(TIME_PERIOD_ID_NOT_FOUND_EXCEPTION_MESSAGE, id)));
+        }
+
+        return null;
     }
 }

@@ -3,7 +3,6 @@ package org.chulgang.hrd.classroom.model.service;
 import org.chulgang.hrd.classroom.dto.GetClassroomsResponse;
 import org.chulgang.hrd.classroom.model.repository.ClassroomRepository;
 import org.chulgang.hrd.classroom.model.repository.ClassroomRepositoryImpl;
-import org.chulgang.hrd.util.DbConnection;
 
 public class ClassroomServiceImpl implements ClassroomService {
     private static final ClassroomService INSTANCE = new ClassroomServiceImpl(ClassroomRepositoryImpl.getInstance());
@@ -19,7 +18,6 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Override
     public GetClassroomsResponse getClassrooms() {
-        DbConnection.initialize();
         return GetClassroomsResponse.from(classroomRepository.findAll());
     }
 }

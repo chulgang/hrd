@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TimePeriodRepository {
     List<TimePeriod> findAllByClassroomId(Long classroomId);
+
+    String findPeriodById(Long id);
 }
