@@ -13,9 +13,9 @@ public class RequestConstant {
     public static final String PAYMENT_SERVICE_ATTRIBUTE_NAME = "paymentService";
     public static final String WALLET_HISTORY_SERVICE_ATTRIBUTE_NAME = "walletHistoryService";
 
-
     public static final String GET_SUBJECTS_ATTRIBUTE_NAME = "getSubjectsResponse";
     public static final String GET_CLASSROOMS_ATTRIBUTE_NAME = "getClassroomsResponse";
+    public static final String LOGIN_SESSION_ATTRIBUTE_NAME = "dto";
 
     public static final String GET_COURSES_FIRST_REQUEST_URL = "/elearn/course/courses.do";
     public static final String GET_COURSES_SECOND_REQUEST_URL = "/elearn/courses.do";
@@ -25,6 +25,8 @@ public class RequestConstant {
     public static final String PAGE_NUMBER_PARAMETER_NAME = "pageNumber";
     public static final String COURSE_NAME_PARAMETER_NAME = "courseName";
     public static final String CLASSROOM_ID_PARAMETER_NAME = "classroomId";
+    public static final String START_DATE_PARAMETER_NAME = "start-date";
+    public static final String LAST_DATE_PARAMETER_NAME = "last-date";
 
     public static final String COURSES_VIEW = "courses-grid.jsp";
     public static final String LOGIN_FAILED_VIEW = "login-failed.jsp";
@@ -40,7 +42,6 @@ public class RequestConstant {
     public static final String REGISTER_COURSE_SECOND_REQUEST_URL = "/elearn/registration.do";
     public static final String VALIDATION_URL = "/elearn/course/validation.do";
     public static final String JSON_CONTENT_TYPE = "application/json;charset=utf-8";
-
 
     public static final String GET_PERIODS_FIRST_REQUEST_URL = "/elearn/classroom/get-periods.do";
     public static final String GET_PERIODS_SECOND_REQUEST_URL = "/elearn/get-periods.do";
