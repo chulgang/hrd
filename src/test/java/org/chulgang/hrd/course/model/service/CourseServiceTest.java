@@ -1,5 +1,8 @@
 package org.chulgang.hrd.course.model.service;
 
+import org.chulgang.hrd.classroom.model.repository.TimePeriodRepository;
+import org.chulgang.hrd.classroom.model.service.TimePeriodService;
+import org.chulgang.hrd.classroom.model.service.TimePeriodServiceImpl;
 import org.chulgang.hrd.course.domain.Course;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.dto.GetCourseResponse;
@@ -28,6 +31,8 @@ import static org.mockito.Mockito.*;
 class CourseServiceTest {
     CourseRepository courseRepository = mock(CourseRepository.class);
     CourseService courseService = new CourseServiceImpl(courseRepository);
+    TimePeriodRepository timePeriodRepository = mock(TimePeriodRepository.class);
+    TimePeriodService timePeriodService = new TimePeriodServiceImpl(timePeriodRepository);
     MockedStatic<DbConnection> dbConnection = mockStatic(DbConnection.class);
 
     LocalDateTime now = LocalDateTime.now();
@@ -157,7 +162,7 @@ class CourseServiceTest {
         dbConnection.when(DbConnection::initialize).thenAnswer(invocation -> null);
 
         // when
-        courseService.create(createCourseRequest);
+        courseService.create(createCourseRequest, timePeriodService);
 
         // then
         ArgumentCaptor<Course> courseCaptor = ArgumentCaptor.forClass(Course.class);
