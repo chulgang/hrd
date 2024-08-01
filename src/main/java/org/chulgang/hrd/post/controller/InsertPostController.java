@@ -21,8 +21,6 @@ public class InsertPostController extends HttpServlet {
 
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DbConnection.initialize();
-
         HttpSession session = request.getSession();
         UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
         PostService service = new PostServiceImpl();

@@ -24,7 +24,7 @@ public class DeletePostController extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 DbConnection.reset();
-                DbConnection.initialize();
+                
                 HttpSession session = request.getSession();
                 String strpost_id = request.getParameter("post_id");
                 System.out.println("strpostid널널::::  " + strpost_id);
