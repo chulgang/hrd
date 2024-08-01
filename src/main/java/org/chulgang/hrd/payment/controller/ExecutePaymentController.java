@@ -33,9 +33,10 @@ public class ExecutePaymentController extends HttpServlet {
 
         Long userId = 1L;
         Long reservationId = Long.parseLong(request.getParameter("reservationId"));
+        Long courseId = Long.parseLong(request.getParameter("courseId"));
         int paymentAmount = Integer.parseInt(request.getParameter("paymentAmount"));
 
-        boolean isPaymentSuccessful = paymentService.executePayment(userId, reservationId, paymentAmount);
+        boolean isPaymentSuccessful = paymentService.executePayment(userId, reservationId, courseId ,paymentAmount);
 
         if (isPaymentSuccessful) {
             response.sendRedirect(request.getContextPath() + "/payment-success");
