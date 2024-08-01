@@ -55,15 +55,18 @@ public class SubjectRepositoryImpl implements SubjectRepository {
         ResultSet resultSet = DataSelector.getResultSet(statement, sql);
 
         try {
-            String name = resultSet.getString(1);
-            ConnectionContainer.close(resultSet);
-            ConnectionContainer.close(statement);
-            return name;
+            if (resultSet.next()) {
+                String name = resultSet.getString(1);
+                ConnectionContainer.close(resultSet);
+                ConnectionContainer.close(statement);
+                return name;
+            }
         } catch (SQLException se) {
             GlobalExceptionHandler.throwRuntimeException(
                     new SubjectIdNotFoundException(String.format(SUBJECT_ID_NOT_FOUND_EXCEPTION_MESSAGE, id)));
+        } finally {
+            DbConnection.reset();
         }
-        DbConnection.reset();
 
         return null;
     }
