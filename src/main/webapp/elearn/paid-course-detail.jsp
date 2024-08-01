@@ -88,162 +88,20 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="event-seprator">
-                                        <h2 class="text-primary">강좌 제목</h2>
+                                        <h2 class="text-primary">${payedCourse.courseName}</h2>
                                         <ul
                                                 class="event-info-list mb-4 pb-4 borders-bottom border-color-medium-gray">
-                                            <li><i class="ti-calendar pe-2 text-secondary"></i>22 August, 2023</li>
-                                            <li><i class="ti-time pe-2 text-secondary"></i>10.00 AM - 06.00 PM</li>
-                                            <li><i class="ti-location-pin pe-2 text-secondary"></i>27 Street, New
-                                                York</li>
+                                            <li><i class="ti-calendar pe-2 text-secondary"></i>${payedCourse.startDate}</li>
+                                            <li><i class="ti-time pe-2 text-secondary"></i>${payedCourse.period}</li>
+                                            <li><i class="ti-location-pin pe-2 text-secondary"></i>가산디지털단지, 구로구</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-1-9">
-                                    <p class="alt-font font-weight-500 text-color">강의 설명</p>
-                                    <h3>Event Overview</h3>
-                                    <p class="alt-font font-weight-500 text-color">Lorem Ipsum is simply dummy text
-                                        of the printing and typesetting industry. Lorem Ipsum has been the
-                                        industry’s standard dummy tex an unknown printer took. Lorem Ipsum is simply
-                                        dummy text of the printing.</p>
-                                    <ul class="course-detail-list">
-                                        <li><i
-                                                class="ti-check-box vertical-align-middle text-secondary pe-2"></i>Basic
-                                            knowledge of digital marketing terms</li>
-                                        <li><i
-                                                class="ti-check-box vertical-align-middle text-secondary pe-2"></i>Basic
-                                            understanding of business</li>
-                                        <li><i
-                                                class="ti-check-box vertical-align-middle text-secondary pe-2"></i>Pen
-                                            and paper for taking notes</li>
-                                        <li><i
-                                                class="ti-check-box vertical-align-middle text-secondary pe-2"></i>Internet
-                                            connection</li>
-                                        <li><i class="ti-check-box vertical-align-middle text-secondary pe-2"></i>No
-                                            digital marketing experience required!</li>
-                                    </ul>
+                                    <p class="alt-font font-weight-500 text-color">${payedCourse.description}</p>
                                 </div>
-                                <div class="col-md-12 mb-lg-1-9">
-                                    <h3>Event Speakers</h3>
-                                    <p class="alt-font font-weight-500 text-color mb-1-6">Even slightly believable.
-                                        If you are going use a passage of Lorem Ipsum need equal blame belongs to
-                                        those who fail in their duty through weakness of will, which is the same as
-                                        saying through shrinking from toil and pain. These cases are perfectly
-                                        simple and easy to distinguish.</p>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-1-6 mb-sm-1-9 mb-lg-0">
-                                            <div class="team-style1 text-center">
-                                                <img src="img/team/team-01.jpg" class="border-radius-5" alt="...">
-                                                <div class="team-info">
-                                                    <h3 class="text-primary mb-1 h4">Murilo Souza</h3>
-                                                    <span class="font-weight-600 text-secondary">Web Designer</span>
-                                                </div>
-                                                <div class="team-overlay">
-                                                    <div class="d-table h-100 w-100">
-                                                        <div class="d-table-cell align-middle">
-                                                            <h3><a href="instructors-details.html"
-                                                                   class="text-white">About Murilo Souza</a></h3>
-                                                            <p class="text-white mb-0">I preserve each companion
-                                                                certification and I'm an authorized AWS solutions
-                                                                architect professional.</p>
-                                                            <ul class="social-icon-style1">
-                                                                <li><a href="#!"><i
-                                                                        class="fab fa-facebook-f"></i></a></li>
-                                                                <li><a href="#!"><i class="fab fa-twitter"></i></a>
-                                                                </li>
-                                                                <li><a href="#!"><i class="fab fa-youtube"></i></a>
-                                                                </li>
-                                                                <li><a href="#!"><i
-                                                                        class="fab fa-linkedin-in"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mb-1-6 mb-sm-1-9 mb-lg-0">
-                                            <div class="team-style1 text-center">
-                                                <img src="img/team/team-02.jpg" class="border-radius-5" alt="...">
-                                                <div class="team-info">
-                                                    <h3 class="text-primary mb-1 h4">Balsam Samira</h3>
-                                                    <span class="font-weight-600 text-secondary">Photographer</span>
-                                                </div>
-                                                <div class="team-overlay">
-                                                    <div class="d-table h-100 w-100">
-                                                        <div class="d-table-cell align-middle">
-                                                            <h3><a href="instructors-details.html"
-                                                                   class="text-white">About Balsam Samira</a></h3>
-                                                            <p class="text-white mb-0">I preserve each companion
-                                                                certification and I'm an authorized AWS solutions
-                                                                architect professional.</p>
-                                                            <ul class="social-icon-style1">
-                                                                <li><a href="#!"><i
-                                                                        class="fab fa-facebook-f"></i></a></li>
-                                                                <li><a href="#!"><i class="fab fa-twitter"></i></a>
-                                                                </li>
-                                                                <li><a href="#!"><i class="fab fa-youtube"></i></a>
-                                                                </li>
-                                                                <li><a href="#!"><i
-                                                                        class="fab fa-linkedin-in"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 mb-1-9">
-                                    <h3>Event Schedule</h3>
-                                    <p class="alt-font font-weight-500 text-color mb-1-6">Even slightly believable.
-                                        If you are going use a passage of Lorem Ipsum need equal blame belongs to
-                                        those who fail in their duty through weakness of will, which is the same as
-                                        saying through shrinking from toil and pain. These cases are perfectly
-                                        simple and easy to distinguish.</p>
-                                    <div class="event-schedule-table table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th class="time">Time</th>
-                                                <th class="topics">Topics</th>
-                                                <th class="speakers">Speakers</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td class="time">10.00 am to 10.30 am</td>
-                                                <td class="topics">Registration and T-shirt distribution</td>
-                                                <td class="speakers">-----------</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="time">10.35 am to 11.00 am</td>
-                                                <td class="topics">Latest version of WordPress and it's Benefit
-                                                </td>
-                                                <td class="speakers">Alister Camble</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="time">11.05 am to 11.30 am</td>
-                                                <td class="topics">Snacks &amp; Tea Break</td>
-                                                <td class="speakers">-----------</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="time">11.35 am to 12.35 pm</td>
-                                                <td class="topics">How to use latest version of WordPress</td>
-                                                <td class="speakers">Ethan Smith</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="time">12.40 pm to 1.45 pm</td>
-                                                <td class="topics">Future of WordPress</td>
-                                                <td class="speakers">Keth Williams</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="time">1.50 pm to 2.15 pm</td>
-                                                <td class="topics">Thanks giving &amp; closing </td>
-                                                <td class="speakers">Organizer</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+
+
                                 <div class="col-md-12 event-seprator">
                                     <h3>Event Location</h3>
                                     <p class="alt-font font-weight-500 text-color mb-1-6">Duis aute irure dolor in
@@ -275,18 +133,16 @@
                                     <h3>강의 정보</h3>
                                 </div>
                                 <ul class="course-list">
-                                    <li><span><i class="ti-ticket pe-2"></i>가격</span><span>$75.00</span>
+                                    <li><span><i class="ti-ticket pe-2"></i>가격</span><span>${payedCourse.price}</span>
                                     </li>
-                                    <li><span><i class="ti-calendar pe-2"></i>수강 시작일</span><span>25 May, 2023</span>
+                                    <li><span><i class="ti-calendar pe-2"></i>수강 시작일</span><span>${payedCourse.startDate}</span>
                                     </li>
-                                    <li><span><i class="ti-calendar pe-2"></i>수강 종료일</span><span>25 May, 2023</span>
+                                    <li><span><i class="ti-calendar pe-2"></i>수강 종료일</span><span>${payedCourse.lastDate}</span>
                                     </li>
-                                    <li><span><i class="ti-time pe-2"></i>시간</span><span>10:00 am to 6:00
+                                    <li><span><i class="ti-time pe-2"></i>시간</span><span>${payedCourse.period}
                                                 pm</span></li>
-                                    <li><span><i class="ti-location-pin pe-2"></i>강의실</span><span>23 street, New
-                                                York</span></li>
-                                    <li><span><i class="ti-medall pe-2"></i>Seat</span><span>Yes</span></li>
-                                    <li><span><i class="ti-world pe-2"></i>Language</span><span>English</span></li>
+                                    <li><span><i class="ti-location-pin pe-2"></i>강의실</span><span>${payedCourse.classRoomName}</span></li>
+                                    <li><span><i class="ti-star pe-2"></i>별점</span><span>${payedCourse.averageScore}</span></li>
                                 </ul>
                             </div>
 
