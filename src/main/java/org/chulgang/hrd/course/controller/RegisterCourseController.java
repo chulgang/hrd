@@ -60,6 +60,19 @@ public class RegisterCourseController extends HttpServlet {
             return;
         }
 
+        HttpSession httpSession = request.getSession();
+        UsersLoginResponse usersLoginResponse
+                = (UsersLoginResponse) httpSession.getAttribute(LOGIN_SESSION_ATTRIBUTE_NAME);
+
+        if (usersLoginResponse == null) {
+            response.sendRedirect(LOGIN_FAILED_VIEW);
+            return;
+        }
+        if (!usersLoginResponse.getRole().equals(TEACHER_ROLE_NAME)) {
+            response.sendRedirect(AUTHORIZATION_FAILED_VIEW);
+            return;
+        }
+
         GetSubjectsResponse getSubjectsResponse = subjectService.getSubjects();
         GetClassroomsResponse getClassroomsResponse = classroomService.getClassrooms();
 
@@ -75,14 +88,6 @@ public class RegisterCourseController extends HttpServlet {
 
         if (request.getRequestURI().equals(VALIDATION_URL)) {
             validateDuplicateCourseName(request, response);
-            return;
-        }
-
-        HttpSession httpSession = request.getSession();
-        UsersLoginResponse usersLoginResponse
-                = (UsersLoginResponse) httpSession.getAttribute(LOGIN_SESSION_ATTRIBUTE_NAME);
-        if (usersLoginResponse == null) {
-            response.sendRedirect(LOGIN_FAILED_VIEW);
             return;
         }
 
