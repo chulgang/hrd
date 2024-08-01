@@ -8,6 +8,7 @@ public class Post {
     private long writer_id;
     private String subject;
     private String content;
+    private String full_name;
     private long view_count;
     private LocalDateTime created_at;
     private LocalDateTime modified_at;
@@ -22,13 +23,24 @@ public class Post {
         this.created_at = created_at;
         this.modified_at = modified_at;
     }
+    public Post(long id, long writer_id, String subject, String content, String full_name,
+                long view_count, LocalDateTime created_at, LocalDateTime modified_at) {
+        this.id = id;
+        this.writer_id = writer_id;
+        this.subject = subject;
+        this.content = content;
+        this.full_name = full_name;
+        this.view_count = view_count;
+        this.created_at = created_at;
+        this.modified_at = modified_at;
+    }
     public Post(String subject, String content,
                 long view_count) {
         this.subject = subject;
         this.content = content;
         this.view_count = view_count;
-
     }
+
     public Post(long id, long writer_id, String subject, String content,
                 long view_count) {
         this.id = id;
@@ -40,12 +52,17 @@ public class Post {
     }
 
     public Post(long writer_id, String subject, String content,
-                long view_count) {
+                long view_count, String full_name) {
         this.writer_id = writer_id;
         this.subject = subject;
         this.content = content;
         this.view_count = view_count;
+        this.full_name = full_name;
 
+    }
+
+    public Post(String full_name) {
+        this.full_name = full_name;
     }
 
     public long getSeq() {
@@ -94,6 +111,14 @@ public class Post {
 
     public void setView_count(long view_count) {
         this.view_count = view_count;
+    }
+
+    public String getFull_name() {
+        return full_name;
+    }
+
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
     }
 
     public LocalDateTime getCreated_at() {

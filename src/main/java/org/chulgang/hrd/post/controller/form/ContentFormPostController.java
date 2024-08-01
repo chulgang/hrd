@@ -29,6 +29,10 @@ public class ContentFormPostController extends HttpServlet {
                 0, null, null);
 
 
+        String full_name = (String) session.getAttribute("full_name");
+
+
+        request.setAttribute("full_name", full_name);
         session.setAttribute("post", post);
 
         if(user == null) { //로그인 안했을 때

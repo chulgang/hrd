@@ -20,6 +20,12 @@ insert into IMAGE values(IMAGE_SEQ.nextval,3,'target_type3','name3',null,sysdate
 insert into IMAGE values(IMAGE_SEQ.nextval,4,'target_type4','name4',null,sysdate,sysdate);
 insert into IMAGE values(IMAGE_SEQ.nextval,5,'target_type5','name5',null,sysdate,sysdate);
 
+insert into post values(POST_SEQ.nextval,1,'subject1','content1',1,'full1',sysdate,sysdate);
+insert into post values(POST_SEQ.nextval,2,'subject2','content2',2,'full2',sysdate,sysdate);
+insert into post values(POST_SEQ.nextval,3,'subject3','content3',3,'full3',sysdate,sysdate);
+insert into post values(POST_SEQ.nextval,4,'subject4','content4',4,'full4',sysdate,sysdate);
+insert into post values(POST_SEQ.nextval,5,'subject5','content5',5,'full5',sysdate,sysdate);
+
 insert into SUBJECT(ID, NAME, CREATED_AT, MODIFIED_AT) values(1, '수학', SYSDATE, SYSDATE);
 insert into SUBJECT(ID, NAME, CREATED_AT, MODIFIED_AT) values(2, '영어', SYSDATE, SYSDATE);
 insert into SUBJECT(ID, NAME, CREATED_AT, MODIFIED_AT) values(3, '국어', SYSDATE, SYSDATE);
@@ -30,12 +36,6 @@ insert into TIME_PERIOD(ID, CLASSROOM_ID, PERIOD, START_DATE, LAST_DATE, IS_USED
 insert into TIME_PERIOD(ID, CLASSROOM_ID, PERIOD, START_DATE, LAST_DATE, IS_USED, CREATED_AT, MODIFIED_AT) values(4, 1, 'FOURTEEN', SYSDATE, SYSDATE, 0, SYSDATE, SYSDATE);
 insert into TIME_PERIOD(ID, CLASSROOM_ID, PERIOD, START_DATE, LAST_DATE, IS_USED, CREATED_AT, MODIFIED_AT) values(5, 3, 'SIXTEEN', SYSDATE, SYSDATE, 0, SYSDATE, SYSDATE);
 insert into TIME_PERIOD(ID, CLASSROOM_ID, PERIOD, START_DATE, LAST_DATE, IS_USED, CREATED_AT, MODIFIED_AT) values(6, 1, 'NINE', SYSDATE, SYSDATE, 0, SYSDATE, SYSDATE);
-
-insert into post values(POST_SEQ.nextval,1,'subject1','content1',1,sysdate,sysdate);
-insert into post values(POST_SEQ.nextval,2,'subject2','content2',2,sysdate,sysdate);
-insert into post values(POST_SEQ.nextval,3,'subject3','content3',3,sysdate,sysdate);
-insert into post values(POST_SEQ.nextval,4,'subject4','content4',4,sysdate,sysdate);
-insert into post values(POST_SEQ.nextval,5,'subject5','content5',5,sysdate,sysdate);
 
 insert into COMMENTS values(COMMENTS_SEQ.nextval,1,1,'content1',sysdate,sysdate);
 insert into COMMENTS values(COMMENTS_SEQ.nextval,2,2,'content2',sysdate,sysdate);

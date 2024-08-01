@@ -31,8 +31,10 @@ public class InsertPostController extends HttpServlet {
         System.out.println("Controller subject: " + subject);
         System.out.println("Controller content: " + content);
 
+        String full_name = (String) session.getAttribute("full_name");
+
         System.out.println("Controller getID: " + user.getId());
-        Post post = new Post(user.getId(), subject, content, 1);
+        Post post = new Post(user.getId(), subject, content, 1, full_name);
         service.insert_PostS(post);
 
         response.sendRedirect("/elearn/post.do");

@@ -7,17 +7,17 @@ import java.util.ArrayList;
 
 public interface PostService {
 
-    ArrayList<Post> postsS();
+    ArrayList<Post> postsS(String full_name);
 
-    ArrayList<Post> content_postsS(long writer_id);
+    ArrayList<Post> list_postsS();
 
     void insert_PostS(Post post);
+//
+//    void incrementViewCountS(long postId);
+//    long getViewCountS(long postId);
 
-    void incrementViewCountS(long postId);
-
-    long getViewCountS(long postId);
     void delete_PostS(long postId);
     void update_PostS(Post post);
 
-        Post getSubjectAndContent(long postId);
+    Post getSubjectAndContent(long postId);
 }
