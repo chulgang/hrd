@@ -19,7 +19,6 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         return INSTANCE;
     }
 
-        try {
     @Override
     public List<PaymentCardResponse> findPaymentCourseCardByMemberId(Long userId, int pageNumber) {
         List<PaymentCardResponse> payments = new ArrayList<>();
