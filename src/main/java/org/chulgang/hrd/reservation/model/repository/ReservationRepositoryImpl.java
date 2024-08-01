@@ -22,7 +22,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     @Override
     public boolean registerReservation(Long memberId, Long courseId) {
         String insertReservationSQL = "INSERT INTO RESERVATION (ID, STUDENT_ID, CREATED_AT) VALUES (RESERVATION_SEQ.NEXTVAL, ?, SYSDATE)";
-        String insertReservedCourseSQL = "INSERT INTO RESERVED_COURSE (ID, COURSE_ID, RESERVATION_ID, CREATED_AT) VALUES (RESERVED_COURSE_SEQ.NEXTVAL, ?, RESERVATION_SEQ.CURRVAL, SYSDATE)";
+        String insertReservedCourseSQL = "INSERT INTO RESERVED_COURSE (ID, COURSE_ID, RESERVATION_ID, CREATED_AT, IS_RESERVED) VALUES (RESERVED_COURSE_SEQ.NEXTVAL, ?, RESERVATION_SEQ.CURRVAL, SYSDATE";
 
         try {
             Connection connection = DbConnection.getConnection();
@@ -122,7 +122,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 
     @Override
     public Optional<ReservationCourse> findById(Long id) {
-        String sql = "SELECT * FROM RESERVATION_COURSE WHERE ID = ?";
+        String sql = "SELECT * FROM RESERVED_COURSE WHERE ID = ?";
         try {
             Connection connection = DbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
