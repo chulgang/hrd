@@ -31,9 +31,9 @@ public class DeleteReservationController extends HttpServlet {
         Long reservationCourseId = Long.parseLong(request.getParameter("reservationCourseId"));
         boolean isDeleted = reservationService.deleteReservation(reservationCourseId);
         if (isDeleted) {
-            response.sendRedirect(request.getContextPath() + "/reservation-list.do");
+            response.sendRedirect(request.getContextPath() + "/elearn/reservation-list.do");
         } else {
-            response.sendRedirect(request.getContextPath() + "/reservation-list.do");
+            response.sendRedirect(request.getContextPath() + "/elearn/error.do");
         }
     }
 }
