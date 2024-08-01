@@ -76,6 +76,8 @@ CREATE TABLE TIME_PERIOD (
                              ID NUMBER(19,0) NOT NULL,
                              CLASSROOM_ID NUMBER(19,0) NOT NULL,
                              PERIOD VARCHAR2(30) NOT NULL,
+                             START_DATE DATE NOT NULL,
+                             LAST_DATE DATE NOT NULL,
                              IS_USED NUMBER(1,0) NOT NULL,
                              CONSTRAINT PK_TIME_PERIOD PRIMARY KEY (ID),
                              CONSTRAINT FK_TIME_PERIOD_CLASSROOM FOREIGN KEY (CLASSROOM_ID) REFERENCES CLASSROOM(ID) ON DELETE CASCADE
