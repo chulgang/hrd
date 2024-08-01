@@ -6,8 +6,11 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.chulgang.hrd.classroom.model.service.TimePeriodService;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.model.service.CourseService;
+import org.chulgang.hrd.users.dto.UsersLoginResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,15 +26,18 @@ import static org.mockito.Mockito.*;
 
 public class RegisterCourseControllerTest {
     private CourseService courseService;
+    private TimePeriodService timePeriodService;
     private RegisterCourseController registerCourseController;
     private HttpServletRequest request;
     private HttpServletResponse response;
+    private HttpSession session;
     private ServletConfig servletConfig;
     private ServletContext servletContext;
 
     @BeforeEach
     void setUp() throws ServletException {
         courseService = mock(CourseService.class);
+        timePeriodService = mock(TimePeriodService.class);
         registerCourseController = new RegisterCourseController();
         registerCourseController.init();
         request = mock(HttpServletRequest.class);
@@ -59,6 +65,8 @@ public class RegisterCourseControllerTest {
         when(request.getParameter("start-date")).thenReturn(START_DATE1.toString());
         when(request.getParameter("last-date")).thenReturn(LAST_DATE1.toString());
         when(request.getParameter("seatCount")).thenReturn(String.valueOf(REMAINED_SEAT1));
+        when(request.getSession()).thenReturn(session);
+        when(session.getAttribute("dto")).thenReturn(UsersLoginResponse.class);
 
         RequestDispatcher mockDispatcher = mock(RequestDispatcher.class);
         when(request.getRequestDispatcher(COURSE_REGISTRATION_CONFIRM_VIEW)).thenReturn(mockDispatcher);
@@ -68,7 +76,7 @@ public class RegisterCourseControllerTest {
 
         // then
         ArgumentCaptor<CreateCourseRequest> captor = ArgumentCaptor.forClass(CreateCourseRequest.class);
-        verify(courseService, times(1)).create(captor.capture());
+        verify(courseService, times(1)).create(captor.capture(), timePeriodService);
         CreateCourseRequest capturedRequest = captor.getValue();
 
         assertThat(capturedRequest).isNotNull();

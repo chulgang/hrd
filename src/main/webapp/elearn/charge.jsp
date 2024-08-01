@@ -86,53 +86,32 @@
             <div class="col-lg-6" style = "margin: 0 auto;">
                 <div class="faq-form">
                     <h2 class="mb-4 text-primary">충전하기</h2>
-                    <form class="contact quform" name="f" action="users/signUp.do" method="post">
+                    <form class="contact quform" name="f" action="../wallet-recharge" method="post">
                         <div class="quform-elements">
                             <br class="row">
 
                             <!-- Begin Text input element -->
                             <div class="col-md-12">
                                 <div class="quform-element form-group">
-                                    <label for="email">충전금액<span class="quform-required">*</span></label>
+                                    <label for="amount">충전금액<span class="quform-required">*</span></label>
                                     <div class="quform-input">
-                                        <input class="form-control" id="email" type="text" name="email" placeholder="충전금액" />
+                                        <input class="form-control" id="amount" type="text" name="amount" placeholder="충전금액" />
                                     </div>
                                 </div>
                             </div>
                             <!-- End Text input element -->
 
                             <!-- Begin Text input element -->
-                            <div class="col-md-12">
-                                <div class="quform-element form-group">
-                                    <label for="username">사용금액<span class="quform-required">*</span></label>
-                                    <div class="quform-input">
-                                        <input class="form-control" id="username" type="password" name="password" placeholder="사용금액" />
-                                    </div>
-                                </div>
-                            </div>
+
 
                             <!-- End Text input element -->
 
                             <!-- Begin Text input element -->
-                            <div class="col-md-12">
-                                <div class="quform-element form-group">
-                                    <label for="password">소득금액<span class="quform-required">*</span></label>
-                                    <div class="quform-input">
-                                        <input class="form-control" id="password" type="password" name="password" placeholder="소득금액" />
-                                    </div>
-                                </div>
-                            </div>
+
                             <!-- End Text input element -->
 
                             <!-- Begin Text input element -->
-                            <div class="col-md-12">
-                                <div class="quform-element form-group">
-                                    <label for="full_name">환불금액</label>
-                                    <div class="quform-input">
-                                        <input class="form-control" id="full_name" type="text" name="full_name" placeholder="환불금액" />
-                                    </div>
-                                </div>
-                            </div>
+
                             <!-- End Text input element -->
 
 
@@ -141,10 +120,10 @@
                             <div class="col-md-12">
                                 <div class="quform-element">
                                     <div class="form-group">
-                                        <label for="phone">현재금액</label>
+                                        <label for="current_amount">현재금액</label>
                                         <div class="quform-input">
                                             <input class="form-control" id="phone" type="text" name="phone" placeholder="현재금액" value="${walletHistory.currentAmount}" disabled/>
-                                            <input class="form-control" id="phone2" type="hidden" name="phone" placeholder="현재금액" value="${walletHistory.currentAmount}"/>
+                                            <input class="form-control" id="current_amount" type="hidden" name="current_amount" placeholder="현재금액" value="${walletHistory.currentAmount}"/>
 
                                         </div>
                                     </div>
@@ -157,14 +136,12 @@
                             <!-- Begin Submit button -->
                             <div class="col-md-12">
                                 <div class="quform-submit-inner">
-                                    <button class="butn secondary" type="button" onclick="submit()" ><i class="far fa-paper-plane icon-arrow before"></i><span class="label">전송</span><i class="far fa-paper-plane icon-arrow after"></i></button>
+                                    <button class="butn secondary" type="submit" onclick="submit()" ><i class="far fa-paper-plane icon-arrow before"></i><span class="label">전송</span><i class="far fa-paper-plane icon-arrow after"></i></button>
                                 </div>
 
                                 <div class="quform-loading-wrap text-start"><span class="quform-loading"></span></div>
                             </div>
                             <!-- End Submit button -->
-
-
                 </div>
                 </form>
             </div>

@@ -14,7 +14,7 @@ import org.chulgang.hrd.util.DbConnection;
 import java.io.IOException;
 
 
-@WebServlet("/elearn/users/login.do")
+@WebServlet("/elearn/login.do")
 public class LoginController extends HttpServlet {
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -40,7 +40,7 @@ public class LoginController extends HttpServlet {
             dto = service.loginByEmail(email,password);
             System.out.println("로그인컨트롤 롤:: "+ dto.getRole());
             session.setAttribute("dto",dto);
-            response.sendRedirect("../index.jsp");
+            response.sendRedirect("index.jsp");
         }else if(!email.contains("@")){
             flag = 1;
             request.setAttribute("flag", flag);
@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
             dto= service.loginByUsername(email,password);
             System.out.println("로그인컨트롤 롤:: "+ dto.getRole());
             session.setAttribute("dto",dto);
-            response.sendRedirect("../index.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 }

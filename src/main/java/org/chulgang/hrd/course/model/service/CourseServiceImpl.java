@@ -1,5 +1,7 @@
 package org.chulgang.hrd.course.model.service;
 
+import org.chulgang.hrd.classroom.dto.UpdateUsedTimePeriodRequest;
+import org.chulgang.hrd.classroom.model.service.TimePeriodService;
 import org.chulgang.hrd.course.domain.Course;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.dto.GetCourseResponse;
@@ -31,7 +33,9 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public boolean create(CreateCourseRequest createCourseRequest) {
+    public boolean create(CreateCourseRequest createCourseRequest, TimePeriodService timePeriodService) {
+        timePeriodService.updateUsedTimePeriod(UpdateUsedTimePeriodRequest.from(createCourseRequest));
+
         return courseRepository.save(Course.from(createCourseRequest));
     }
 

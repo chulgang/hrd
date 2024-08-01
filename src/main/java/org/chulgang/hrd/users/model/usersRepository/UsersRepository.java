@@ -9,14 +9,15 @@ import java.time.format.DateTimeFormatter;
 
 public class UsersRepository {
 
-    public int signUp(String email, String username, String password, String full_name, String phone) {
-
+    public long signUp(String email, String username, String password, String full_name, String phone) {
+        PreparedStatement pstmt =null;
+        Connection con= null;
         String sql = UsersSQL.signUp;
         int flag = -1;
-
+        long user_id = 0L;
         try {
-            Connection con = DbConnection.getConnection();
-            PreparedStatement pstmt = con.prepareStatement(sql);
+            con = DbConnection.getConnection();
+            pstmt = con.prepareStatement(sql);
             pstmt.setString(1, email);
             pstmt.setString(2, username);
             pstmt.setString(3, password);
@@ -24,17 +25,19 @@ public class UsersRepository {
             pstmt.setString(5, phone);
             pstmt.executeUpdate();
             System.out.println("signUp 성공");
-            System.out.println("signUp: " + 1);
+            System.out.println("signUp user_id : " + user_id);
 
-            return 1;
+            return user_id;
         } catch (SQLException e) {
             System.err.println(e + "Board write  insert SQLException");
             e.printStackTrace();
             flag = -1;
         } finally {
             DbConnection.reset();
+            user_id = findSeq();
+            return user_id;
         }
-        return flag;
+
     }
 
     public UsersLoginResponse loginByEmail(String email, String password) {
@@ -54,6 +57,7 @@ public class UsersRepository {
             user_seq = findSeq();
 
             String get_role = findRoleByUserId(user_seq);
+            System.out.println("레포에서 로그인 롤 : " + get_role);
             while (rs.next()) {
                 dto.setId(rs.getInt(1));
                 dto.setEmail(rs.getString(2));
@@ -96,7 +100,11 @@ public class UsersRepository {
             pstmt.setString(2, password);
             rs = pstmt.executeQuery();
             user_seq = findSeq();
+            System.out.println("레포에서 user_seq : " + user_seq);
+
             String get_role = findRoleByUserId(user_seq);
+            System.out.println("레포에서 로그인 롤 : " + get_role);
+
             while (rs.next()) {
                 dto.setId(rs.getLong(1));
                 dto.setEmail(rs.getString(2));
@@ -151,18 +159,19 @@ public class UsersRepository {
         return flag;
     }
 
-    public long findSeq() {
-
+    public long  findSeq() {
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet  rs =null;
         String sql = UsersSQL.findSeq;
-        ResultSet rs;
         long users_no = 0L;
         try {
-            Connection con = DbConnection.getConnection();
-            Statement stmt = con.createStatement();
+            con = DbConnection.getConnection();
+            stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 users_no = rs.getLong(1);
-                System.out.println("user_no 파인드시퀀::: " + users_no);
+                System.out.println("findSeq user_no 파인드시퀀::: " + users_no);
             }
             return users_no;
         } catch (SQLException se) {

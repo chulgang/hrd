@@ -69,7 +69,9 @@ CREATE TABLE SUBJECT (
 CREATE TABLE CLASSROOM (
                            ID NUMBER(19,0) NOT NULL,
                            NAME VARCHAR2(30) NOT NULL,
-                           SEAT_NUMBER NUMBER(10,0) NOT NULL,
+                           SEAT_COUNT NUMBER(10,0) NOT NULL,
+                           CREATED_AT DATE NOT NULL,
+                           MODIFIED_AT DATE NULL,
                            CONSTRAINT PK_CLASSROOM PRIMARY KEY (ID)
 );
 CREATE TABLE TIME_PERIOD (
@@ -120,7 +122,6 @@ CREATE TABLE WALLET_HISTORY (
                                 USER_ID NUMBER(19,0) NOT NULL,
                                 ADDED_AMOUNT NUMBER(10,0) NULL,
                                 USED_AMOUNT NUMBER(10,0) NULL,
-                                EARNED_AMOUNT NUMBER(10,0) NULL,
                                 REFUNDED_AMOUNT NUMBER(10,0) NULL,
                                 CURRENT_AMOUNT NUMBER(10,0) NOT NULL,
                                 CREATED_AT DATE NOT NULL,

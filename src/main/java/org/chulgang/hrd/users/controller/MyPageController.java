@@ -11,7 +11,7 @@ import org.chulgang.hrd.util.DbConnection;
 
 import java.io.IOException;
 
-@WebServlet("/elearn/users/myPage.do")
+@WebServlet("/elearn/myPage.do")
 public class MyPageController extends HttpServlet{
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -34,7 +34,7 @@ public class MyPageController extends HttpServlet{
             int result = service.modifyMyPage(email,username,password,full_name,phone);
             //PrintWriter pw = response.getWriter();
             // pw.println("<script>location.href='../index.jsp';</script>");
-            response.sendRedirect("../index.jsp");
+            response.sendRedirect("index.jsp");
         }
 
 

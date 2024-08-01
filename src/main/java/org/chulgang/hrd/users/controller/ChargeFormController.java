@@ -13,7 +13,7 @@ import org.chulgang.hrd.wallethistory.model.service.WalletHistoryServiceImpl;
 
 import java.io.IOException;
 
-@WebServlet("/elearn/users/chargeForm.do")
+@WebServlet("/elearn/chargeForm.do")
 public class ChargeFormController extends HttpServlet{
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -25,7 +25,7 @@ public class ChargeFormController extends HttpServlet{
 
         WalletHistory walletHistory =walletService.getLatestWalletHistoryByUserId(users_id);
         request.setAttribute("walletHistory",walletHistory);
-        RequestDispatcher rd = request.getRequestDispatcher("../charge.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("charge.jsp");
         rd.forward(request, response);
     }
 }

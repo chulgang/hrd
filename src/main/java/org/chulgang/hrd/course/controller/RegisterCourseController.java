@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import org.chulgang.hrd.aop.LoggingAspect;
 import org.chulgang.hrd.classroom.dto.GetClassroomsResponse;
 import org.chulgang.hrd.classroom.model.service.ClassroomService;
+import org.chulgang.hrd.classroom.model.service.TimePeriodService;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.dto.GetSubjectsResponse;
 import org.chulgang.hrd.course.model.service.CourseService;
@@ -32,6 +33,7 @@ public class RegisterCourseController extends HttpServlet {
     private CourseService courseService;
     private SubjectService subjectService;
     private ClassroomService classroomService;
+    private TimePeriodService timePeriodService;
     private UsersService usersService;
 
     @Override
@@ -46,12 +48,28 @@ public class RegisterCourseController extends HttpServlet {
 
         classroomService = LoggingAspect.createProxy(ClassroomService.class,
                 (ClassroomService) config.getServletContext().getAttribute(CLASSROOM_SERVICE_ATTRIBUTE_NAME));
+
+        timePeriodService = LoggingAspect.createProxy(TimePeriodService.class,
+                (TimePeriodService) config.getServletContext().getAttribute(TIME_PERIOD_SERVICE_ATTRIBUTE_NAME));
     }
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getRequestURI().contains(String.format("%s/", COURSE_DOMAIN_NAME))) {
             response.sendRedirect(REGISTER_COURSE_SECOND_REQUEST_URL);
+            return;
+        }
+
+        HttpSession httpSession = request.getSession();
+        UsersLoginResponse usersLoginResponse
+                = (UsersLoginResponse) httpSession.getAttribute(LOGIN_SESSION_ATTRIBUTE_NAME);
+
+        if (usersLoginResponse == null) {
+            response.sendRedirect(LOGIN_FAILED_VIEW);
+            return;
+        }
+        if (!usersLoginResponse.getRole().equals(TEACHER_ROLE_NAME)) {
+            response.sendRedirect(AUTHORIZATION_FAILED_VIEW);
             return;
         }
 
@@ -73,14 +91,7 @@ public class RegisterCourseController extends HttpServlet {
             return;
         }
 
-        HttpSession httpSession = request.getSession();
-        UsersLoginResponse usersLoginResponse = (UsersLoginResponse) httpSession.getAttribute("dto");
-        if (usersLoginResponse == null) {
-            response.sendRedirect(LOGIN_FAILED_VIEW);
-            return;
-        }
-
-        boolean isSuccess = courseService.create(CreateCourseRequest.from(request));
+        boolean isSuccess = courseService.create(CreateCourseRequest.from(request), timePeriodService);
         request.setAttribute("isSuccess", isSuccess);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(COURSE_REGISTRATION_CONFIRM_VIEW);
         requestDispatcher.forward(request, response);

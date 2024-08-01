@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.chulgang.hrd.aop.LoggingAspect;
 import org.chulgang.hrd.reservation.model.service.ReservationService;
+import org.chulgang.hrd.users.dto.UsersLoginResponse;
 
 import java.io.IOException;
 
@@ -29,11 +30,9 @@ public class RegisterReservationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        //User user = (User) session.getAttribute("dto");
-        //Long userId = user.getUserId();
-        Long userId = 1L;
-        //Long courseId = Long.parseLong(request.getParameter("courseId"));
-        Long courseId = 1L;
+        UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
+        Long userId = user.getId();
+        Long courseId = Long.parseLong(request.getParameter("courseId"));
         boolean isReserved = reservationService.registerReservation(userId, courseId);
 
         if (isReserved) {

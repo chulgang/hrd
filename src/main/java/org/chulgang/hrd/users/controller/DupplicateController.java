@@ -11,7 +11,7 @@ import org.chulgang.hrd.util.DbConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/elearn/users/dupplicate.do")
+@WebServlet("/elearn/dupplicate.do")
 public class DupplicateController extends HttpServlet{
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

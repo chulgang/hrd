@@ -1,5 +1,6 @@
 package org.chulgang.hrd.course.model.service;
 
+import org.chulgang.hrd.classroom.model.service.TimePeriodService;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.dto.GetCourseResponse;
 import org.chulgang.hrd.course.dto.GetCoursesResponse;
@@ -9,7 +10,7 @@ public interface CourseService {
 
     GetCourseResponse getCourse(Long id);
 
-    boolean create(CreateCourseRequest createCourseRequest);
+    boolean create(CreateCourseRequest createCourseRequest, TimePeriodService timePeriodService);
 
     boolean checkDuplicateCourseName(String courseName);
 
