@@ -19,4 +19,6 @@ public interface ReservationRepository {
     Optional<ReservationCourse> findById(Long id);
 
     void updateReservationStatus(Long reservationId, int status);
+
+    boolean isAlreadyReserved(Long userId, Long courseId);
 }

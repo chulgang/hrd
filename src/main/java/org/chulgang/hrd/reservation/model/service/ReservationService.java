@@ -18,4 +18,6 @@ public interface ReservationService {
     int getTotalReservations(Long userId);
 
     void updateReservationStatus(Long reservationId, int status);
+
+    boolean isAlreadyReserved(Long userId, Long courseId);
 }
