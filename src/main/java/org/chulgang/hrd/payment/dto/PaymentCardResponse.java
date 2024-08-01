@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class PaymentCardResponse {
 
+    private Long payedCourseId;
     private Long reservationCourseId;
     private String courseName;
     private String courseDescription;
@@ -11,6 +12,14 @@ public class PaymentCardResponse {
     private boolean isRefunded;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    public Long getPayedCourseId() {
+        return payedCourseId;
+    }
+
+    public void setPayedCourseId(Long payedCourseId) {
+        this.payedCourseId = payedCourseId;
+    }
 
     public Long getReservationCourseId() {
         return reservationCourseId;
