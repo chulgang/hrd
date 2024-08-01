@@ -17,4 +17,6 @@ public interface ReservationRepository {
     int countReservations(Long userId);
 
     Optional<ReservationCourse> findById(Long id);
+
+    void updateReservationStatus(Long reservationId, int status);
 }

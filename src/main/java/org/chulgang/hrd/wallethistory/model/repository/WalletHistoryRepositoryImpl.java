@@ -6,6 +6,7 @@ import org.chulgang.hrd.wallethistory.domain.WalletHistory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class WalletHistoryRepositoryImpl implements WalletHistoryRepository {
@@ -36,6 +37,8 @@ public class WalletHistoryRepositoryImpl implements WalletHistoryRepository {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
         return Optional.empty();
     }
@@ -53,6 +56,8 @@ public class WalletHistoryRepositoryImpl implements WalletHistoryRepository {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
         return 0;
     }
@@ -72,6 +77,9 @@ public class WalletHistoryRepositoryImpl implements WalletHistoryRepository {
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            DbConnection.reset();
         }
     }
+
 }

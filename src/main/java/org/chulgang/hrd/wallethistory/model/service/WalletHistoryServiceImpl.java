@@ -85,4 +85,9 @@ public class WalletHistoryServiceImpl implements WalletHistoryService {
 
         walletHistoryRepository.save(walletHistory);
     }
+
+    @Override
+    public Integer currentAmountByUser(Long userId) {
+        return walletHistoryRepository.findCurrentAmountByUserId(userId);
+    }
 }

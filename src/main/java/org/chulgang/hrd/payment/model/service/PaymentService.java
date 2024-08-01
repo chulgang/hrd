@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PaymentService {
 
-    boolean executePayment(Long memberId, Long reservationId, int paymentAmount);
+    boolean executePayment(Long userId, Long reservationId, Long courseId ,int paymentAmount);
 
     List<PaymentCardResponse> getPagedPayments(Long userId, int pageNumber);
 
@@ -15,4 +15,5 @@ public interface PaymentService {
 
     int getTotalPayments(Long userId);
 
+    boolean refundPayment(Long userId, Long payedCourseId);
 }

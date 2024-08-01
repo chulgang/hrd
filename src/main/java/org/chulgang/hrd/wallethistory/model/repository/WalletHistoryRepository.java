@@ -10,4 +10,5 @@ public interface WalletHistoryRepository {
     Integer findCurrentAmountByUserId(Long userId);
 
     void save(WalletHistory walletHistory);
+
 }

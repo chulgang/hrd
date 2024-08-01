@@ -8,12 +8,13 @@ import java.util.Optional;
 
 public interface PaymentRepository {
 
-    boolean executePayment(Long memberId, Long reservationId, int paymentAmount);
-
     List<PaymentCardResponse> findPaymentCourseCardByMemberId(Long userId, int pageNumber);
 
     Optional<PayedCourse> findPayedCourseById(Long payedCourseId);
 
     int countPayments(Long userId);
 
+    void insertPayedCourse(Long userId, Long reservationId, Long courseId, int paymentAmount);
+
+    void updatePayedCourseRefundStatus(Long payedCourseId, boolean isRefunded);
 }

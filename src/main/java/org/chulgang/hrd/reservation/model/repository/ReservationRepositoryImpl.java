@@ -145,4 +145,20 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         }
         return Optional.empty();
     }
+
+    @Override
+    public void updateReservationStatus(Long reservationId, int status) {
+        String sql = "UPDATE RESERVATION_COURSE SET IS_RESERVED = ? WHERE ID = ?";
+        try {Connection connection = DbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, status);
+            preparedStatement.setLong(2, reservationId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbConnection.reset();
+        }
+    }
+
 }

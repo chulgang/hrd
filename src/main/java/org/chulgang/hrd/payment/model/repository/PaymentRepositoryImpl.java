@@ -20,59 +20,6 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     }
 
     @Override
-    public boolean executePayment(Long userId, Long reservationId, int paymentAmount) {
-
-        try {
-            Connection connection = DbConnection.getConnection();
-            connection.setAutoCommit(false);
-
-            String selectCourseSql = "SELECT c.PRICE, c.REMAINED_SEAT, c.ID AS COURSE_ID FROM RESERVED_COURSE rc JOIN COURSE c ON rc.COURSE_ID = c.ID WHERE rc.RESERVATION_ID = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(selectCourseSql);
-            preparedStatement.setLong(1, reservationId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                int price = resultSet.getInt("PRICE");
-                int remainedSeat = resultSet.getInt("REMAINED_SEAT");
-                Long courseId = resultSet.getLong("COURSE_ID");
-
-                if (remainedSeat <= 0) {
-                    throw new SQLException("남은 자리가 없음");
-                }
-
-                String updateWalletSql = "UPDATE WALLET_HISTORY SET CURRENT_AMOUNT = CURRENT_AMOUNT - ?, USED_AMOUNT = USED_AMOUNT + ? WHERE USER_ID = ?";
-                preparedStatement = connection.prepareStatement(updateWalletSql);
-                preparedStatement.setInt(1, paymentAmount);
-                preparedStatement.setInt(2, paymentAmount);
-                preparedStatement.setLong(3, userId);
-                preparedStatement.executeUpdate();
-
-                String insertPayedCourseSql = "INSERT INTO PAYED_COURSE (ID, COURSE_ID, RESERVATION_ID, PAYED_AT, PAYED_AMOUNT, IS_REFUNDED, IS_EXPIRED) VALUES (PAYED_COURSE_SEQ.NEXTVAL, ?, ?, SYSDATE, ?, 0, 0)";
-                preparedStatement = connection.prepareStatement(insertPayedCourseSql);
-                preparedStatement.setLong(1, courseId);
-                preparedStatement.setLong(2, reservationId);
-                preparedStatement.setInt(3, paymentAmount);
-                preparedStatement.executeUpdate();
-
-                String updateCourseSql = "UPDATE COURSE SET REMAINED_SEAT = REMAINED_SEAT - 1 WHERE ID = ?";
-                preparedStatement = connection.prepareStatement(updateCourseSql);
-                preparedStatement.setLong(1, courseId);
-                preparedStatement.executeUpdate();
-
-                connection.commit();
-                return true;
-            } else {
-                throw new SQLException("예약을 찾을 수 없음");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            DbConnection.reset();
-        }
-    }
-
-    @Override
     public List<PaymentCardResponse> findPaymentCourseCardByMemberId(Long userId, int pageNumber) {
         List<PaymentCardResponse> payments = new ArrayList<>();
         int pageSize = 10;
@@ -161,5 +108,37 @@ public class PaymentRepositoryImpl implements PaymentRepository {
             DbConnection.reset();
         }
         return 0;
+    }
+
+    @Override
+    public void insertPayedCourse(Long userId, Long reservationId, Long courseId, int paymentAmount) {
+        String sql = "INSERT INTO PAYED_COURSE (ID, COURSE_ID, RESERVATION_ID, PAYED_AT, PAYED_AMOUNT, IS_REFUNDED, IS_EXPIRED) " +
+                "VALUES (PAYED_COURSE_SEQ.NEXTVAL, ?, ?, SYSDATE, ?, 0, 0)";
+        try {Connection connection = DbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, courseId);
+            preparedStatement.setLong(2, reservationId);
+            preparedStatement.setInt(3, paymentAmount);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbConnection.reset();
+        }
+    }
+
+    @Override
+    public void updatePayedCourseRefundStatus(Long payedCourseId, boolean isRefunded) {
+        String sql = "UPDATE PAYED_COURSE SET IS_REFUNDED = ? WHERE ID = ?";
+        try {Connection connection = DbConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setBoolean(1, isRefunded);
+            preparedStatement.setLong(2, payedCourseId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbConnection.reset();
+        }
     }
 }

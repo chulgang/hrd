@@ -14,8 +14,8 @@ import java.io.IOException;
 
 import static org.chulgang.hrd.course.util.RequestConstant.PAYMENT_SERVICE_ATTRIBUTE_NAME;
 
-@WebServlet(urlPatterns = {"/elearn/execute-payment"})
-public class ExecutePaymentController extends HttpServlet {
+@WebServlet(urlPatterns = {"/elearn/refund-payment"})
+public class RefundPaymentController extends HttpServlet {
     private PaymentService paymentService;
 
     @Override
@@ -32,14 +32,12 @@ public class ExecutePaymentController extends HttpServlet {
         //Long userId = user.getUserId();
 
         Long userId = 1L;
-        Long reservationId = Long.parseLong(request.getParameter("reservationId"));
         Long courseId = Long.parseLong(request.getParameter("courseId"));
-        int paymentAmount = Integer.parseInt(request.getParameter("paymentAmount"));
 
-        boolean isPaymentSuccessful = paymentService.executePayment(userId, reservationId, courseId ,paymentAmount);
+        boolean isRefundSuccessful = paymentService.refundPayment(userId, courseId);
 
-        if (isPaymentSuccessful) {
-            response.sendRedirect(request.getContextPath() + "/payment-success");
+        if (isRefundSuccessful) {
+            response.sendRedirect(request.getContextPath() + "/refund-success");
         } else {
             response.sendRedirect(request.getContextPath() + "/404");
         }
