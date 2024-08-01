@@ -20,4 +20,9 @@ public class ClassroomServiceImpl implements ClassroomService {
     public GetClassroomsResponse getClassrooms() {
         return GetClassroomsResponse.from(classroomRepository.findAll());
     }
+
+    @Override
+    public String getName(Long id) {
+        return classroomRepository.findNameById(id);
+    }
 }

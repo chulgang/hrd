@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ClassroomRepository {
     List<Classroom> findAll();
+
+    String findNameById(Long id);
 }
