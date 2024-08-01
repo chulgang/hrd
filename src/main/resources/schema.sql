@@ -120,7 +120,6 @@ CREATE TABLE WALLET_HISTORY (
                                 USER_ID NUMBER(19,0) NOT NULL,
                                 ADDED_AMOUNT NUMBER(10,0) NULL,
                                 USED_AMOUNT NUMBER(10,0) NULL,
-                                EARNED_AMOUNT NUMBER(10,0) NULL,
                                 REFUNDED_AMOUNT NUMBER(10,0) NULL,
                                 CURRENT_AMOUNT NUMBER(10,0) NOT NULL,
                                 CREATED_AT DATE NOT NULL,

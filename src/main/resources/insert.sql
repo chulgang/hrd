@@ -43,11 +43,11 @@ insert into course values(COURSE_SEQ.nextval,2,2,2,'name2','description2',2,sysd
 insert into course values(COURSE_SEQ.nextval,3,3,3,'name3','description3',3,sysdate,sysdate,3,3,sysdate,sysdate);
 insert into course values(COURSE_SEQ.nextval,4,4,4,'name4','description4',4,sysdate,sysdate,4,4,sysdate,sysdate);
 insert into course values(COURSE_SEQ.nextval,5,5,5,'name5','description5',5,sysdate,sysdate,5,5,sysdate,sysdate);
-insert into WALLET_HISTORY values(WALLET_HISTORY_SEQ.nextval,1,1,1,1,1,1,sysdate);
-insert into WALLET_HISTORY values(WALLET_HISTORY_SEQ.nextval,2,2,2,2,2,2,sysdate);
-insert into WALLET_HISTORY values(WALLET_HISTORY_SEQ.nextval,3,3,3,3,3,3,sysdate);
-insert into WALLET_HISTORY values(WALLET_HISTORY_SEQ.nextval,4,4,4,4,4,4,sysdate);
-insert into WALLET_HISTORY values(WALLET_HISTORY_SEQ.nextval,5,5,5,5,5,5,sysdate);
+insert into WALLET_HISTORY values(WALLET_HISTORY_SEQ.nextval,1,0,0,0,0,sysdate);
+insert into WALLET_HISTORY values(WALLET_HISTORY_SEQ.nextval,2,0,0,0,0,sysdate);
+insert into WALLET_HISTORY values(WALLET_HISTORY_SEQ.nextval,3,0,0,0,0,sysdate);
+insert into WALLET_HISTORY values(WALLET_HISTORY_SEQ.nextval,4,0,0,0,0,sysdate);
+insert into WALLET_HISTORY values(WALLET_HISTORY_SEQ.nextval,5,0,0,0,0,sysdate);
 insert into RESERVATION values(RESERVATION_SEQ.nextval,1,sysdate);
 insert into RESERVATION values(RESERVATION_SEQ.nextval,2,sysdate);
 insert into RESERVATION values(RESERVATION_SEQ.nextval,3,sysdate);
