@@ -80,6 +80,8 @@ public class WalletHistoryServiceImpl implements WalletHistoryService {
         WalletHistory walletHistory = new WalletHistory();
         walletHistory.setUserId(userId);
         walletHistory.setAddedAmount(amount);
+        walletHistory.setRefundedAmount(0);
+        walletHistory.setUsedAmount(0);
         walletHistory.setCurrentAmount(latestHistory.getCurrentAmount() + amount);
         walletHistory.setCreatedAt(LocalDateTime.now());
 

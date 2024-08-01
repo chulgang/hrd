@@ -33,11 +33,10 @@ public class WalletRechargeController extends HttpServlet {
         UsersLoginResponse users = (UsersLoginResponse) session.getAttribute("dto");
         Long userId = users.getId();
         int amount = Integer.parseInt(request.getParameter("amount"));
-
+        System.out.println("amount: " + amount);
         try {
             walletHistoryService.rechargeWallet(userId, amount);
-            request.setAttribute("current_amount", walletHistoryService.currentAmountByUser(userId));
-            response.sendRedirect(request.getContextPath() + "/wallet-recharge-success");
+            response.sendRedirect(request.getContextPath() + "users/myPageForm.do");
         } catch (Exception e) {
             response.sendRedirect(request.getContextPath() + "/404");
         }
