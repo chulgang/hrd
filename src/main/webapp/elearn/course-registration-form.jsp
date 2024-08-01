@@ -5,7 +5,8 @@
 <%@ page import="static org.chulgang.hrd.course.util.RequestConstant.GET_CLASSROOMS_ATTRIBUTE_NAME" %>
 <%
     GetSubjectsResponse getSubjectsResponse = (GetSubjectsResponse) request.getAttribute(GET_SUBJECTS_ATTRIBUTE_NAME);
-    GetClassroomsResponse getClassroomsResponse = (GetClassroomsResponse) request.getAttribute(GET_CLASSROOMS_ATTRIBUTE_NAME);
+    GetClassroomsResponse getClassroomsResponse
+            = (GetClassroomsResponse) request.getAttribute(GET_CLASSROOMS_ATTRIBUTE_NAME);
 %>
 
 <html lang="en">
@@ -554,17 +555,23 @@
 
     $(document).ready(function () {
         $('#classroom').change(function () {
-            var selectedSeatCount = $(this).find('option:selected').data('seatcount'); // 선택된 옵션의 seatCount 가져오기
-            $('#seatCount').val(selectedSeatCount); // hidden 필드에 seatCount 값 설정
+            var selectedSeatCount = $(this).find('option:selected').data('seatcount');
+            $('#seatCount').val(selectedSeatCount);
 
             var selectedClassroomId = $(this).val();
+            var startDate = $('#start-date').val();
+            var lastDate = $('#last-date').val();
 
             if (selectedClassroomId) {
                 $.ajax({
                     type: 'GET',
                     dataType: 'json',
                     url: '/elearn/get-periods.do',
-                    data: {classroomId: selectedClassroomId},
+                    data: {
+                        classroomId: selectedClassroomId,
+                        'start-date': startDate,
+                        'last-date': lastDate
+                    },
                     success: function (response) {
                         var options = '<option value="">시간대를 선택해 주세요</option>';
                         if (response.length > 0) {
