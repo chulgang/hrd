@@ -19,7 +19,7 @@ import java.io.IOException;
 public class UpdatePostController extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DbConnection.initialize();
+        
         HttpSession session = request.getSession();
         PostService service = new PostServiceImpl();
 

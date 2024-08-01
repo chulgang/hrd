@@ -40,6 +40,8 @@ public class PostRepositoryImpl implements PostRepository {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            DbConnection.reset();
         }
     }
 
@@ -72,16 +74,8 @@ public class PostRepositoryImpl implements PostRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-
-            try {
-                if (rs != null) rs.close();
-                if (pstmt != null) pstmt.close();
-                if (con != null) con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            DbConnection.reset();
         }
-
         return posts;
     }
 
@@ -111,31 +105,28 @@ public class PostRepositoryImpl implements PostRepository {
             System.err.println("SQL Exception: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            try {
-                pstmt.close();
-                con.close();
-            } catch (SQLException se) {
-                System.out.println("insert_post" + se);
-            }
+            DbConnection.reset();
         }
     }
 
     public void incrementViewCount(long postId) throws SQLException {
-        DbConnection.initialize();
+
         Connection con = null;
         String query = "UPDATE post SET view_count = view_count + 1 WHERE id = ?";
         try {
-             con= DbConnection.getConnection();
-        PreparedStatement stmt = con.prepareStatement(query);
+            con= DbConnection.getConnection();
+            PreparedStatement stmt = con.prepareStatement(query);
             stmt.setLong(1, postId);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DbConnection.reset();
         }
     }
 
     public long getViewCount(long postId) throws SQLException {
-        DbConnection.initialize();
+
         Connection con = null;
         String query = "SELECT view_count FROM post WHERE id = ?";
 
@@ -153,13 +144,15 @@ public class PostRepositoryImpl implements PostRepository {
             }
         }catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DbConnection.reset();
         }
         return -1;
     }
     //게시글 삭제 메소드 추가함
     @Override
     public void deletePost(long postId) {
-        DbConnection.initialize();
+
         Connection con = null;
         String query = deletePost;
         PreparedStatement pstmt =null;
@@ -171,6 +164,8 @@ public class PostRepositoryImpl implements PostRepository {
             System.out.println("삭제성공");
         }catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DbConnection.reset();
         }
     }
     //게시글 제목 및 내용 가져오는 메소드
@@ -197,6 +192,8 @@ public class PostRepositoryImpl implements PostRepository {
 
         }catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            DbConnection.reset();
         }
         return null;
     }
@@ -220,12 +217,7 @@ public class PostRepositoryImpl implements PostRepository {
             System.err.println("SQL Exception: " + e.getMessage());
             e.printStackTrace();
         } finally {
-            try {
-                pstmt.close();
-                con.close();
-            } catch (SQLException se) {
-                System.out.println("insert_post" + se);
-            }
+            DbConnection.reset();
         }
     }
 }
