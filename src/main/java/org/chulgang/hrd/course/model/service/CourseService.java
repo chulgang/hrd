@@ -4,9 +4,10 @@ import org.chulgang.hrd.classroom.model.service.TimePeriodService;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
 import org.chulgang.hrd.course.dto.GetCourseResponse;
 import org.chulgang.hrd.course.dto.GetCoursesResponse;
+import org.chulgang.hrd.users.model.usersService.UsersService;
 
 public interface CourseService {
-    GetCoursesResponse getCourses(int size, int pageNumber);
+    GetCoursesResponse getCourses(int size, int pageNumber, SubjectService subjectService, UsersService usersService);
 
     GetCourseResponse getCourse(Long id);
 

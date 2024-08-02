@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.chulgang.hrd.aop.LoggingAspect;
 import org.chulgang.hrd.course.model.service.CourseService;
+import org.chulgang.hrd.course.model.service.SubjectService;
+import org.chulgang.hrd.users.model.usersService.UsersService;
 import org.chulgang.hrd.util.FormatConverter;
 import org.chulgang.hrd.util.FormatValidator;
 
@@ -19,6 +21,8 @@ import static org.chulgang.hrd.course.util.RequestConstant.*;
 @WebServlet(urlPatterns = {GET_COURSES_FIRST_REQUEST_URL, GET_COURSES_SECOND_REQUEST_URL})
 public class GetCoursesController extends HttpServlet {
     private CourseService courseService;
+    private SubjectService subjectService;
+    private UsersService usersService = UsersService.getInstance();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -26,6 +30,9 @@ public class GetCoursesController extends HttpServlet {
 
         courseService = LoggingAspect.createProxy(CourseService.class,
                 (CourseService) config.getServletContext().getAttribute(COURSE_SERVICE_ATTRIBUTE_NAME));
+
+        subjectService = LoggingAspect.createProxy(SubjectService.class,
+                (SubjectService) config.getServletContext().getAttribute(SUBJECT_SERVICE_ATTRIBUTE_NAME));
     }
 
     @Override
@@ -58,7 +65,11 @@ public class GetCoursesController extends HttpServlet {
             parsedPageNumber = FormatConverter.parseToInt(pageNumber);
         }
 
-        request.setAttribute(COURSES_ATTRIBUTE_NAME, courseService.getCourses(parsedSize, parsedPageNumber));
+        request.setAttribute(
+                COURSES_ATTRIBUTE_NAME, courseService.getCourses(
+                        parsedSize, parsedPageNumber, subjectService, usersService
+                )
+        );
         request.setAttribute(SIZE_PARAMETER_NAME, parsedSize);
         request.setAttribute(PAGE_NUMBER_PARAMETER_NAME, parsedPageNumber);
 

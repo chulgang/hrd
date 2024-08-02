@@ -8,6 +8,9 @@ import org.chulgang.hrd.course.dto.GetCourseResponse;
 import org.chulgang.hrd.course.dto.GetCoursesResponse;
 import org.chulgang.hrd.course.model.repository.CourseRepository;
 import org.chulgang.hrd.course.model.repository.CourseRepositoryImpl;
+import org.chulgang.hrd.users.model.usersService.UsersService;
+
+import java.util.List;
 
 public class CourseServiceImpl implements CourseService {
     private static final CourseService INSTANCE = new CourseServiceImpl(CourseRepositoryImpl.getInstance());
@@ -22,9 +25,20 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public GetCoursesResponse getCourses(int size, int pageNumber) {
-        int pageCount = courseRepository.computePageCount(size);
-        return GetCoursesResponse.from(courseRepository.findAll(size, pageNumber), pageCount);
+    public GetCoursesResponse getCourses(
+            int size, int pageNumber, SubjectService subjectService, UsersService usersService
+    ) {
+        List<Course> courses = courseRepository.findAll(size, pageNumber);
+        GetCoursesResponse getCoursesResponse = new GetCoursesResponse();
+
+        for (Course course : courses) {
+            String subjectName = subjectService.getSubjectName(course.getSubjectId());
+            String teacherName = usersService.findById(course.getTeacherId());
+
+            GetCourseResponse getCourseResponse = GetCourseResponse.from(course, subjectName, teacherName);
+            getCoursesResponse.add(getCourseResponse);
+        }
+        return getCoursesResponse;
     }
 
     @Override
