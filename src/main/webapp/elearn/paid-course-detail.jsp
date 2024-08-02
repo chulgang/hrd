@@ -63,8 +63,8 @@
                 </div>
                 <div class="col-md-12">
                     <ul>
-                        <li><a href="index.jsp">Home</a></li>
-                        <li><a href="#!">Paid Details</a></li>
+                        <li><a href="index.jsp">바로가기</a></li>
+                        <li><a href="paid-course-list.jsp">결제목록</a></li>
                     </ul>
                 </div>
             </div>
@@ -80,9 +80,7 @@
                 <div class="col-md-12 col-lg-8 mb-2-9 mb-lg-0">
                     <div class="row">
                         <div class="col-md-12 mb-1-6 mb-md-1-9">
-                            <div class="event-details-img position-relative">
-                                <img class="border-radius-5" src="img/content/event-details-01.jpg" alt="...">
-                            </div>
+
                         </div>
                         <div class="col-md-12">
                             <div class="row">
@@ -93,7 +91,6 @@
                                                 class="event-info-list mb-4 pb-4 borders-bottom border-color-medium-gray">
                                             <li><i class="ti-calendar pe-2 text-secondary"></i>${payedCourse.startDate}</li>
                                             <li><i class="ti-time pe-2 text-secondary"></i>${payedCourse.period}</li>
-                                            <li><i class="ti-location-pin pe-2 text-secondary"></i>가산디지털단지, 구로구</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -103,18 +100,15 @@
 
 
                                 <div class="col-md-12 event-seprator">
-                                    <h3>Event Location</h3>
-                                    <p class="alt-font font-weight-500 text-color mb-1-6">Duis aute irure dolor in
-                                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                        officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis
-                                        iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                                    <h3>학원위치</h3>
+                                    <p class="alt-font font-weight-500 text-color mb-1-6">
+                                        서울특별시 금천구 벚꽃로 44길 24 1201호
+                                    </p>
                                     <ul class="event-meta mb-4 ps-0">
-                                        <li><i class="ti-location-pin"></i>Newyork City, USA</li>
-                                        <li><i class="ti-mobile"></i>+012 (345) 6789</li>
+                                        <li><i class="ti-location-pin"></i>벚꽃로 44길 24</li>
+                                        <li><i class="ti-mobile"></i>02 (123) 4567 </li>
                                     </ul>
-                                    <iframe width="100%" height="400" id="gmap_canvas"
-                                            src="https://maps.google.com/maps?q=london&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+                                    <iframe width="100%" height="400" id="gmap_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.114215052936!2d126.88035067629376!3d37.481631028991345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e1d8db9e377%3A0x5608c055f2ed61ca!2z6rCA7IKw65SU7KeA7YS464uo7KeA!5e0!3m2!1sko!2skr!4v1722558403789!5m2!1sko!2skr"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </div>
                         </div>

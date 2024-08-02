@@ -44,31 +44,28 @@
                     <div class="ps-md-1-6 ps-lg-1-9">
                         <h3 class="text-primary h5 mb-2-2">회원</h3>
                         <ul class="footer-list">
-                            <li><a href="about.html">회원가입</a></li>
-                            <li><a href="courses-list.html">로그인</a></li>
-                            <li><a href="instructors.html">게시글</a></li>
-
+                            <li><a href="signUpform.do">회원가입</a></li>
+                            <li><a href="loginForm.do">로그인</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3 mb-2-5 mb-md-0">
                     <div class="ps-lg-1-9 ps-xl-2-5">
-                        <h3 class="text-primary h5 mb-2-2">예약</h3>
+                        <h3 class="text-primary h5 mb-2-2">게시판</h3>
                         <ul class="footer-list">
-                            <li><a href="blog-grid.html">강의</a></li>
-                            <li><a href="portfolio.html">강좌</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
+                            <li><a href="post.do">목록</a></li>
+                            <li><a href="">게시글</a></li>
+
 
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
                     <div class="ps-md-1-9">
-                        <h3 class="text-primary h5 mb-2-2">결제</h3>
+                        <h3 class="text-primary h5 mb-2-2">강의</h3>
                         <ul class="footer-list">
                             <li><a href="blog-grid.html">강의</a></li>
                             <li><a href="portfolio.html">강좌</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
                         </ul>
                     </div>
                 </div>

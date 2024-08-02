@@ -76,12 +76,12 @@
                                 <h1 class="display-1 font-weight-800 mb-2-6 title text-white">편리하게 예약해요!</h1>
                                 <c:choose>
                                     <c:when test="${empty dto}">
-                                        <a href="contact.jsp" class="butn my-1 mx-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">회원가입</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
-                                        <a href="login.jsp" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="signUpForm.do" class="butn my-1 mx-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">회원가입</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="loginForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="myPageForm.doPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
-                                        <a href="logout.do?">로그아웃</a>
+                                        <a href="myPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="logout.do">로그아웃</a>
                                     </c:otherwise>
                                 </c:choose>
                             </div>
@@ -96,13 +96,13 @@
                                 <h2 class="display-1 font-weight-800 mb-2-6 title text-white">손 쉬운 원터치 예약</h2>
                                 <c:choose>
                                     <c:when test="${empty dto}">
-                                        <a href="contact.jsp" class="butn my-1 mx-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">회원가입</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
-                                        <a href="courses-list.html" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="signUpForm.do" class="butn my-1 mx-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">회원가입</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="loginForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="myPageForm.doPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="myPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
 
-                                        <a href="logout.do?">로그아웃</a>
+                                        <a href="logout.do">로그아웃</a>
                                     </c:otherwise>
                                 </c:choose>
 
@@ -118,11 +118,11 @@
                                 <h2 class="display-1 font-weight-800 mb-2-6 title text-white">강의 예약 홈페이지</h2>
                                 <c:choose>
                                     <c:when test="${empty dto}">
-                                        <a href="contact.jsp" class="butn my-1 mx-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">회원가입</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
-                                        <a href="courses-list.html" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="signUpForm.do" class="butn my-1 mx-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">회원가입</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="loginForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="myPageForm.doPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="myPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
 
                                     </c:otherwise>
                                 </c:choose>
@@ -154,7 +154,7 @@
                             </div>
                             <div>
                                 <p class="mb-3">회원가입 바로가기 입니다.</p>
-                                <a href="users/signUpForm.do" class="butn-style1 secondary">회원가입</a>
+                                <a href="signUpForm.do" class="butn-style1 secondary">회원가입</a>
                             </div>
                         </div>
                     </div>
@@ -166,11 +166,11 @@
                                 <div class="card-icon">
                                     <i class="ti-world"></i>
                                 </div>
-                                <h4 class="ms-4 mb-0">강좌관리</h4>
+                                <h4 class="ms-4 mb-0">게시판</h4>
                             </div>
                             <div>
-                                <p class="mb-3">강좌 바로가기 입니다</p>
-                                <a href="about.html" class="butn-style1 secondary">강좌</a>
+                                <p class="mb-3">게시판 바로가기 입니다</p>
+                                <a href="post.do" class="butn-style1 secondary">목록</a>
                             </div>
                         </div>
                     </div>
@@ -182,11 +182,11 @@
                                 <div class="card-icon">
                                     <i class="ti-user"></i>
                                 </div>
-                                <h4 class="ms-4 mb-0">결제관리</h4>
+                                <h4 class="ms-4 mb-0">강좌</h4>
                             </div>
                             <div>
-                                <p class="mb-3">결제 바로가기 입니다.</p>
-                                <a href="about.html" class="butn-style1 secondary">결제</a>
+                                <p class="mb-3">강좌 바로가기 입니다.</p>
+                                <a href="about.html" class="butn-style1 secondary">강좌</a>
                             </div>
                         </div>
                     </div>

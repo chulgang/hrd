@@ -66,8 +66,8 @@
                     </div>
                     <div class="col-md-12">
                         <ul>
-                            <li><a href="index.jsp">Home</a></li>
-                            <li><a href="#!">Contact</a></li>
+                            <li><a href="index.jsp">처음으로</a></li>
+                            <li><a href="loginForm.do">로그인</a></li>
                         </ul>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     <div class="col-lg-6" style = "margin: 0 auto;">
                         <div class="faq-form">
                             <h2 class="mb-4 text-primary">회원가입</h2>
-                            <form class="contact quform" name="f" action="users/signUp.do" method="post">
+                            <form class="contact quform" name="f" action="signUp.do" method="post">
                                 <div class="quform-elements">
                                     <br class="row">
 
@@ -265,7 +265,7 @@ function dupplicate() {
     $.ajax({ //property 설정을 위하여 Json형태로 작성
         type: "POST", //전송 타입
         dataType: 'json',
-        url: "users/dupplicate.do", //요청 url
+        url: "dupplicate.do", //요청 url
         data:  { username: document.getElementById("username").value }, //전송할 데이터
 
         success: function (data) { //성공 이벤트 핸들러
