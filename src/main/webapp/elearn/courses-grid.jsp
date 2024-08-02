@@ -67,12 +67,11 @@
     <%@include file="header.jsp" %>
     <!-- PAGE TITLE
     ================================================== -->
-    <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9"
-             data-background="img/bg/bg-04.jpg">
+    <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9">
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <h1>강좌</h1>
+                    <h1>강좌 목록</h1>
                 </div>
                 <div class="col-md-12">
                     <ul>
@@ -175,9 +174,27 @@
                     </div>
                     <div class="text-end mt-4">
                         <% if (isTeacher) { %>
-                        <a href="<%= REGISTER_COURSE_FIRST_REQUEST_URL %>" class="btn btn-primary">강좌 개설 예약</a>
+                        <a href="<%= REGISTER_COURSE_FIRST_REQUEST_URL %>" class="btn btn-primary">강좌 개설</a>
                         <% } %></div>
                 </div>
+    </section>
+
+    <section>
+        <div class="container mt-4">
+            <form id="pageSizeForm" method="GET" action="<%= GET_COURSES_SECOND_REQUEST_URL %>" style="text-align: right;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="pageSize">페이지 크기:</label>
+                        <select id="pageSize" name="size" class="form-select" style="width: auto; display: inline-block;" onchange="document.getElementById('pageSizeForm').submit()">
+                            <option value="3" <%= size == 3 ? "selected" : "" %>>3</option>
+                            <option value="6" <%= size == 6 ? "selected" : "" %>>6</option>
+                            <option value="9" <%= size == 9 ? "selected" : "" %>>9</option>
+                        </select>
+                        <input type="hidden" name="pageNumber" value="<%= pageNumber %>"/>
+                    </div>
+                </div>
+            </form>
+        </div>
     </section>
 
     <!-- FOOTER
