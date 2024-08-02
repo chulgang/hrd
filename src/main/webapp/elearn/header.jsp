@@ -1,6 +1,6 @@
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=utf-8"
-         import="javax.sql.DataSource, java.sql.Connection"%>
+         import="javax.sql.DataSource, java.sql.Connection" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ page import="java.util.*" %>
 
@@ -28,7 +28,8 @@
                                 <span class="input-group-addon cursor-pointer">
                                     <button class="search-form_submit fas fa-search text-white" type="submit"></button>
                                 </span>
-                        <input type="text" class="search-form_input form-control" name="s" autocomplete="off" placeholder="Type & hit enter...">
+                        <input type="text" class="search-form_input form-control" name="s" autocomplete="off"
+                               placeholder="Type & hit enter...">
                         <span class="input-group-addon close-search mt-1"><i class="fas fa-times"></i></span>
                     </div>
                 </for>
@@ -52,42 +53,9 @@
                             <!-- start menu area -->
                             <ul class="navbar-nav ms-auto" id="nav" style="display: none;">
                                 <li><a href="index.jsp">Home</a></li>
-                                <li>
-                                    <a href="#!">Pages</a>
+                                <li><a href="#!">강좌 목록</a>
                                     <ul>
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="instructors.html">Instructors</a></li>
-                                        <li><a href="instructors-details.html">Instructors Details</a></li>
-                                        <li><a href="pricing.html">Pricing</a></li>
-                                        <li><a href="faq.html">FAQ</a></li>
-                                        <li><a href="404.html">Page 404</a></li>
-                                        <li><a href="coming-soon.html">Coming Soon</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#!">Courses</a>
-                                    <ul>
-                                        <li><a href="courses-grid.html">Courses Grid</a></li>
-                                        <li><a href="courses-list.html">Courses List</a></li>
-                                        <li><a href="course-details.html">Courses Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#!">Events</a>
-                                    <ul>
-                                        <li><a href="event-list.html">Event List</a></li>
-                                        <li><a href="event-details.html">Event Details</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#!">Portfolio</a>
-                                    <ul>
-                                        <li><a href="#!">Portfolio Grid</a>
-                                            <ul>
-                                                <li><a href="portfolio-two-columns.html">2 Columns</a></li>
-                                                <li><a href="portfolio.html">3 Columns - Standard</a></li>
-                                                <li><a href="portfolio-four-columns.html">4 Columns</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="portfolio-details.html">Portfolio Details</a></li>
+                                        <li><a href="courses.do">강좌 목록</a></li>
                                     </ul>
                                 </li>
                                 <li>
