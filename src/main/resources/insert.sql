@@ -71,7 +71,7 @@ insert into review values(REVIEW_SEQ.nextval,3,3,3,'content3',sysdate,sysdate);
 insert into review values(REVIEW_SEQ.nextval,4,4,4,'content4',sysdate,sysdate);
 insert into review values(REVIEW_SEQ.nextval,1,1,1,'content5',sysdate,sysdate);
 
-insert into reserved_course values(COURSE_SEQ.nextval,1,1,sysdate,1);
-insert into reserved_course values(COURSE_SEQ.nextval,2,2,sysdate,1);
-insert into reserved_course values(COURSE_SEQ.nextval,3,3,sysdate,1);
-insert into reserved_course values(COURSE_SEQ.nextval,4,4,sysdate,1);
+insert into reserved_course values(RESERVED_COURSE_SEQ.nextval,1,1,sysdate,0);
+insert into reserved_course values(RESERVED_COURSE_SEQ.nextval,2,2,sysdate,0);
+insert into reserved_course values(RESERVED_COURSE_SEQ.nextval,3,3,sysdate,0);
+insert into reserved_course values(RESERVED_COURSE_SEQ.nextval,4,4,sysdate,0);
