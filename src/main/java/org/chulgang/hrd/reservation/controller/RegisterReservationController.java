@@ -35,7 +35,7 @@ public class RegisterReservationController extends HttpServlet {
         Long courseId = Long.parseLong(request.getParameter("courseId"));
 
         if (reservationService.isAlreadyReserved(userId, courseId)) {
-            response.getWriter().write("<html><meta contentType=\"text/html\" charset=\"utf-8\"/><script  charset=\"utf-8\">alert('이미 예약되어 있습니다.'); window.location.href = 'reservation-list.do';</script><httml>");
+            response.getWriter().write("<html><meta contentType=\"text/html\" charset=\"utf-8\"/><script  charset=\"utf-8\">alert('에러가 발생했습니다.'); window.location.href = 'reservation-list.do';</script><httml>");
         } else {
             boolean isReserved = reservationService.registerReservation(userId, courseId);
 
