@@ -164,7 +164,8 @@
                                 <div class="mt-1-9">
                                     <div>
                                         <form id="paymentForm${reservationCourse.reservationCourseId}" method="POST" action="/elearn/execute-payment.do">
-                                            <input type="hidden" name="reservationId" value="${reservationCourse.reservationCourseId}">
+                                            <input type="hidden" name="reservationCourseId" value="${reservationCourse.reservationCourseId}">
+                                            <input type="hidden" name="reservationId" value="${reservationCourse.reservationId}">
                                             <input type="hidden" name="courseId" value="${reservationCourse.courseId}">
                                             <input type="hidden" name="paymentAmount" value="${reservationCourse.price}">
                                             <a href="#" class="butn bg-secondary" onclick="document.getElementById('paymentForm${reservationCourse.reservationCourseId}').submit();">

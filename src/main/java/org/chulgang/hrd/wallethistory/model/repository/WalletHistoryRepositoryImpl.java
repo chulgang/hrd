@@ -46,8 +46,8 @@ public class WalletHistoryRepositoryImpl implements WalletHistoryRepository {
     @Override
     public Integer findCurrentAmountByUserId(Long userId) {
         String selectCurrentAmountSql = "SELECT CURRENT_AMOUNT FROM WALLET_HISTORY WHERE USER_ID = ? ORDER BY CREATED_AT DESC FETCH FIRST ROW ONLY";
-        Connection connection = DbConnection.getConnection();
         try {
+            Connection connection = DbConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(selectCurrentAmountSql);
             preparedStatement.setLong(1, userId);
             ResultSet rs = preparedStatement.executeQuery();
@@ -64,7 +64,7 @@ public class WalletHistoryRepositoryImpl implements WalletHistoryRepository {
 
     @Override
     public void save(WalletHistory walletHistory) {
-        String insertWalletSql = "INSERT INTO WALLET_HISTORY (ID, USER_ID, ADDED_AMOUNT, USED_AMOUNT, REFUNDED_AMOUNT, CURRENT_AMOUNT, CREATED_AT) VALUES (WALLET_HISTORY_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?)";
+        String insertWalletSql = "INSERT INTO WALLET_HISTORY (ID, USER_ID, ADDED_AMOUNT, USED_AMOUNT, REFUNDED_AMOUNT, CURRENT_AMOUNT, CREATED_AT) VALUES (WALLET_HISTORY_SEQ.NEXTVAL, ?, ?, ?, ?, ?, sysdate)";
         Connection connection = DbConnection.getConnection();
         try {
             PreparedStatement ps = connection.prepareStatement(insertWalletSql);
@@ -73,7 +73,6 @@ public class WalletHistoryRepositoryImpl implements WalletHistoryRepository {
             ps.setInt(3, walletHistory.getUsedAmount());
             ps.setInt(4, walletHistory.getRefundedAmount());
             ps.setInt(5, walletHistory.getCurrentAmount());
-            ps.setTimestamp(6, java.sql.Timestamp.valueOf(walletHistory.getCreatedAt()));
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
