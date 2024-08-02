@@ -86,8 +86,7 @@
                 <c:forEach var="reservation" items="${reservations}">
                     <div class="col-xl-6 mt-2-9">
                         <div class="row g-0 event-wrapper">
-                            <div class="col-md-5 event-img bg-img cover-background"
-                                 style="background-image: url('https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1566778017/noticon/ytjm1rralodyhvuggrpu.png');">
+                            <div class="col-md-5 cover-background" >
                             </div>
                             <div class="col-md-7">
                                 <div class="p-1-6 p-sm-1-9">
