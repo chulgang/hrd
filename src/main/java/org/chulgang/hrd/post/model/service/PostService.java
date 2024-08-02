@@ -1,6 +1,7 @@
 package org.chulgang.hrd.post.model.service;
 
 import org.chulgang.hrd.post.domain.Post;
+import org.chulgang.hrd.users.dto.UsersLoginResponse;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public interface PostService {
 
     ArrayList<Post> postsS(String full_name);
 
-    ArrayList<Post> list_postsS();
+    ArrayList<UsersLoginResponse> list_postsS();
 
     void insert_PostS(Post post);
 //
