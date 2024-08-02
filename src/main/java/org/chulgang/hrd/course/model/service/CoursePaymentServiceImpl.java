@@ -18,6 +18,7 @@ public class CoursePaymentServiceImpl implements CoursePaymentService {
 
     @Override
     public CourseResponseForPayment getCourseForPayment(Long courseId) {
+        courseId = 5L;
         CourseService courseService = CourseServiceImpl.getInstance();
         SubjectService subjectService = SubjectServiceImpl.getInstance();
         UsersService usersService = UsersService.getInstance();

@@ -18,4 +18,6 @@ public interface CourseRepository {
     int findRemainedSeatById(Long id);
 
     void updateRemainedSeatById(Long id, int newRemainedSeat);
+
+    int getPageCount(int size);
 }

@@ -183,4 +183,26 @@ public class CourseRepositoryImpl implements CourseRepository {
         ConnectionContainer.close(preparedStatement);
         DbConnection.reset();
     }
+
+    @Override
+    public int getPageCount(int size) {
+        String sql = "select count(ID) from COURSE";
+
+        Statement statement = StatementGenerator.generateStatement();
+        ResultSet resultSet = DataSelector.getResultSet(statement, sql);
+
+        try {
+            if (resultSet.next()) {
+                int totalCount = resultSet.getInt(1);
+                ConnectionContainer.close(resultSet);
+                ConnectionContainer.close(statement);
+                DbConnection.reset();
+                return totalCount % size == 0 ? totalCount / size : totalCount / size + 1;
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+        return -1;
+    }
 }
