@@ -68,10 +68,10 @@ public class RegisterCourseController extends HttpServlet {
             response.sendRedirect(LOGIN_FAILED_VIEW);
             return;
         }
-//        if (!usersLoginResponse.getRole().equals(TEACHER_ROLE_NAME)) {
-//            response.sendRedirect(AUTHORIZATION_FAILED_VIEW);
-//            return;
-//        }
+        if (!usersLoginResponse.getRole().equals(TEACHER_ROLE_NAME)) {
+            response.sendRedirect(AUTHORIZATION_FAILED_VIEW);
+            return;
+        }
 
         GetSubjectsResponse getSubjectsResponse = subjectService.getSubjects();
         GetClassroomsResponse getClassroomsResponse = classroomService.getClassrooms();

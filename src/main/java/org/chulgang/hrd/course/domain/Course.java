@@ -172,9 +172,9 @@ public class Course {
 
     public void setTupleValues(PreparedStatement preparedStatement) throws SQLException {
         int index = 1;
-//        if (!isIdNull()) {
-//            preparedStatement.setLong(index++, id);
-//        }
+        if (!isIdNull()) {
+            preparedStatement.setLong(index++, id);
+        }
 
         preparedStatement.setLong(index++, 10L);
         preparedStatement.setLong(index++, subjectId);

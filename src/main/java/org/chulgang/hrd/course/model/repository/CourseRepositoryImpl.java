@@ -105,11 +105,11 @@ public class CourseRepositoryImpl implements CourseRepository {
                 + "START_DATE, LAST_DATE, CREATED_AT, REMAINED_SEAT) "
                 + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
 
-/*        if (course.isIdNull()) {
+        if (course.isIdNull()) {
             sql = "insert into COURSE(SUBJECT_ID, TEACHER_ID, TIME_PERIOD_ID, NAME, DESCRIPTION, PRICE, "
                     + "START_DATE, LAST_DATE, CREATED_AT, REMAINED_SEAT) "
                     + "values(?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
-        } */
+        }
 
         PreparedStatement preparedStatement = StatementGenerator.generateStatement(sql);
 
