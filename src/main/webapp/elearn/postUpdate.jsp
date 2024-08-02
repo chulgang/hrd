@@ -61,7 +61,7 @@
 
     <!-- PAGE TITLE
     ================================================== -->
-    <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9" data-background="img/bg/bg-04.jpg">
+    <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9"  >
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12">
@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-md-12">
                     <ul>
-                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="index.jsp">처음으로 </a></li>
                         <li><a href="post_listForm.do">Q&A List</a></li>
                     </ul>
                 </div>

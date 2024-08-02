@@ -110,15 +110,15 @@
 
   <!-- PAGE TITLE
   ================================================== -->
-  <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9" data-background="img/bg/bg-04.jpg">
+  <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9"  >
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1>Contents</h1>
+          <h1>댓글</h1>
         </div>
         <div class="col-md-12">
           <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.jsp">처음으로 </a></li>
             <li><a href="post_listForm.do">Q&A List</a></li>
           </ul>
         </div>
@@ -132,7 +132,7 @@
   <section>
     <div class="container">
       <div class="section-heading">
-        <h2 class="h1 mb-0">${full_name}</h2>
+        <h2 class="h1 mb-0">${refull_name}</h2>
         <span class="sub-title">Q&A</span>
       </div>
 
@@ -145,16 +145,13 @@
                 <h5 class="mb-0">
                   <button class="btn btn-link" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                     ${post.subject}
-                    제목
                   </button>
                 </h5>
               </div>
               <div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-bs-parent="#accordion1">
                 <div class="card-body">
                   ${post.content}
-                  ${post.writer_id}
                   <p style="margin: 0 0">
-                    내용
                   </p>
                 </div>
               </div>
@@ -235,39 +232,39 @@
                   <div class="comment-section">
                     <div class="comment">
                       <div class="comment-author-date">
-                        <div class="comment-author">선생님 이름</div>
-                        <div class="comment-date">작성일</div>
+                        <div class="comment-author">박길동</div>
+                        <div class="comment-date">2024/08/02</div>
                       </div>
-                      <div class="comment-content">답글 내용.</div>
+                      <div class="comment-content">금방 알려드리겠습니다.</div>
                       <!-- 답글 부분 -->
                       <div class="reply">
                         <div class="reply-author-date">
-                          <div class="reply-author">답글 작성자 이름</div>
-                          <div class="reply-date">작성일</div>
+                          <div class="reply-author">남길동</div>
+                          <div class="reply-date">2024/08/02</div>
                         </div>
-                        <div class="reply-content">질문 내용.</div>
+                        <div class="reply-content">감사합니다.</div>
                       </div>
                       <div class="reply">
                         <div class="reply-author-date">
-                          <div class="reply-author">답글 작성자 이름</div>
-                          <div class="reply-date">작성일</div>
+                          <div class="reply-author">박길동</div>
+                          <div class="reply-date">2024/08/02</div>
                         </div>
-                        <div class="reply-content">질문 내용.</div>
+                        <div class="reply-content">네^^</div>
                       </div>
                     </div>
                     <div class="comment">
                       <div class="comment-author-date">
-                        <div class="comment-author">선생님 이름</div>
-                        <div class="comment-date">작성일</div>
+                        <div class="comment-author">박길동</div>
+                        <div class="comment-date">2024/08/02</div>
                       </div>
-                      <div class="comment-content">답글 내용.</div>
+                      <div class="comment-content">오늘이라고 하네요!!!</div>
                       <!-- 답글 부분 -->
                       <div class="reply">
                         <div class="reply-author-date">
-                          <div class="reply-author">답글 작성자 이름</div>
-                          <div class="reply-date">작성일</div>
+                          <div class="reply-author">남길동</div>
+                          <div class="reply-date">2024/08/02</div>
                         </div>
-                        <div class="reply-content">질문 내용.</div>
+                        <div class="reply-content">참고하겠습니다. 감사합니다^^</div>
                       </div>
                     </div>
                   </div>
@@ -300,7 +297,6 @@
         </c:when>
         <c:otherwise>
           <!-- user_id와 post.writer_id가 다른 경우 실행될 내용 -->
-          없서 냥냥
         </c:otherwise>
       </c:choose>
 

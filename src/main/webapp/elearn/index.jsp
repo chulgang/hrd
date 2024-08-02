@@ -72,7 +72,7 @@
                     <div class="container pt-6 pt-md-0">
                         <div class="row align-items-center">
                             <div class="col-md-10 col-lg-8 col-xl-7 mb-1-9 mb-lg-0 py-6 position-relative">
-                                <span class="h5 text-secondary">예약사이트에 오신것을 환연합니다.</span>
+                                <span class="h5 text-secondary">예약사이트에 오신것을 환영합니다.</span>
                                 <h1 class="display-1 font-weight-800 mb-2-6 title text-white">편리하게 예약해요!</h1>
                                 <c:choose>
                                     <c:when test="${empty dto}">
@@ -80,8 +80,9 @@
                                         <a href="loginForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="myPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
-                                        <a href="logout.do">로그아웃</a>
+                                        <a href="courses.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">강좌 목록</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="reservation-list.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">예약 대기</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="post_listForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">질문 목록</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:otherwise>
                                 </c:choose>
                             </div>
@@ -92,7 +93,7 @@
                     <div class="container pt-6 pt-md-0">
                         <div class="row align-items-center">
                             <div class="col-md-10 col-lg-8 col-xl-7 mb-1-9 mb-lg-0 py-6 position-relative">
-                                <span class="h5 text-secondary">예약사이트에 오신것을 환연합니다.</span>
+                                <span class="h5 text-secondary">예약사이트에 오신것을 환영합니다.</span>
                                 <h2 class="display-1 font-weight-800 mb-2-6 title text-white">손 쉬운 원터치 예약</h2>
                                 <c:choose>
                                     <c:when test="${empty dto}">
@@ -100,9 +101,9 @@
                                         <a href="loginForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="myPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
-
-                                        <a href="logout.do">로그아웃</a>
+                                        <a href="courses.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">강좌 목록</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="reservation-list.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">예약 대기</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="post_listForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">질문 목록</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:otherwise>
                                 </c:choose>
 
@@ -114,7 +115,7 @@
                     <div class="container pt-6 pt-md-0">
                         <div class="row align-items-center">
                             <div class="col-md-10 col-lg-8 col-xl-7 mb-1-9 mb-lg-0 py-6 position-relative">
-                                <span class="h5 text-secondary">예약사이트에 오신것을 환연합니다.</span>
+                                <span class="h5 text-secondary">예약사이트에 오신것을 환영합니다.</span>
                                 <h2 class="display-1 font-weight-800 mb-2-6 title text-white">강의 예약 홈페이지</h2>
                                 <c:choose>
                                     <c:when test="${empty dto}">
@@ -122,8 +123,9 @@
                                         <a href="loginForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">로그인</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="myPageForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">마이페이지</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
-
+                                        <a href="courses.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">강좌 목록</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="reservation-list.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">예약 대기</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
+                                        <a href="post_listForm.do" class="butn white my-1"><i class="fas fa-plus-circle icon-arrow before"></i><span class="label">질문 목록</span><i class="fas fa-plus-circle icon-arrow after"></i></a>
                                     </c:otherwise>
                                 </c:choose>
 
@@ -166,11 +168,11 @@
                                 <div class="card-icon">
                                     <i class="ti-world"></i>
                                 </div>
-                                <h4 class="ms-4 mb-0">게시판</h4>
+                                <h4 class="ms-4 mb-0">질문 목록</h4>
                             </div>
                             <div>
-                                <p class="mb-3">게시판 바로가기 입니다</p>
-                                <a href="post.do" class="butn-style1 secondary">목록</a>
+                                <p class="mb-3">질문 목록 바로가기 입니다</p>
+                                <a href="post_listForm.do" class="butn-style1 secondary">목록</a>
                             </div>
                         </div>
                     </div>

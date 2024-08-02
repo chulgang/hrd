@@ -31,8 +31,11 @@ public class ContentFormPostController extends HttpServlet {
         String Session_full_name = (String) session.getAttribute("full_name");
         String refull_name= request.getParameter("refull_name");
 
+        request.setAttribute("refull_name", refull_name);
         session.setAttribute("post", post);
 
+        System.out.println("@@@@@@@@@@@@@@@@@@@"+refull_name);
+        System.out.println("@@@@@@@@@@@@@@"+Session_full_name);
         if(user == null) { //로그인 안했을 때
             String view = "postContent.jsp";
 

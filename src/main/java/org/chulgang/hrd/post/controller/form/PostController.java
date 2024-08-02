@@ -41,6 +41,7 @@ public class PostController extends HttpServlet {
                     System.out.println("user=null");
                     String view = "post.jsp";
                     postlist = service.postsS(full_name);
+                    session.setAttribute("full_name", full_name);
                     request.setAttribute("postlist", postlist);
                     RequestDispatcher rd = request.getRequestDispatcher(view);
                     rd.forward(request, response);
