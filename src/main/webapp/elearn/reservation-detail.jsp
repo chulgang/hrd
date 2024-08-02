@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-md-12">
                     <ul>
-                        <li><a href="index.jsp">Home</a></li>
+                        <li><a href="index.jsp">처음으로 </a></li>
                         <li><a href="#!">Reservation Details</a></li>
                     </ul>
                 </div>
@@ -219,7 +219,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-lg-3 mb-2-5 mb-lg-0">
-                <a href="index.html" class="footer-logo">
+                <a href="index.jsp" class="footer-logo">
                     <img src="img/logos/footer-light-logo.png" class="mb-4" alt="Footer Logo">
                 </a>
                 <p class="mb-1-6 text-white">

@@ -52,7 +52,7 @@
 
                             <!-- start menu area -->
                             <ul class="navbar-nav ms-auto" id="nav" style="display: none;">
-                                <li><a href="index.jsp">Home</a></li>
+                                <li><a href="index.jsp">처음으로 </a></li>
                                 <li><a href="#!">강좌 목록</a>
                                     <ul>
                                         <li><a href="courses.do">강좌 목록</a></li>
@@ -65,7 +65,7 @@
                                         <li><a href="payment-list.do">수강 강좌</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="post_listForm.do">Q&A</a></li>
+                                <li><a href="post_listForm.do">질문 목록</a></li>
                                 <c:choose>
                                     <c:when test="${empty dto}">
                                         <li><a href="signUpForm.do">회원가입</a></li>

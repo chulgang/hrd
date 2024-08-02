@@ -51,12 +51,9 @@
                 </div>
                 <div class="col-md-6 col-lg-3 mb-2-5 mb-md-0">
                     <div class="ps-lg-1-9 ps-xl-2-5">
-                        <h3 class="text-primary h5 mb-2-2">게시판</h3>
+                        <h3 class="text-primary h5 mb-2-2">질문</h3>
                         <ul class="footer-list">
-                            <li><a href="post.do">목록</a></li>
-                            <li><a href="">게시글</a></li>
-
-
+                            <li><a href="post_listForm.do">목록</a></li>
                         </ul>
                     </div>
                 </div>
