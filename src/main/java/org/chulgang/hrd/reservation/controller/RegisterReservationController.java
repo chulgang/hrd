@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import static org.chulgang.hrd.course.util.RequestConstant.RESERVATION_SERVICE_ATTRIBUTE_NAME;
 
-@WebServlet(urlPatterns = {"/register-reservation"})
+@WebServlet(urlPatterns = {"/register-reservation.do"})
 public class RegisterReservationController extends HttpServlet {
     private ReservationService reservationService;
 

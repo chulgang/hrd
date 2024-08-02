@@ -29,8 +29,8 @@ public class ExecutePaymentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
-        Long userId = user.getId();
+        //UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
+        Long userId = 1L;
         Long reservationId = Long.parseLong(request.getParameter("reservationId"));
         Long courseId = Long.parseLong(request.getParameter("courseId"));
         int paymentAmount = Integer.parseInt(request.getParameter("paymentAmount"));
@@ -38,7 +38,7 @@ public class ExecutePaymentController extends HttpServlet {
         boolean isPaymentSuccessful = paymentService.executePayment(userId, reservationId, courseId ,paymentAmount);
 
         if (isPaymentSuccessful) {
-            response.sendRedirect(request.getContextPath() + "/payment-success");
+            response.sendRedirect(request.getContextPath() + "/elearn/payment-list.do");
         } else {
             response.sendRedirect(request.getContextPath() + "/404");
         }

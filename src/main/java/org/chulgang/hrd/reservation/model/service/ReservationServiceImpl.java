@@ -80,7 +80,7 @@ public class ReservationServiceImpl implements ReservationService {
         response.setStartDate(parseDate(courseResponseForPayment.getStartDate()));
         response.setLastDate(parseDate(courseResponseForPayment.getLastDate()));
         response.setPrice(courseResponseForPayment.getPrice());
-        response.setPeriod(courseResponseForPayment.getPeriod().toString());
+        response.setPeriod(courseResponseForPayment.getPeriod().getDescription());
         response.setRoomName(courseResponseForPayment.getClassroomName());
         response.setAverageScore(courseResponseForPayment.getAverageScore());
         response.setDescription(courseResponseForPayment.getCourseDescription());
