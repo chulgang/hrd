@@ -66,12 +66,12 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12">
-                    <h1>Q&A</h1>
+                    <h1>질문</h1>
                 </div>
                 <div class="col-md-12">
                     <ul>
                         <li><a href="index.jsp">처음으로 </a></li>
-                        <li><a href="post_listForm.do">Q&A List</a></li>
+                        <li><a href="post_listForm.do">질문 목록</a></li>
                     </ul>
                 </div>
             </div>
