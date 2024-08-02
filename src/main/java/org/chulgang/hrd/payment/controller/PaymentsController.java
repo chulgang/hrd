@@ -33,7 +33,7 @@ public class PaymentsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
-        Long userId = user.getId();
+        Long userId = 1L;
         int page = 1;
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));

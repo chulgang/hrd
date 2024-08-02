@@ -36,9 +36,9 @@ public class RefundPaymentController extends HttpServlet {
         boolean isRefundSuccessful = paymentService.refundPayment(userId, courseId);
 
         if (isRefundSuccessful) {
-            response.sendRedirect(request.getContextPath() + "/refund-success");
+            response.sendRedirect(request.getContextPath() + "/elearn/paid-course-detail.do");
         } else {
-            response.sendRedirect(request.getContextPath() + "/404");
+            response.sendRedirect(request.getContextPath() + "/elearn/error");
         }
     }
 }

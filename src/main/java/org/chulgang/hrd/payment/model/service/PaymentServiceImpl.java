@@ -109,15 +109,15 @@ public class PaymentServiceImpl implements PaymentService {
         response.setPaymentId(payedCourse.getId());
         response.setCourseId(payedCourse.getCourseId());
         response.setReservationId(payedCourse.getReservationId());
-//        response.setSubjectName(courseResponseForPayment.getSubjectName());
-//        response.setCourseName(courseResponseForPayment.getCourseName());
-//        response.setDescription(courseResponseForPayment.getCourseDescription());
-//        response.setPrice(courseResponseForPayment.getPrice());
-//        response.setStartDate(parseDate(courseResponseForPayment.getStartDate()));
-//        response.setLastDate(parseDate(courseResponseForPayment.getLastDate()));
-//        response.setPeriod(courseResponseForPayment.getPeriod().toString());
-//        response.setClassRoomName(courseResponseForPayment.getClassroomName());
-//        response.setAverageScore(courseResponseForPayment.getAverageScore());
+        response.setSubjectName(courseResponseForPayment.getSubjectName());
+        response.setCourseName(courseResponseForPayment.getCourseName());
+        response.setDescription(courseResponseForPayment.getCourseDescription());
+        response.setPrice(courseResponseForPayment.getPrice());
+        response.setStartDate(parseDate(courseResponseForPayment.getStartDate()));
+        response.setLastDate(parseDate(courseResponseForPayment.getLastDate()));
+        response.setPeriod(courseResponseForPayment.getPeriod().getDescription());
+        response.setClassRoomName(courseResponseForPayment.getClassroomName());
+        response.setAverageScore(courseResponseForPayment.getAverageScore());
         response.setIsRefunded(payedCourse.isRefunded() ? 1 : 0);
         return response;
     }
