@@ -9,6 +9,7 @@ import org.chulgang.hrd.course.dto.GetCourseResponse;
 import org.chulgang.hrd.course.dto.GetCoursesResponse;
 import org.chulgang.hrd.course.model.repository.CourseRepository;
 import org.chulgang.hrd.course.model.testutil.CourseTestObjectFactory;
+import org.chulgang.hrd.users.model.usersService.UsersService;
 import org.chulgang.hrd.util.DbConnection;
 import org.chulgang.hrd.util.FormatConverter;
 import org.junit.jupiter.api.AfterEach;
@@ -81,10 +82,11 @@ class CourseServiceTest {
         when(courseRepository.findAll(anyInt(), anyInt())).thenReturn(courses);
 
         // when
-        GetCoursesResponse getCoursesResponse1 = courseService.getCourses(SIZE1, PAGE_NUMBER);
+        GetCoursesResponse getCoursesResponse1 = courseService.getCourses(SIZE1, PAGE_NUMBER, SubjectServiceImpl.getInstance(), UsersService.getInstance());
 
         courses.add(course3);
-        GetCoursesResponse getCoursesResponse2 = courseService.getCourses(SIZE2, PAGE_NUMBER);
+        GetCoursesResponse getCoursesResponse2 = courseService.getCourses(SIZE2, PAGE_NUMBER, SubjectServiceImpl.getInstance(), UsersService.getInstance());
+        ;
 
         // then
         assertThat(getCoursesResponse1.getCourseResponses()).hasSize(2)
@@ -136,7 +138,7 @@ class CourseServiceTest {
         );
 
         // when
-        GetCourseResponse getCourseResponse = courseService.getCourse(COURSE_ID1);
+        GetCourseResponse getCourseResponse = courseService.getCourse(COURSE_ID1, SubjectServiceImpl.getInstance(), UsersService.getInstance());
 
         // then
         assertThat(getCourseResponse).isNotNull();
