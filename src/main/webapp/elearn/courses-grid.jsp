@@ -8,10 +8,9 @@
 
 <%
     GetCoursesResponse getCoursesResponse = (GetCoursesResponse) request.getAttribute(COURSES_ATTRIBUTE_NAME);
-    int pageCount = getCoursesResponse.getPageCount();
+    int pageCount = (int) request.getAttribute(PAGE_COUNT_PARAMETER_NAME);
     int size = (int) request.getAttribute(SIZE_PARAMETER_NAME);
     int pageNumber = (int) request.getAttribute(PAGE_NUMBER_PARAMETER_NAME);
-
     UsersLoginResponse usersLoginResponse
             = (UsersLoginResponse) request.getSession().getAttribute(LOGIN_SESSION_ATTRIBUTE_NAME);
     boolean isTeacher = usersLoginResponse != null && usersLoginResponse.getRole().equals("teacher");
@@ -104,7 +103,7 @@
                         </div>
                         <div class="card-body position-relative pt-0 px-1-9 pb-1-9">
                             <div class="card-author d-flex">
-                                <h4 class="mb-0 h6"><%= getCoursesResponse.get(i).getTeacherName() %>
+                                <h4 class="mb-0 h6">강사: <%= getCoursesResponse.get(i).getTeacherName() %>
                                 </h4>
                             </div>
                             <div class="pt-6">

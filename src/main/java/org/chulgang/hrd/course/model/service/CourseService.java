@@ -18,4 +18,6 @@ public interface CourseService {
     int getRemainedSeat(Long id);
 
     void updateRemainedSeat(Long id, int newRemainedSeat);
+
+    int getPageCount(int size);
 }

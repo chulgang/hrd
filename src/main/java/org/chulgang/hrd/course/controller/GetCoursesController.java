@@ -67,6 +67,7 @@ public class GetCoursesController extends HttpServlet {
                 )
         );
         request.setAttribute(SIZE_PARAMETER_NAME, parsedSize);
+        request.setAttribute(PAGE_COUNT_PARAMETER_NAME, courseService.getPageCount(parsedSize));
         request.setAttribute(PAGE_NUMBER_PARAMETER_NAME, parsedPageNumber);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(COURSES_VIEW);

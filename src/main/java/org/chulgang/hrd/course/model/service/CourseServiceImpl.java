@@ -70,4 +70,9 @@ public class CourseServiceImpl implements CourseService {
     public void updateRemainedSeat(Long id, int newRemainedSeat) {
         courseRepository.updateRemainedSeatById(id, newRemainedSeat);
     }
+
+    @Override
+    public int getPageCount(int size) {
+        return courseRepository.getPageCount(size);
+    }
 }

@@ -22,6 +22,7 @@ public class RequestConstant {
     public static final String COURSES_ATTRIBUTE_NAME = "courses";
     public static final String SEARCH_WORD_PARAMETER_NAME = "searchWord";
     public static final String SIZE_PARAMETER_NAME = "size";
+    public static final String PAGE_COUNT_PARAMETER_NAME = "pageCount";
     public static final String PAGE_NUMBER_PARAMETER_NAME = "pageNumber";
     public static final String COURSE_NAME_PARAMETER_NAME = "courseName";
     public static final String CLASSROOM_ID_PARAMETER_NAME = "classroomId";
