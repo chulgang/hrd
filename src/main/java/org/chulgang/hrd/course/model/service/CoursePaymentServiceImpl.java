@@ -24,7 +24,7 @@ public class CoursePaymentServiceImpl implements CoursePaymentService {
         TimePeriodService timePeriodService = TimePeriodServiceImpl.getInstance();
         ClassroomService classroomService = ClassroomServiceImpl.getInstance();
 
-        GetCourseResponse getCourseResponse = courseService.getCourse(courseId);
+        GetCourseResponse getCourseResponse = courseService.getCourse(courseId, SubjectServiceImpl.getInstance(), UsersService.getInstance());
         String subjectName = subjectService.getSubjectName(getCourseResponse.getSubjectId());
         String teacherName = usersService.findById(getCourseResponse.getTeacherId());
         GetTimePeriodResponse getTimePeriodResponse

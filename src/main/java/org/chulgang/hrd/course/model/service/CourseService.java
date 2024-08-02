@@ -9,7 +9,7 @@ import org.chulgang.hrd.users.model.usersService.UsersService;
 public interface CourseService {
     GetCoursesResponse getCourses(int size, int pageNumber, SubjectService subjectService, UsersService usersService);
 
-    GetCourseResponse getCourse(Long id);
+    GetCourseResponse getCourse(Long id, SubjectService subjectService, UsersService usersService);
 
     boolean create(CreateCourseRequest createCourseRequest, TimePeriodService timePeriodService);
 
