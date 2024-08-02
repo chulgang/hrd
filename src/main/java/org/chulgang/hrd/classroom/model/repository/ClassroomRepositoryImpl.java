@@ -55,14 +55,15 @@ public class ClassroomRepositoryImpl implements ClassroomRepository {
 
         try {
             if (resultSet.next()) {
-                ConnectionContainer.close(resultSet);
-                ConnectionContainer.close(statement);
-                DbConnection.reset();
                 return resultSet.getString(1);
             }
         } catch (SQLException e) {
             GlobalExceptionHandler.throwRuntimeException(
                     new ClassroomNotFoundException(String.format(CLASSROOM_ID_NOT_FOUND_EXCEPTION_MESSAGE, id)));
+        } finally {
+            ConnectionContainer.close(resultSet);
+            ConnectionContainer.close(statement);
+            DbConnection.reset();
         }
 
         return null;
