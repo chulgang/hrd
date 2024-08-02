@@ -2,7 +2,6 @@ package org.chulgang.hrd.course.model.repository;
 
 import org.chulgang.hrd.course.domain.Course;
 import org.chulgang.hrd.course.exception.CourseIdNotFoundException;
-import org.chulgang.hrd.course.exception.SubjectIdNotFoundException;
 import org.chulgang.hrd.exception.GlobalExceptionHandler;
 import org.chulgang.hrd.util.ConnectionContainer;
 import org.chulgang.hrd.util.DataSelector;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.chulgang.hrd.course.exception.ExceptionMessage.COURSE_ID_NOT_FOUND_EXCEPTION_MESSAGE;
-import static org.chulgang.hrd.course.exception.ExceptionMessage.SUBJECT_ID_NOT_FOUND_EXCEPTION_MESSAGE;
 
 public class CourseRepositoryImpl implements CourseRepository {
     private static final CourseRepository INSTANCE = new CourseRepositoryImpl();
@@ -154,14 +152,16 @@ public class CourseRepositoryImpl implements CourseRepository {
         ResultSet resultSet = DataSelector.getResultSet(statement, sql);
 
         try {
-            int remainedSeat = resultSet.getInt(1);
-            ConnectionContainer.close(resultSet);
-            ConnectionContainer.close(statement);
-            DbConnection.reset();
-            return remainedSeat;
+            if (resultSet.next()) {
+                int remainedSeat = resultSet.getInt(1);
+                ConnectionContainer.close(resultSet);
+                ConnectionContainer.close(statement);
+                DbConnection.reset();
+                return remainedSeat;
+            }
         } catch (SQLException se) {
             GlobalExceptionHandler.throwRuntimeException(
-                    new SubjectIdNotFoundException(String.format(SUBJECT_ID_NOT_FOUND_EXCEPTION_MESSAGE, id)));
+                    new CourseIdNotFoundException(String.format(COURSE_ID_NOT_FOUND_EXCEPTION_MESSAGE, id)));
         }
 
         return -1;
