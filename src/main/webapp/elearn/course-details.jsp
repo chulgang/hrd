@@ -20,7 +20,7 @@
     <meta name="description" content="eLearn - Online Education Learning Template"/>
 
     <!-- title  -->
-    <title>eLearn - Online Education Learning Template</title>
+    <title>강좌 상세 페이지</title>
 
     <!-- favicon -->
     <link rel="shortcut icon" href="img/logos/favicon.png"/>
@@ -61,8 +61,7 @@
 
     <!-- PAGE TITLE
     ================================================== -->
-    <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9"
-             data-background="img/bg/bg-04.jpg">
+    <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9">
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12">

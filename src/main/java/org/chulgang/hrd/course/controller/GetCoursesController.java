@@ -45,14 +45,10 @@ public class GetCoursesController extends HttpServlet {
         if (FormatValidator.isNoValue(request.getParameter(SEARCH_WORD_PARAMETER_NAME))) {
             getAllCourses(request, response);
         }
-
-        // TODO: 검색 기능 추가
     }
 
     private void getAllCourses(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // TODO: 이미지 추가
-
         String size = request.getParameter(SIZE_PARAMETER_NAME);
         int parsedSize = 3;
         if (!FormatValidator.isNoValue(size)) {
