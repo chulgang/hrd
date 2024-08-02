@@ -788,12 +788,14 @@
         </div>
     </section>
 
+    <% if (getCourseResponse.getRemainedSeat() > 0) { %>
     <div style="position: fixed; bottom: 20px; right: 20px;">
         <form action="/register-reservation.do" method="POST">
             <input type="hidden" name="courseId" value="<%= getCourseResponse.getId() %>"/>
             <button type="submit" class="btn btn-primary">수강 신청</button>
         </form>
     </div>
+    <% } %>
 
     <!-- FOOTER
     ================================================== -->
