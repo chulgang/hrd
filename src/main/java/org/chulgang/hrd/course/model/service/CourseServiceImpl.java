@@ -42,8 +42,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public GetCourseResponse getCourse(Long id) {
-        return GetCourseResponse.from(courseRepository.findById(id));
+    public GetCourseResponse getCourse(Long id, SubjectService subjectService, UsersService usersService) {
+        Course course = courseRepository.findById(id);
+        String subjectName = subjectService.getSubjectName(course.getSubjectId());
+        String teacherName = usersService.findById(course.getTeacherId());
+        return GetCourseResponse.from(course, subjectName, teacherName);
     }
 
     @Override
