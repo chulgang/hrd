@@ -9,8 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.chulgang.hrd.aop.LoggingAspect;
 import org.chulgang.hrd.course.model.service.CourseService;
+import org.chulgang.hrd.course.model.service.SubjectService;
 import org.chulgang.hrd.exception.ArgumentNoValueException;
 import org.chulgang.hrd.exception.GlobalExceptionHandler;
+import org.chulgang.hrd.users.model.usersService.UsersService;
 import org.chulgang.hrd.util.FormatConverter;
 import org.chulgang.hrd.util.FormatValidator;
 
@@ -22,6 +24,8 @@ import static org.chulgang.hrd.exception.ExceptionMessage.ARGUMENT_NO_VALUE_EXCE
 @WebServlet(urlPatterns = {GET_COURSE_FIRST_REQUEST_URL, GET_COURSE_SECOND_REQUEST_URL})
 public class GetCourseController extends HttpServlet {
     private CourseService courseService;
+    private SubjectService subjectService;
+    private UsersService usersService = UsersService.getInstance();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -29,6 +33,9 @@ public class GetCourseController extends HttpServlet {
 
         courseService = LoggingAspect.createProxy(CourseService.class,
                 (CourseService) config.getServletContext().getAttribute(COURSE_SERVICE_ATTRIBUTE_NAME));
+
+        subjectService = LoggingAspect.createProxy(SubjectService.class,
+                (SubjectService) config.getServletContext().getAttribute(SUBJECT_SERVICE_ATTRIBUTE_NAME));
     }
 
     @Override
@@ -54,7 +61,7 @@ public class GetCourseController extends HttpServlet {
         }
         Long parsedId = FormatConverter.parseToLong(id);
 
-        request.setAttribute(COURSE_DOMAIN_NAME, courseService.getCourse(parsedId));
+        request.setAttribute(COURSE_DOMAIN_NAME, courseService.getCourse(parsedId, subjectService, usersService));
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(COURSE_DETAIL_VIEW);
         requestDispatcher.forward(request, response);
     }
