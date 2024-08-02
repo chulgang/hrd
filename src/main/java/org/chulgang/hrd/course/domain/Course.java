@@ -176,7 +176,6 @@ public class Course {
             preparedStatement.setLong(index++, id);
         }
 
-        preparedStatement.setLong(index++, 10L);
         preparedStatement.setLong(index++, subjectId);
         preparedStatement.setLong(index++, teacherId);
         preparedStatement.setLong(index++, timePeriodId);

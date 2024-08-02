@@ -104,9 +104,9 @@ public class CourseRepositoryImpl implements CourseRepository {
                 + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
 
         if (course.isIdNull()) {
-            sql = "insert into COURSE(SUBJECT_ID, TEACHER_ID, TIME_PERIOD_ID, NAME, DESCRIPTION, PRICE, "
+            sql = "insert into COURSE(ID, SUBJECT_ID, TEACHER_ID, TIME_PERIOD_ID, NAME, DESCRIPTION, PRICE, "
                     + "START_DATE, LAST_DATE, CREATED_AT, REMAINED_SEAT) "
-                    + "values(?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
+                    + "values(COURSE_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
         }
 
         PreparedStatement preparedStatement = StatementGenerator.generateStatement(sql);
