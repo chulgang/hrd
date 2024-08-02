@@ -104,7 +104,7 @@
                             <div id="${postlist.id}" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
                                 <div class="card-body">
                                     ${postlist.writer_id}
-                                    <a href="post_contentForm.do?post_id=${postlist.id}&post_writer_id=${postlist.writer_id}&post_content=${postlist.content}&post_subject=${postlist.subject}" class="button">${postlist.content}</a>
+                                    <a href="post_contentForm.do?post_id=${postlist.id}&post_writer_id=${postlist.writer_id}&post_content=${postlist.content}&post_subject=${postlist.subject}&refull_name=${full_name}" class="button">${postlist.content}</a>
                                 </div>
                             </div>
 

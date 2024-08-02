@@ -11,7 +11,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <meta name="keywords" content="Online Education Learning Template"/>
   <meta name="description" content="eLearn - Online Education Learning Template"/>
+  <style>
+    .comment, .reply {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
 
+    .comment-author, .reply-author {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .comment-content, .reply-content {
+      margin-bottom: 5px;
+    }
+
+    .comment-date, .reply-date {
+      font-size: 0.9em;
+      color: #777;
+    }
+
+    .comment-header {
+      background-color: #36c6d3;
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .comment-author-date, .reply-author-date {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .accordion-style1 .btn-link:after {
+      display: none;
+    }
+  </style>
   <!-- title  -->
   <title>eLearn - Online Education Learning Template</title>
   <script>function openContentJSP() {
@@ -31,11 +70,7 @@
   }
 
   </script>
-  <style>
-    .accordion-style1 .btn-link:after {
-      display: none;
-    }
-  </style>
+
   <!-- favicon -->
   <link rel="shortcut icon" href="img/logos/favicon.png"/>
   <link rel="apple-touch-icon" href="img/logos/apple-touch-icon-57x57.png"/>
@@ -102,30 +137,159 @@
       </div>
 
 
-        <div class="row">
-          <div class="col-md-10 mx-auto">
-            <div id="accordion1" class="accordion-style1">
-              <div class="card">
-                <div class="card-header" id="headingOne">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-                      ${post.subject}
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-bs-parent="#accordion1">
-                  <div class="card-body">
-                    ${post.content}
-                    ${post.writer_id}
-                    <p>
-                      userid = ${user_Id}
-                    </p>
-                  </div>
+      <div class="row">
+        <div class="col-md-10 mx-auto">
+          <div id="accordion1" class="accordion-style1">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                  <button class="btn btn-link" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                    ${post.subject}
+                    제목
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseFive" class="collapse show" aria-labelledby="headingFive" data-bs-parent="#accordion1">
+                <div class="card-body">
+                  ${post.content}
+                  ${post.writer_id}
+                  <p style="margin: 0 0">
+                    내용
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <!--권한 없을때-->
+<%--      <div style="margin: 5% 10% 3% 10%;" class="row">--%>
+<%--        <div class="card-body">--%>
+<%--          <!-- 답글 내용 표시 부분: 리스트 형식으로 표시 -->--%>
+<%--          <div class="user-comments">--%>
+<%--            <div class="comment-header">--%>
+<%--              답변--%>
+<%--            </div>--%>
+<%--            <div class="comment-section">--%>
+<%--              <div class="comment">--%>
+<%--                <div class="comment-author-date">--%>
+<%--                  <div class="comment-author">선생님 이름</div>--%>
+<%--                  <div class="comment-date">작성일</div>--%>
+<%--                </div>--%>
+<%--                <div class="comment-content">답글 내용.</div>--%>
+<%--                <!-- 답글 부분 -->--%>
+<%--                <div class="reply">--%>
+<%--                  <div class="reply-author-date">--%>
+<%--                    <div class="reply-author">답글 작성자 이름</div>--%>
+<%--                    <div class="reply-date">작성일</div>--%>
+<%--                  </div>--%>
+<%--                  <div class="reply-content">질문 내용.</div>--%>
+<%--                </div>--%>
+<%--                <div class="reply">--%>
+<%--                  <div class="reply-author-date">--%>
+<%--                    <div class="reply-author">답글 작성자 이름</div>--%>
+<%--                    <div class="reply-date">작성일</div>--%>
+<%--                  </div>--%>
+<%--                  <div class="reply-content">질문 내용.</div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--              <div class="comment">--%>
+<%--                <div class="comment-author-date">--%>
+<%--                  <div class="comment-author">선생님 이름</div>--%>
+<%--                  <div class="comment-date">작성일</div>--%>
+<%--                </div>--%>
+<%--                <div class="comment-content">답글 내용.</div>--%>
+<%--                <!-- 답글 부분 -->--%>
+<%--                <div class="reply">--%>
+<%--                  <div class="reply-author-date">--%>
+<%--                    <div class="reply-author">답글 작성자 이름</div>--%>
+<%--                    <div class="reply-date">작성일</div>--%>
+<%--                  </div>--%>
+<%--                  <div class="reply-content">질문 내용.</div>--%>
+<%--                </div>--%>
+<%--              </div>--%>
+<%--            </div>--%>
+<%--            <!-- 답글 입력 및 작성 버튼 -->--%>
+<%--            <div style="display: flex; flex-direction: column; align-items: flex-end; margin-top: 10px;">--%>
+<%--              <!-- 답글 입력 칸 -->--%>
+<%--              <textarea id="commentInput" class="comment" rows="4" cols="50" placeholder="답글을 입력하세요." style="width: 100%;"></textarea>--%>
+<%--              <!-- 답글 작성 버튼 -->--%>
+<%--              <button type="button" style="border: 1px solid; margin-top: 10px;" class="btn btn-outline-success" onclick="submitComment()">--%>
+<%--                답글 작성--%>
+<%--              </button>--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--        </div>--%>
+<%--      </div>--%>
+
+
+      <%--권한 있을때--%>
+            <div style="margin: 5% 10% 3% 10%;" class="row">
+              <div class="card-body">
+                <!-- 답글 내용 표시 부분: 리스트 형식으로 표시 -->
+                <div class="user-comments">
+                  <div class="comment-header">
+                    답변
+                  </div>
+                  <div class="comment-section">
+                    <div class="comment">
+                      <div class="comment-author-date">
+                        <div class="comment-author">선생님 이름</div>
+                        <div class="comment-date">작성일</div>
+                      </div>
+                      <div class="comment-content">답글 내용.</div>
+                      <!-- 답글 부분 -->
+                      <div class="reply">
+                        <div class="reply-author-date">
+                          <div class="reply-author">답글 작성자 이름</div>
+                          <div class="reply-date">작성일</div>
+                        </div>
+                        <div class="reply-content">질문 내용.</div>
+                      </div>
+                      <div class="reply">
+                        <div class="reply-author-date">
+                          <div class="reply-author">답글 작성자 이름</div>
+                          <div class="reply-date">작성일</div>
+                        </div>
+                        <div class="reply-content">질문 내용.</div>
+                      </div>
+                    </div>
+                    <div class="comment">
+                      <div class="comment-author-date">
+                        <div class="comment-author">선생님 이름</div>
+                        <div class="comment-date">작성일</div>
+                      </div>
+                      <div class="comment-content">답글 내용.</div>
+                      <!-- 답글 부분 -->
+                      <div class="reply">
+                        <div class="reply-author-date">
+                          <div class="reply-author">답글 작성자 이름</div>
+                          <div class="reply-date">작성일</div>
+                        </div>
+                        <div class="reply-content">질문 내용.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 답글 입력 및 작성 버튼 -->
+                  <c:choose>
+                    <c:when test="${refull_name eq Session_full_name}">
+                        <!-- teacher일 때 답글 입력 칸과 버튼 모두 표시 -->
+                        <div style="display: flex; flex-direction: column; align-items: flex-end; margin-top: 10px;">
+                          <!-- 답글 입력 칸 -->
+                          <textarea id="commentInput" rows="4" cols="50" placeholder="답글을 입력하세요..." style="width: 100%;"></textarea>
+                          <!-- 답글 작성 버튼 -->
+                          <button type="button" style="border: 1px solid; margin-top: 10px;" class="btn btn-outline-success" onclick="submitComment()">
+                            답글 작성
+                          </button>
+                        </div>
+                    </c:when>
+                  </c:choose>
+
+                </div>
+              </div>
+            </div>
 
 
       <c:choose>

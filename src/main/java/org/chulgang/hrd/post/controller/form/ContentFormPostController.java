@@ -28,11 +28,9 @@ public class ContentFormPostController extends HttpServlet {
         Post post = new Post(post_id, post_writer_id, post_subject, post_content,
                 0, null, null);
 
+        String Session_full_name = (String) session.getAttribute("full_name");
+        String refull_name= request.getParameter("refull_name");
 
-        String full_name = (String) session.getAttribute("full_name");
-
-
-        request.setAttribute("full_name", full_name);
         session.setAttribute("post", post);
 
         if(user == null) { //로그인 안했을 때
@@ -44,7 +42,12 @@ public class ContentFormPostController extends HttpServlet {
             session = request.getSession();
             user = (UsersLoginResponse) session.getAttribute("dto");
 
-            request.setAttribute("user_Id", user.getId());
+            request.setAttribute("user_role", user.getRole());
+
+            request.setAttribute("refull_name", refull_name);
+            request.setAttribute("Session_full_name", Session_full_name);
+            System.out.println("ConteFoPostCon refull_name++"+ refull_name);
+            System.out.println("ConteFoPostCon Session_full_name++"+Session_full_name);
 
             post_id = Long.parseLong(request.getParameter("post_id"));
             post_writer_id = Long.parseLong(request.getParameter("post_writer_id"));

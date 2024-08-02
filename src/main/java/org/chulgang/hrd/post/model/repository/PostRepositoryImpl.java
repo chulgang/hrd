@@ -2,6 +2,7 @@ package org.chulgang.hrd.post.model.repository;
 
 import org.chulgang.hrd.post.domain.Post;
 import org.chulgang.hrd.post.model.sql.PostSQL;
+import org.chulgang.hrd.users.dto.UsersLoginResponse;
 import org.chulgang.hrd.util.DbConnection;
 
 import java.sql.*;
@@ -46,34 +47,6 @@ public class PostRepositoryImpl implements PostRepository {
         }
     }
 
-    public ArrayList<Post> list_posts() {
-        ArrayList<Post> posts = new ArrayList<>();
-
-        Connection con = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        String sql = PostSQL.viewPostList;
-        Post viewpost = null;
-
-        try {
-            con = DbConnection.getConnection();
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(sql);
-
-            while (rs.next()) {
-                String full_name = rs.getString(2);
-                viewpost = new Post(full_name);
-                posts.add(viewpost);
-            }
-            return posts;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            DbConnection.reset();
-        }
-    }
-
     public void insert_posts(Post post) {
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -105,7 +78,36 @@ public class PostRepositoryImpl implements PostRepository {
         }
     }
 
-//    public void incrementViewCount(long postId) throws SQLException {
+    @Override
+    public ArrayList<UsersLoginResponse> list_postsS() {
+        ArrayList<UsersLoginResponse> list_posts = new ArrayList<>();
+
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        String sql = PostSQL.viewPostList;
+
+        try {
+            con = DbConnection.getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                UsersLoginResponse viewpost = new UsersLoginResponse();
+                String full_name = rs.getString(1);
+                viewpost.setFull_name(full_name);
+                list_posts.add(viewpost);
+            }
+            return list_posts;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            DbConnection.reset();
+        }
+    }
+
+    //    public void incrementViewCount(long postId) throws SQLException {
 //
 //        Connection con = null;
 //        String query = "UPDATE post SET view_count = view_count + 1 WHERE id = ?";

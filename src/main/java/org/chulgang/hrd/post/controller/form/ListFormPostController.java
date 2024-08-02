@@ -22,7 +22,7 @@ public class ListFormPostController extends HttpServlet {
         HttpSession session = request.getSession();
         //UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
         PostService service = new PostServiceImpl();
-        ArrayList<Post> list_post = service.list_postsS();
+        ArrayList<UsersLoginResponse> list_post = service.list_postsS();
         System.out.println("LIST_FORM"+list_post);
 
         session.setAttribute("list_post", list_post);

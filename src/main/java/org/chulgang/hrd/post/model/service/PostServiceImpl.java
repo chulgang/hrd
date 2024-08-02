@@ -2,9 +2,8 @@ package org.chulgang.hrd.post.model.service;
 
 import org.chulgang.hrd.post.domain.Post;
 import org.chulgang.hrd.post.model.repository.PostRepositoryImpl;
-import org.chulgang.hrd.users.model.usersRepository.UsersRepository;
+import org.chulgang.hrd.users.dto.UsersLoginResponse;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PostServiceImpl implements PostService {
@@ -25,8 +24,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public ArrayList<Post> list_postsS() {
-        return postRepository.list_posts();
+    public ArrayList<UsersLoginResponse> list_postsS() {
+        return postRepository.list_postsS();
     }
 
     public void insert_PostS(Post post) {

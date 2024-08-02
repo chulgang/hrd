@@ -31,10 +31,9 @@ public class PostController extends HttpServlet {
                 String full_name= request.getParameter("full_name");
 
                 request.setAttribute("full_name", full_name);
-                session.setAttribute("full_name", full_name);
+
                 String a = (String) session.getAttribute("full_name");
                 System.out.println(a);
-
 
                 System.out.println("PostController@@@@@@@@@@@@@@@@@@:"+a);
 
@@ -51,7 +50,7 @@ public class PostController extends HttpServlet {
                     System.out.println("session.getAttribute(post) == null");
                     postlist = service.postsS(full_name);
                     request.setAttribute("postlist", postlist);
-
+                    session.setAttribute("full_name", full_name);
                     System.out.println("user_id: "+user.getUsername());
                     request.setAttribute("user_Id", user.getId());
                     RequestDispatcher rd = request.getRequestDispatcher(view);
