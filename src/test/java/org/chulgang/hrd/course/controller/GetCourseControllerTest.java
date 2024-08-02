@@ -8,7 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.chulgang.hrd.course.dto.GetCourseResponse;
 import org.chulgang.hrd.course.model.service.CourseService;
+import org.chulgang.hrd.course.model.service.SubjectServiceImpl;
 import org.chulgang.hrd.course.model.testutil.CourseTestObjectFactory;
+import org.chulgang.hrd.users.model.usersService.UsersService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -51,7 +53,7 @@ public class GetCourseControllerTest {
                 COURSE_ID1, SUBJECT_ID1, TEACHER_ID1, TIME_PERIOD_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1,
                 LAST_DATE1, AVERAGE_SCORE1, REMAINED_SEAT1, now, now
         );
-        when(courseService.getCourse(COURSE_ID1)).thenReturn(getCourseResponse);
+        when(courseService.getCourse(COURSE_ID1, SubjectServiceImpl.getInstance(), UsersService.getInstance())).thenReturn(getCourseResponse);
 
         // When
         getCourseController.doGet(request, response);

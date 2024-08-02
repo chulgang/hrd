@@ -9,7 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.chulgang.hrd.course.domain.Course;
 import org.chulgang.hrd.course.dto.GetCoursesResponse;
 import org.chulgang.hrd.course.model.service.CourseService;
+import org.chulgang.hrd.course.model.service.SubjectServiceImpl;
 import org.chulgang.hrd.course.model.testutil.CourseTestObjectFactory;
+import org.chulgang.hrd.users.model.usersService.UsersService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -68,7 +70,7 @@ public class GetCoursesControllerTest {
         );
         GetCoursesResponse getCoursesResponse = GetCoursesResponse.from(List.of(course1, course2), PAGE_COUNT);
 
-        when(courseService.getCourses(SIZE1, PAGE_NUMBER)).thenReturn(getCoursesResponse);
+        when(courseService.getCourses(SIZE1, PAGE_NUMBER, SubjectServiceImpl.getInstance(), UsersService.getInstance())).thenReturn(getCoursesResponse);
 
         // When
         getCoursesController.doGet(request, response);
