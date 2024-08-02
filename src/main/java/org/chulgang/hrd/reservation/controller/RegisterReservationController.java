@@ -31,7 +31,7 @@ public class RegisterReservationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
-        Long userId = 1L;
+        Long userId = user.getId();
         Long courseId = Long.parseLong(request.getParameter("courseId"));
 
         if (reservationService.isAlreadyReserved(userId, courseId)) {

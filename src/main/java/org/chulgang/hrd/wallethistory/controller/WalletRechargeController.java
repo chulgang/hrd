@@ -29,14 +29,12 @@ public class WalletRechargeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-
         UsersLoginResponse users = (UsersLoginResponse) session.getAttribute("dto");
         Long userId = users.getId();
         int amount = Integer.parseInt(request.getParameter("amount"));
-        System.out.println("amount: " + amount);
         try {
             walletHistoryService.rechargeWallet(userId, amount);
-            response.sendRedirect(request.getContextPath() + "users/myPageForm.do");
+            response.sendRedirect(request.getContextPath() + "myPageForm.do");
         } catch (Exception e) {
             response.sendRedirect(request.getContextPath() + "/404");
         }

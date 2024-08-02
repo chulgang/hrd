@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class ReservationCourseDetailResponse {
 
+    private Long reservationId;
     private Long reservationCourseId;
     private Long courseId;
     private String courseName;
@@ -16,6 +17,14 @@ public class ReservationCourseDetailResponse {
     private String roomName;
     private float averageScore;
     private String description;
+
+    public Long getReservationId() {
+        return reservationId;
+    }
+
+    public void setReservationId(Long reservationId) {
+        this.reservationId = reservationId;
+    }
 
     public Long getReservationCourseId() {
         return reservationCourseId;

@@ -72,6 +72,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     private ReservationCourseDetailResponse buildReservationCourseDetailResponse(ReservationCourse reservationCourse, CourseResponseForPayment courseResponseForPayment) {
         ReservationCourseDetailResponse response = new ReservationCourseDetailResponse();
+        response.setReservationId(reservationCourse.getReservationId());
         response.setReservationCourseId(reservationCourse.getId());
         response.setCourseId(reservationCourse.getCourseId());
         response.setCourseName(courseResponseForPayment.getCourseName());

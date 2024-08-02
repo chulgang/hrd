@@ -46,16 +46,17 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public boolean executePayment(Long userId, Long reservationId, Long courseId ,int paymentAmount) {
         int currentAmount = walletHistoryService.currentAmountByUser(userId);
-        if (currentAmount < paymentAmount) {
+        if (currentAmount <= paymentAmount) {
             throw new IllegalArgumentException("잔액이 부족합니다. 잔액 : " + paymentAmount);
         }
-
+        System.out.println(courseId);
         int remainedSeat = courseService.getRemainedSeat(courseId);
         if (remainedSeat <= 0) {
             throw new IllegalArgumentException("남은자리가 없습니다.");
         }
 
         walletHistoryService.deductFromWallet(userId, paymentAmount);
+        //
         paymentRepository.insertPayedCourse(userId, reservationId, courseId, paymentAmount);
         courseService.updateRemainedSeat(courseId, remainedSeat - 1);
         reservationService.updateReservationStatus(reservationId, 1);
