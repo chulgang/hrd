@@ -72,8 +72,8 @@
                     </div>
                     <div class="col-md-12">
                         <ul>
-                            <li><a href="index.jsp">Home</a></li>
-                            <li><a href="#!">Contact</a></li>
+                            <li><a href="index.jsp">처음으로</a></li>
+                            <li><a href="siupForm.do">회원가입</a></li>
                         </ul>
                     </div>
                 </div>
