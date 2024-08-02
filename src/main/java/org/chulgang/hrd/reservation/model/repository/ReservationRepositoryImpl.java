@@ -148,7 +148,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 
     @Override
     public void updateReservationStatus(Long reservationId, int status) {
-        String sql = "UPDATE RESERVED_COURSE SET IS_RESERVED = 1 WHERE ID = ?";
+        String sql = "UPDATE RESERVED_COURSE SET IS_RESERVED = 1 WHERE RESERVATION_ID = ?";
         try {Connection connection = DbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, reservationId);

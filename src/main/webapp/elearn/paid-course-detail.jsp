@@ -152,11 +152,6 @@
                                     <li><a href="#!"><i class="fab fa-linkedin-in"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="widget">
-                                <div class="btn">
-                                    <h3>수강취소</h3>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
