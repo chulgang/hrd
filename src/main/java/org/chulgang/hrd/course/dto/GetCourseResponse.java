@@ -54,8 +54,9 @@ public class GetCourseResponse {
     }
 
     public GetCourseResponse(Long id,
-
+                             Long subjectId,
                              String subjectName,
+                             Long teacherId,
                              String teacherName,
                              Long timePeriodId,
                              String name,
@@ -68,7 +69,9 @@ public class GetCourseResponse {
                              String createdAt,
                              String modifiedAt) {
         this.id = id;
+        this.subjectId = subjectId;
         this.subjectName = subjectName;
+        this.teacherId = teacherId;
         this.teacherName = teacherName;
         this.timePeriodId = timePeriodId;
         this.name = name;
@@ -123,7 +126,9 @@ public class GetCourseResponse {
 
         return new GetCourseResponse(
                 course.getId(),
+                course.getSubjectId(),
                 subjectName,
+                course.getTeacherId(),
                 teacherName,
                 course.getTimePeriodId(),
                 course.getName(),
