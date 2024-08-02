@@ -31,14 +31,19 @@ public class RegisterReservationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
-        Long userId = user.getId();
+        Long userId = 1L;
         Long courseId = Long.parseLong(request.getParameter("courseId"));
-        boolean isReserved = reservationService.registerReservation(userId, courseId);
 
-        if (isReserved) {
-            response.sendRedirect(request.getContextPath() + "/reservation-list");
+        if (reservationService.isAlreadyReserved(userId, courseId)) {
+            response.getWriter().write("<script>alert('이미 예약되어 있습니다.'); window.location.href = '/reservation-list';</script>");
         } else {
-            response.sendRedirect(request.getContextPath() + "/404");
+            boolean isReserved = reservationService.registerReservation(userId, courseId);
+
+            if (isReserved) {
+                response.sendRedirect(request.getContextPath() + "/elearn/reservation-list.do");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/elearn/error.do");
+            }
         }
     }
 }

@@ -31,7 +31,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             connection.setAutoCommit(false);
             reservationStmt.setLong(1, memberId);
             reservationStmt.executeUpdate();
-            reservedCourseStmt.setLong(1, courseId);
+            reservedCourseStmt.setLong(0, courseId);
             reservedCourseStmt.executeUpdate();
             connection.commit();
             return true;
@@ -51,7 +51,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
                         "FROM RESERVED_COURSE rc " +
                         "JOIN RESERVATION r ON rc.RESERVATION_ID = r.ID " +
                         "JOIN COURSE c ON rc.COURSE_ID = c.ID " +
-                        "WHERE r.STUDENT_ID = ? " +
+                        "WHERE r.STUDENT_ID = ? AND rc.IS_RESERVED = 0 " +
                         "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         try {
             Connection connection = DbConnection.getConnection();
@@ -161,4 +161,23 @@ public class ReservationRepositoryImpl implements ReservationRepository {
         }
     }
 
+    @Override
+    public boolean isAlreadyReserved(Long userId, Long courseId) {
+        String sql = "SELECT 1 FROM RESERVED_COURSE rc " +
+                "JOIN RESERVATION r ON rc.RESERVATION_ID = r.ID " +
+                "WHERE r.STUDENT_ID = ? AND rc.COURSE_ID = ?";
+        try {
+            Connection connection = DbConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, userId);
+            preparedStatement.setLong(2, courseId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbConnection.reset();
+        }
+        return false;
+    }
 }

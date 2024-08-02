@@ -46,7 +46,6 @@ public class ReservationServiceImpl implements ReservationService {
             CourseResponseForPayment courseResponseForPayment = coursePaymentService.getCourseForPayment(reservationCourse.getCourseId());
             return buildReservationCourseDetailResponse(reservationCourse, courseResponseForPayment);
         } else {
-            // TODO: Handle error appropriately
             return null;
         }
     }
@@ -66,20 +65,25 @@ public class ReservationServiceImpl implements ReservationService {
         reservationRepository.updateReservationStatus(reservationId, status);
     }
 
+    @Override
+    public boolean isAlreadyReserved(Long userId, Long courseId) {
+        return reservationRepository.isAlreadyReserved(userId, courseId);
+    }
+
     private ReservationCourseDetailResponse buildReservationCourseDetailResponse(ReservationCourse reservationCourse, CourseResponseForPayment courseResponseForPayment) {
         ReservationCourseDetailResponse response = new ReservationCourseDetailResponse();
         response.setReservationCourseId(reservationCourse.getId());
         response.setCourseId(reservationCourse.getCourseId());
-//        response.setCourseName(courseResponseForPayment.getCourseName());
-//        response.setSubjectName(courseResponseForPayment.getSubjectName());
-//        response.setTeacherName(courseResponseForPayment.getTeacherName());
-//        response.setStartDate(parseDate(courseResponseForPayment.getStartDate()));
-//        response.setLastDate(parseDate(courseResponseForPayment.getLastDate()));
-//        response.setPrice(courseResponseForPayment.getPrice());
-//        response.setPeriod(courseResponseForPayment.getPeriod().toString());
-//        response.setRoomName(courseResponseForPayment.getClassroomName());
-//        response.setAverageScore(courseResponseForPayment.getAverageScore());
-//        response.setDescription(courseResponseForPayment.getCourseDescription());
+        response.setCourseName(courseResponseForPayment.getCourseName());
+        response.setSubjectName(courseResponseForPayment.getSubjectName());
+        response.setTeacherName(courseResponseForPayment.getTeacherName());
+        response.setStartDate(parseDate(courseResponseForPayment.getStartDate()));
+        response.setLastDate(parseDate(courseResponseForPayment.getLastDate()));
+        response.setPrice(courseResponseForPayment.getPrice());
+        response.setPeriod(courseResponseForPayment.getPeriod().toString());
+        response.setRoomName(courseResponseForPayment.getClassroomName());
+        response.setAverageScore(courseResponseForPayment.getAverageScore());
+        response.setDescription(courseResponseForPayment.getCourseDescription());
         return response;
     }
 
