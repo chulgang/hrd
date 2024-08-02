@@ -119,7 +119,7 @@
         <div class="col-md-12">
           <ul>
             <li><a href="index.jsp">처음으로 </a></li>
-            <li><a href="post_listForm.do">Q&A List</a></li>
+            <li><a href="post_listForm.do">질문 목록</a></li>
           </ul>
         </div>
       </div>
@@ -232,7 +232,7 @@
                   <div class="comment-section">
                     <div class="comment">
                       <div class="comment-author-date">
-                        <div class="comment-author">박길동</div>
+                        <div class="comment-author">홍길동</div>
                         <div class="comment-date">2024/08/02</div>
                       </div>
                       <div class="comment-content">금방 알려드리겠습니다.</div>
@@ -246,7 +246,7 @@
                       </div>
                       <div class="reply">
                         <div class="reply-author-date">
-                          <div class="reply-author">박길동</div>
+                          <div class="reply-author">홍길동</div>
                           <div class="reply-date">2024/08/02</div>
                         </div>
                         <div class="reply-content">네^^</div>
@@ -254,7 +254,7 @@
                     </div>
                     <div class="comment">
                       <div class="comment-author-date">
-                        <div class="comment-author">박길동</div>
+                        <div class="comment-author">홍길동</div>
                         <div class="comment-date">2024/08/02</div>
                       </div>
                       <div class="comment-content">오늘이라고 하네요!!!</div>

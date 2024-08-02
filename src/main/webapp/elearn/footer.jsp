@@ -61,8 +61,7 @@
                     <div class="ps-md-1-9">
                         <h3 class="text-primary h5 mb-2-2">강의</h3>
                         <ul class="footer-list">
-                            <li><a href="blog-grid.html">강의</a></li>
-                            <li><a href="portfolio.html">강좌</a></li>
+                            <li><a href="courses.do">강좌 목록</a></li>
                         </ul>
                     </div>
                 </div>

@@ -188,7 +188,7 @@
                             </div>
                             <div>
                                 <p class="mb-3">강좌 바로가기 입니다.</p>
-                                <a href="about.html" class="butn-style1 secondary">강좌</a>
+                                <a href="courses.do" class="butn-style1 secondary">강좌</a>
                             </div>
                         </div>
                     </div>

@@ -64,7 +64,7 @@
                 <div class="col-md-12">
                     <ul>
                         <li><a href="index.jsp">처음으로 </a></li>
-                        <li><a href="post_listForm.do">Q&A List</a></li>
+                        <li><a href="post_listForm.do">질문 목록</a></li>
                     </ul>
                 </div>
             </div>
