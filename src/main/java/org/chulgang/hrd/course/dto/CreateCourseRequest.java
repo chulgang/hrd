@@ -37,8 +37,6 @@ public class CreateCourseRequest {
     public static CreateCourseRequest from(HttpServletRequest request) {
         UsersLoginResponse usersLoginResponse
                 = (UsersLoginResponse) request.getSession().getAttribute(LOGIN_SESSION_ATTRIBUTE_NAME);
-        System.out.println(usersLoginResponse.getId() + "--------------------");
-        System.out.println(usersLoginResponse.getEmail() + "--------------------");
 
         return new CreateCourseRequest(
                 Long.parseLong(request.getParameter("subjectId")),

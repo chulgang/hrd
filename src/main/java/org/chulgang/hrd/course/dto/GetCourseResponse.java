@@ -9,7 +9,9 @@ import java.time.LocalDateTime;
 public class GetCourseResponse {
     private Long id;
     private Long subjectId;
+    private String subjectName;
     private Long teacherId;
+    private String teacherName;
     private Long timePeriodId;
     private String name;
     private String description;
@@ -51,6 +53,35 @@ public class GetCourseResponse {
         this.modifiedAt = modifiedAt;
     }
 
+    public GetCourseResponse(Long id,
+
+                             String subjectName,
+                             String teacherName,
+                             Long timePeriodId,
+                             String name,
+                             String description,
+                             int price,
+                             String startDate,
+                             String lastDate,
+                             float averageScore,
+                             int remainedSeat,
+                             String createdAt,
+                             String modifiedAt) {
+        this.id = id;
+        this.subjectName = subjectName;
+        this.teacherName = teacherName;
+        this.timePeriodId = timePeriodId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.startDate = startDate;
+        this.lastDate = lastDate;
+        this.averageScore = averageScore;
+        this.remainedSeat = remainedSeat;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
+    }
+
     public static GetCourseResponse from(Course course) {
         String createdAt = null;
         if (course.getCreatedAt() != null) {
@@ -66,6 +97,34 @@ public class GetCourseResponse {
                 course.getId(),
                 course.getSubjectId(),
                 course.getTeacherId(),
+                course.getTimePeriodId(),
+                course.getName(),
+                course.getDescription(),
+                course.getPrice(),
+                FormatConverter.parseToString(course.getStartDate()),
+                FormatConverter.parseToString(course.getLastDate()),
+                course.getAverageScore(),
+                course.getRemainedSeat(),
+                createdAt,
+                modifiedAt
+        );
+    }
+
+    public static GetCourseResponse from(Course course, String subjectName, String teacherName) {
+        String createdAt = null;
+        if (course.getCreatedAt() != null) {
+            createdAt = FormatConverter.parseToString(course.getCreatedAt());
+        }
+
+        String modifiedAt = null;
+        if (course.getModifiedAt() != null) {
+            modifiedAt = FormatConverter.parseToString(course.getModifiedAt());
+        }
+
+        return new GetCourseResponse(
+                course.getId(),
+                subjectName,
+                teacherName,
                 course.getTimePeriodId(),
                 course.getName(),
                 course.getDescription(),
@@ -103,12 +162,20 @@ public class GetCourseResponse {
         return subjectId;
     }
 
-    public Long getTimePeriodId() {
-        return timePeriodId;
+    public String getSubjectName() {
+        return subjectName;
     }
 
     public Long getTeacherId() {
         return teacherId;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public Long getTimePeriodId() {
+        return timePeriodId;
     }
 
     public String getName() {

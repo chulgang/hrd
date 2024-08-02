@@ -9,6 +9,10 @@ public class GetCoursesResponse {
     private List<GetCourseResponse> getCourseResponses;
     private int pageCount;
 
+    public GetCoursesResponse() {
+        getCourseResponses = new ArrayList<>();
+    }
+
     private GetCoursesResponse(List<GetCourseResponse> getCourseResponses, int pageCount) {
         this.getCourseResponses = getCourseResponses;
         this.pageCount = pageCount;
@@ -38,5 +42,9 @@ public class GetCoursesResponse {
         }
 
         return new GetCoursesResponse(getCourseResponses, pageCount);
+    }
+
+    public void add(GetCourseResponse getCourseResponse) {
+        getCourseResponses.add(getCourseResponse);
     }
 }
