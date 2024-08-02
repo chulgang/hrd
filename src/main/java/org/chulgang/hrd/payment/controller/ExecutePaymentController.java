@@ -29,8 +29,8 @@ public class ExecutePaymentController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        //UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
-        Long userId = 1L;
+        UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
+        Long userId = user.getId();
         Long reservationId = Long.parseLong(request.getParameter("reservationId"));
         Long courseId = Long.parseLong(request.getParameter("courseId"));
         int paymentAmount = Integer.parseInt(request.getParameter("paymentAmount"));

@@ -22,7 +22,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
     @Override
     public boolean registerReservation(Long memberId, Long courseId) {
         String insertReservationSQL = "INSERT INTO RESERVATION (ID, STUDENT_ID, CREATED_AT) VALUES (RESERVATION_SEQ.NEXTVAL, ?, SYSDATE)";
-        String insertReservedCourseSQL = "INSERT INTO RESERVED_COURSE (ID, COURSE_ID, RESERVATION_ID, CREATED_AT, IS_RESERVED) VALUES (RESERVED_COURSE_SEQ.NEXTVAL, ?, RESERVATION_SEQ.CURRVAL, SYSDATE";
+        String insertReservedCourseSQL = "INSERT INTO RESERVED_COURSE (ID, COURSE_ID, RESERVATION_ID, CREATED_AT, IS_RESERVED) VALUES (RESERVED_COURSE_SEQ.NEXTVAL, ?, RESERVATION_SEQ.CURRVAL, SYSDATE, 0)";
 
         try {
             Connection connection = DbConnection.getConnection();
@@ -31,7 +31,7 @@ public class ReservationRepositoryImpl implements ReservationRepository {
             connection.setAutoCommit(false);
             reservationStmt.setLong(1, memberId);
             reservationStmt.executeUpdate();
-            reservedCourseStmt.setLong(0, courseId);
+            reservedCourseStmt.setLong(1, courseId);
             reservedCourseStmt.executeUpdate();
             connection.commit();
             return true;
@@ -148,11 +148,10 @@ public class ReservationRepositoryImpl implements ReservationRepository {
 
     @Override
     public void updateReservationStatus(Long reservationId, int status) {
-        String sql = "UPDATE RESERVATION_COURSE SET IS_RESERVED = ? WHERE ID = ?";
+        String sql = "UPDATE RESERVED_COURSE SET IS_RESERVED = 1 WHERE ID = ?";
         try {Connection connection = DbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, status);
-            preparedStatement.setLong(2, reservationId);
+            preparedStatement.setLong(1, reservationId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

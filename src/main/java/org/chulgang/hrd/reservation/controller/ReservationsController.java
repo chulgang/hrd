@@ -34,7 +34,7 @@ public class ReservationsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
-        Long userId = 1L;
+        Long userId = user.getId();
         int page = 1;
         if (request.getParameter("page") != null) {
             page = Integer.parseInt(request.getParameter("page"));
