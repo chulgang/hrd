@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import static org.chulgang.hrd.course.util.RequestConstant.RESERVATION_SERVICE_ATTRIBUTE_NAME;
 
-@WebServlet(urlPatterns = {"/register-reservation.do"})
+@WebServlet(urlPatterns = {"/elearn/register-reservation.do"})
 public class RegisterReservationController extends HttpServlet {
     private ReservationService reservationService;
 
@@ -35,14 +35,14 @@ public class RegisterReservationController extends HttpServlet {
         Long courseId = Long.parseLong(request.getParameter("courseId"));
 
         if (reservationService.isAlreadyReserved(userId, courseId)) {
-            response.getWriter().write("<script>alert('이미 예약되어 있습니다.'); window.location.href = '/reservation-list';</script>");
+            response.getWriter().write("<html><meta contentType=\"text/html\" charset=\"utf-8\"/><script  charset=\"utf-8\">alert('이미 예약되어 있습니다.'); window.location.href = 'reservation-list.do';</script><httml>");
         } else {
             boolean isReserved = reservationService.registerReservation(userId, courseId);
 
             if (isReserved) {
-                response.sendRedirect(request.getContextPath() + "/elearn/reservation-list.do");
+                response.sendRedirect(request.getContextPath() + "reservation-list.do");
             } else {
-                response.sendRedirect(request.getContextPath() + "/elearn/error.do");
+                response.sendRedirect(request.getContextPath() + "elearn/error.do");
             }
         }
     }
