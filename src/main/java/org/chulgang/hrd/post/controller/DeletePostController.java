@@ -40,7 +40,7 @@ public class DeletePostController extends HttpServlet {
 
                 PostService service = new PostServiceImpl();
                 service. delete_PostS(post_id);
-                response.sendRedirect("/elearn/post.do");
+                response.sendRedirect("post_listForm.do");
 
     }
 }

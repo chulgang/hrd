@@ -18,7 +18,9 @@ public class PostServiceImpl implements PostService {
     public PostServiceImpl() {
         postRepository = new PostRepositoryImpl();
     }
-
+    public ArrayList<Post> postsS() {
+        return postRepository.posts();
+    }
     public ArrayList<Post> postsS(String full_name) {
         return postRepository.posts(full_name);
     }

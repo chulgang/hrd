@@ -132,7 +132,7 @@
   <section>
     <div class="container">
       <div class="section-heading">
-        <h2 class="h1 mb-0">${refull_name}</h2>
+        <h2 class="h1 mb-0">${refull_name} 강사님</h2>
         <span class="sub-title">Q&A</span>
       </div>
 
@@ -271,34 +271,46 @@
 
                   <!-- 답글 입력 및 작성 버튼 -->
                   <c:choose>
-                    <c:when test="${refull_name eq Session_full_name}">
-                        <!-- teacher일 때 답글 입력 칸과 버튼 모두 표시 -->
-                        <div style="display: flex; flex-direction: column; align-items: flex-end; margin-top: 10px;">
-                          <!-- 답글 입력 칸 -->
-                          <textarea id="commentInput" rows="4" cols="50" placeholder="답글을 입력하세요..." style="width: 100%;"></textarea>
-                          <!-- 답글 작성 버튼 -->
-                          <button type="button" style="border: 1px solid; margin-top: 10px;" class="btn btn-outline-success" onclick="submitComment()">
-                            답글 작성
-                          </button>
-                        </div>
+                    <c:when test="${empty user}">
+
                     </c:when>
+
+                   <c:otherwise>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; margin-top: 10px;">
+                      <!-- 답글 입력 칸 -->
+                      <textarea id="commentInput" rows="4" cols="50" placeholder="답글을 입력하세요..." style="width: 100%;"></textarea>
+                      <!-- 답글 작성 버튼 -->
+                      <button type="button" style="border: 1px solid; margin-top: 10px;" class="btn btn-outline-success" onclick="submitComment()">
+                        답글 작성
+                      </button>
+                    </div>
+                    </c:otherwise>
+
+
                   </c:choose>
 
                 </div>
               </div>
             </div>
 
+    <c:choose>
 
-      <c:choose>
-        <c:when test="${user_Id eq post.writer_id}">
-          <button type="button" style="margin: 1em; float:right;" class="btn btn-outline-success">
-            <a href="post_updateForm.do?post_id=${post.id}&post_subject=${post.subject}&post_content=${post.content}" class="button">수정</a>
-          </button>
+        <c:when test="${empty user}">
+
         </c:when>
-        <c:otherwise>
-          <!-- user_id와 post.writer_id가 다른 경우 실행될 내용 -->
-        </c:otherwise>
+
+        <c:when test="${user_role eq 'student'}">
+
+        </c:when>
+
+        <c:when test="${user_role eq 'teacher'}">
+          <button type="button" style="margin: 1em; float:right;" class="btn btn-outline-success">
+            <a href="post_updateForm.do?post_id=${post.id}&post_subject=${post.subject}&post_content=${post.content}&refull_name=${refull_name}" class="button">수정</a>
+          </button>
+       </c:when>
+
       </c:choose>
+
 
 
     </div>

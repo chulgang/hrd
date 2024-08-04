@@ -28,25 +28,25 @@ public class ContentFormPostController extends HttpServlet {
         Post post = new Post(post_id, post_writer_id, post_subject, post_content,
                 0, null, null);
 
-        String Session_full_name = (String) session.getAttribute("full_name");
+
         String refull_name= request.getParameter("refull_name");
 
-        request.setAttribute("refull_name", refull_name);
         session.setAttribute("post", post);
 
         System.out.println("@@@@@@@@@@@@@@@@@@@"+refull_name);
-        System.out.println("@@@@@@@@@@@@@@"+Session_full_name);
         if(user == null) { //로그인 안했을 때
             String view = "postContent.jsp";
-
+            request.setAttribute("user",user);
+            request.setAttribute("refull_name", refull_name);
             RequestDispatcher rd = request.getRequestDispatcher(view);
             rd.forward(request, response);
         } else {
             session = request.getSession();
             user = (UsersLoginResponse) session.getAttribute("dto");
-
+            request.setAttribute("user",user);
+            String Session_full_name = (String) session.getAttribute("Session_full_name");
+            System.out.println("CONTROLEL"+user.getRole());
             request.setAttribute("user_role", user.getRole());
-
             request.setAttribute("refull_name", refull_name);
             request.setAttribute("Session_full_name", Session_full_name);
             System.out.println("ConteFoPostCon refull_name++"+ refull_name);
