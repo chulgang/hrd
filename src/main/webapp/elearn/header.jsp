@@ -42,9 +42,9 @@
                 <div class="col-12 col-lg-12">
                     <div class="menu_area alt-font">
                         <nav class="navbar navbar-expand-lg navbar-light p-0">
-                            <div class="navbar-header navbar-header-custom">
+                            <div>
                                 <!-- start logo -->
-                                <a href="index.jsp" class="navbar-brand"><h2 style="color:#ff7029">HRD</h2></a>
+                                <a href ="index.jsp"><img style="width:31.7%" src="img/banner/header.png"></a>
                                 <!-- end logo -->
                             </div>
 

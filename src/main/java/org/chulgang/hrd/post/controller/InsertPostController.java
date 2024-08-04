@@ -37,7 +37,7 @@ public class InsertPostController extends HttpServlet {
         Post post = new Post(user.getId(), subject, content, 1, full_name);
         service.insert_PostS(post);
 
-        response.sendRedirect("/elearn/post.do");
+        response.sendRedirect("post_listForm.do");
 
 //        String view = "postInput.jsp";
 //        RequestDispatcher rd = request.getRequestDispatcher(view);

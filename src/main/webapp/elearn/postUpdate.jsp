@@ -108,7 +108,7 @@
                                     <div class="quform-element form-group">
                                         <label for="username">글쓴이<span class="quform-required">*</span></label>
                                         <div class="quform-input">
-                                            <input class="form-control" disabled="disabled" id="username" type="text" value="${writer}" name="username" />
+                                            <input class="form-control" disabled="disabled" id="username" type="text" value="${refull_name}" name="username" />
                                         </div>
                                     </div>
                                 </div>

@@ -36,6 +36,6 @@ public class UpdatePostController extends HttpServlet {
 
         service.update_PostS(post);
 
-        response.sendRedirect("/elearn/post.do");
+        response.sendRedirect("post_listForm.do");
     }
 }

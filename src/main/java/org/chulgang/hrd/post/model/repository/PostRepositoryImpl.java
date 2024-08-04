@@ -5,12 +5,48 @@ import org.chulgang.hrd.post.model.sql.PostSQL;
 import org.chulgang.hrd.users.dto.UsersLoginResponse;
 import org.chulgang.hrd.util.DbConnection;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
 import static org.chulgang.hrd.post.model.sql.PostSQL.*;
 
 public class PostRepositoryImpl implements PostRepository {
+
+    public ArrayList<Post> posts() {
+        ArrayList<Post> posts = new ArrayList<>();
+        DbConnection.getConnection();
+
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        String sql = PostSQL.Posts;
+        Post viewpost = null;
+
+        try {
+            con = DbConnection.getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            System.out.println("하이");
+
+            while (rs.next()) {
+                long id = rs.getInt(1);
+                long writer_id = rs.getLong(2);
+                System.out.println("writer_id: " + writer_id);
+                String subject = rs.getString(3);
+                String content = rs.getString(4);
+                int view = rs.getInt(5);
+                viewpost = new Post(id, writer_id, subject, content, view);
+
+                posts.add(viewpost);
+            }
+            return posts;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("ㅎㅇㅎㅇ");
+            return null;
+        }
+    }
 
     public ArrayList<Post> posts(String full_name) {
         ArrayList<Post> posts = new ArrayList<>();

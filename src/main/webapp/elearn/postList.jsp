@@ -92,7 +92,7 @@
                             <div class="team-overlay">
                                 <div class="d-table h-100 w-100">
                                     <div class="d-table-cell align-middle">
-                                        <h3><a href="post.do?full_name=${list_post.full_name}" class="text-white">${list_post.full_name}</a></h3>
+                                        <h3><a href="post.do?refull_name=${list_post.full_name}" class="text-white">${list_post.full_name}</a></h3>
                                         <p class="text-white mb-0">오늘도 행복한 하루 되세요 ^^!</p>
                                     </div>
                                 </div>

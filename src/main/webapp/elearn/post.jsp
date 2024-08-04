@@ -16,10 +16,10 @@
     <title>eLearn - Online Education Learning Template</title>
     <script>
 
-    function openInputJSP() {
-        var openInputUrl = "post_insertForm.do";
-        window.open(openInputUrl, '_self');
-    }
+        function openInputJSP() {
+            var openInputUrl = "post_insertForm.do";
+            window.open(openInputUrl, '_self');
+        }
 
     </script>
 
@@ -62,7 +62,7 @@
 
     <!-- PAGE TITLE
     ================================================== -->
-    <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9"  >
+    <section class="page-title-section bg-img cover-background top-position1 left-overlay-dark" data-overlay-dark="9">
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-12">
@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-md-12">
                     <ul>
-                        <li><a href="index.jsp">처음으로 </a></li>
+                        <li><a href="index.jsp">처음으로</a></li>
                         <li><a href="post_listForm.do">질문 목록</a></li>
                     </ul>
                 </div>
@@ -84,45 +84,45 @@
     <section>
         <div class="container">
             <div class="section-heading">
-                <h2 class="h1 mb-0">${full_name}</h2>
+                <h2 class="h1 mb-0">${refull_name} 강사님</h2>
                 <span class="sub-title">Q&A</span>
             </div>
 
             <c:forEach items="${postlist}" var = "postlist">
-            <div class="row">
-                <div class="col-md-10 mx-auto">
-                    <div id="accordion1" class="accordion-style1">
-                        <div class="card">
-                            <div class="card-header" id="headingOne">
-                                <h5 class="mb-0">
-                                    <button id ="viewCountButton" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#${postlist.id}" aria-expanded="false" aria-controls="${postlist.id}">
-                                            ${postlist.subject}
-                                    </button>
-                                </h5>
-                            </div>
-
-                            <div id="${postlist.id}" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
-                                <div class="card-body">
-                                    <a href="post_contentForm.do?post_id=${postlist.id}&post_writer_id=${postlist.writer_id}&post_content=${postlist.content}&post_subject=${postlist.subject}&refull_name=${full_name}" class="button">${postlist.content}</a>
+                <div class="row">
+                    <div class="col-md-10 mx-auto">
+                        <div id="accordion1" class="accordion-style1">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button id ="viewCountButton" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#${postlist.id}" aria-expanded="false" aria-controls="${postlist.id}">
+                                                ${postlist.subject}
+                                        </button>
+                                    </h5>
                                 </div>
-                            </div>
 
+                                <div id="${postlist.id}" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                                    <div class="card-body">
+                                        <a href="post_contentForm.do?post_id=${postlist.id}&post_writer_id=${postlist.writer_id}&post_content=${postlist.content}&post_subject=${postlist.subject}&refull_name=${refull_name}" class="button">${postlist.content}</a>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </c:forEach>
-            <c:choose>
-                <c:when test="${empty user_Id}">
 
+            <c:choose>
+                <c:when test="${user_role eq 'student'}">
+                    <button type="button" onclick="openInputJSP()" style="margin: 1em; float:right;" class="btn btn-outline-success">Question</button>
                 </c:when>
                 <c:otherwise>
-                    <button type="button" onclick="openInputJSP()" style="margin: 1em; float:right;" class="btn btn-outline-success">Question</button>
                 </c:otherwise>
             </c:choose>
 
 
-                </div>
+        </div>
     </section>
 
     <!-- FOOTER

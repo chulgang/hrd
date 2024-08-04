@@ -65,6 +65,13 @@ public class Post {
         this.full_name = full_name;
     }
 
+    public Post(int writerId, String subject, String content, int view_count) {
+        this.writer_id = writer_id;
+        this.subject = subject;
+        this.content = content;
+        this.view_count = view_count;
+    }
+
     public long getSeq() {
         return seq;
     }

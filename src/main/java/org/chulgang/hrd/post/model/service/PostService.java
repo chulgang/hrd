@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface PostService {
-
+    ArrayList<Post> postsS();
     ArrayList<Post> postsS(String full_name);
 
     ArrayList<UsersLoginResponse> list_postsS();

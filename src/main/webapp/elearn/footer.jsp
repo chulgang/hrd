@@ -11,11 +11,8 @@
             <div class="row">
                 <div class="col-md-6 col-lg-3 mb-2-5 mb-lg-0">
                     <a href="index.jsp" class="footer-logo">
-                       <h2 style="color:#ff7029">HRD</h2>
+                        <a href ="index.jsp"><img style="width: 108%;" src="img/banner/header.png"></a>
                     </a>
-                    <p class="mb-1-6 text-white">
-                        오프라인 시범예약 사이트입니다.
-                    </p>
                     <form class="quform newsletter" action="quform/newsletter-two.php" method="post" enctype="multipart/form-data" onclick="">
 
                         <div class="quform-elements">

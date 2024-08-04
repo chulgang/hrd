@@ -18,18 +18,20 @@ import java.io.IOException;
 public class UpdateFormPostController extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
 
         HttpSession session =  request.getSession();
         UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
-        PostService service = new PostServiceImpl();
 
+        String refull_name= request.getParameter("refull_name");
+        String Session_full_name = (String) session.getAttribute("Session_full_name");
+        request.setAttribute("refull_name", refull_name);
+        request.setAttribute("Session_full_name", Session_full_name);
         Post post = (Post) session.getAttribute("post");
 
         session.setAttribute("post", post);
         System.out.println("post: "+ post.getId());
 
-        request.setAttribute("writer",user.getFull_name());
+        request.setAttribute(".",user.getFull_name());
 
         String view = "postUpdate.jsp";
         RequestDispatcher rd = request.getRequestDispatcher(view);
