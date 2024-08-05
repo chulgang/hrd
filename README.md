@@ -22,7 +22,7 @@
   <br><br>
 
 ## 🗼 Architecture
-![HRD Architecture](https://github.com/user-attachments/assets/27223913-cbfc-4c03-9b0f-4a7ccc1a92c8)
+![HRD Architecture](https://github.com/user-attachments/assets/e35dc329-a382-4c53-895b-11ffc11924d0)
 <br><br>
 
 ## 🗄️ ERD ![ERD](https://github.com/user-attachments/assets/729954ac-23e4-4a1d-8583-783905597d7d)
