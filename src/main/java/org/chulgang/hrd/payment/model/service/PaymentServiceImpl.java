@@ -6,6 +6,7 @@ import org.chulgang.hrd.course.model.service.CoursePaymentServiceImpl;
 import org.chulgang.hrd.course.model.service.CourseService;
 import org.chulgang.hrd.course.model.service.CourseServiceImpl;
 import org.chulgang.hrd.payment.domain.PayedCourse;
+import org.chulgang.hrd.payment.dto.ExecutePaymentRequest;
 import org.chulgang.hrd.payment.dto.PaidCourseDetailResponse;
 import org.chulgang.hrd.payment.dto.PaymentCardResponse;
 import org.chulgang.hrd.payment.model.repository.PaymentRepository;
@@ -44,20 +45,20 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public boolean executePayment(Long userId, Long reservationId, Long courseId ,int paymentAmount) {
-        int currentAmount = walletHistoryService.currentAmountByUser(userId);
-        if (currentAmount <= paymentAmount) {
-            throw new IllegalArgumentException("잔액이 부족합니다. 잔액 : " + paymentAmount);
+    public boolean executePayment(ExecutePaymentRequest executePaymentRequest) {
+        int currentAmount = walletHistoryService.currentAmountByUser(executePaymentRequest.getUserId());
+        if (currentAmount <= executePaymentRequest.getPaymentAmount()) {
+            throw new IllegalArgumentException("잔액이 부족합니다. 잔액 : " + executePaymentRequest.getPaymentAmount());
         }
-        int remainedSeat = courseService.getRemainedSeat(courseId);
+        int remainedSeat = courseService.getRemainedSeat(executePaymentRequest.getCourseId());
         if (remainedSeat <= 0) {
             throw new IllegalArgumentException("남은자리가 없습니다.");
         }
 
-        walletHistoryService.deductFromWallet(userId, paymentAmount);
-        paymentRepository.insertPayedCourse(userId, reservationId, courseId, paymentAmount);
-        courseService.updateRemainedSeat(courseId, remainedSeat - 1);
-        reservationService.updateReservationStatus(reservationId, 1);
+        walletHistoryService.deductFromWallet(executePaymentRequest.getUserId(), executePaymentRequest.getPaymentAmount());
+        paymentRepository.insertPayedCourse(executePaymentRequest.getUserId(), executePaymentRequest.getReservationId(), executePaymentRequest.getCourseId(), executePaymentRequest.getPaymentAmount());
+        courseService.updateRemainedSeat( executePaymentRequest.getCourseId(), remainedSeat - 1);
+        reservationService.updateReservationStatus( executePaymentRequest.getReservationId(), 1);
         return true;
     }
 
