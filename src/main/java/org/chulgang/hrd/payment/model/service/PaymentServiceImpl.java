@@ -49,14 +49,12 @@ public class PaymentServiceImpl implements PaymentService {
         if (currentAmount <= paymentAmount) {
             throw new IllegalArgumentException("잔액이 부족합니다. 잔액 : " + paymentAmount);
         }
-        System.out.println(courseId);
         int remainedSeat = courseService.getRemainedSeat(courseId);
         if (remainedSeat <= 0) {
             throw new IllegalArgumentException("남은자리가 없습니다.");
         }
 
         walletHistoryService.deductFromWallet(userId, paymentAmount);
-        //
         paymentRepository.insertPayedCourse(userId, reservationId, courseId, paymentAmount);
         courseService.updateRemainedSeat(courseId, remainedSeat - 1);
         reservationService.updateReservationStatus(reservationId, 1);
@@ -88,20 +86,14 @@ public class PaymentServiceImpl implements PaymentService {
     public boolean refundPayment(Long userId, Long payedCourseId) {
         PayedCourse payedCourse = paymentRepository.findPayedCourseById(payedCourseId)
                 .orElseThrow(() -> new IllegalArgumentException("강좌 없음"));
-
         if (payedCourse.isRefunded()) {
             throw new IllegalArgumentException("이미 환불된 강좌입니다.");
         }
-
         walletHistoryService.refundWallet(userId, payedCourse.getPayedAmount());
-
         paymentRepository.updatePayedCourseRefundStatus(payedCourseId, true);
-
         courseService.updateRemainedSeat(payedCourse.getCourseId(),
                 courseService.getRemainedSeat(payedCourse.getCourseId()) + 1);
-
         reservationService.updateReservationStatus(payedCourse.getReservationId(), 0);
-
         return true;
     }
 

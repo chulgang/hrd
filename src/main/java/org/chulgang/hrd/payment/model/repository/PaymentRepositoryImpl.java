@@ -22,12 +22,10 @@ public class PaymentRepositoryImpl implements PaymentRepository {
     @Override
     public List<PaymentCardResponse> findPaymentCourseCardByMemberId(Long userId, int pageNumber) {
         List<PaymentCardResponse> payments = new ArrayList<>();
-        System.out.println(10);
         int pageSize = 10;
         int offset = (pageNumber - 1) * pageSize;
 
         try {
-            System.out.println(11);
             Connection connection = DbConnection.getConnection();
             String sql =
                     "SELECT pc.ID, c.NAME, c.DESCRIPTION, pc.PAYED_AMOUNT, pc.IS_REFUNDED, c.START_DATE, c.LAST_DATE " +
@@ -43,7 +41,6 @@ public class PaymentRepositoryImpl implements PaymentRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                System.out.println(12);
                 PaymentCardResponse payment = new PaymentCardResponse();
                 payment.setPayedCourseId(resultSet.getLong("ID"));
                 payment.setCourseName(resultSet.getString("NAME"));
@@ -53,8 +50,6 @@ public class PaymentRepositoryImpl implements PaymentRepository {
                 payment.setStartDate(resultSet.getDate("START_DATE").toLocalDate());
                 payment.setEndDate(resultSet.getDate("LAST_DATE").toLocalDate());
                 payments.add(payment);
-                System.out.println(payment);
-                System.out.println(payment.getCourseName());
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,11 +119,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         try {Connection connection = DbConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, courseId);
-            System.out.println(courseId);
             preparedStatement.setLong(2, reservationId);
-            System.out.println(reservationId);
             preparedStatement.setInt(3, paymentAmount);
-            System.out.println(paymentAmount);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
