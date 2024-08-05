@@ -1,5 +1,6 @@
 package org.chulgang.hrd.payment.model.service;
 
+import org.chulgang.hrd.payment.dto.ExecutePaymentRequest;
 import org.chulgang.hrd.payment.dto.PaidCourseDetailResponse;
 import org.chulgang.hrd.payment.dto.PaymentCardResponse;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface PaymentService {
 
-    boolean executePayment(Long userId, Long reservationId, Long courseId ,int paymentAmount);
+    boolean executePayment(ExecutePaymentRequest executePaymentRequest);
 
     List<PaymentCardResponse> getPagedPayments(Long userId, int pageNumber);
 

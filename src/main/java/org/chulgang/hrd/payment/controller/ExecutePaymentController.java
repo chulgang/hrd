@@ -6,10 +6,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.chulgang.hrd.aop.LoggingAspect;
+import org.chulgang.hrd.payment.dto.ExecutePaymentRequest;
 import org.chulgang.hrd.payment.model.service.PaymentService;
-import org.chulgang.hrd.users.dto.UsersLoginResponse;
 
 import java.io.IOException;
 
@@ -28,14 +27,7 @@ public class ExecutePaymentController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        UsersLoginResponse user = (UsersLoginResponse) session.getAttribute("dto");
-        Long userId = user.getId();
-        Long reservationId = Long.parseLong(request.getParameter("reservationId"));
-        Long courseId = Long.parseLong(request.getParameter("courseId"));
-        int paymentAmount = Integer.parseInt(request.getParameter("paymentAmount"));
-
-        boolean isPaymentSuccessful = paymentService.executePayment(userId, reservationId, courseId ,paymentAmount);
+        boolean isPaymentSuccessful = paymentService.executePayment(ExecutePaymentRequest.from(request)) ;
 
         if (isPaymentSuccessful) {
             response.sendRedirect(request.getContextPath() + "/elearn/payment-list.do");
