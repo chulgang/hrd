@@ -2,6 +2,7 @@ package org.chulgang.hrd.util;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.jupiter.api.*;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -18,11 +19,11 @@ class DatabaseUtilTest {
     @Test
     @Order(2)
     @DisplayName("오라클DB 드라이버로드")
-    void mariadb_driver_load(){
-        String driverClassName="oracle.jdbc.OracleDriver";
+    void mariadb_driver_load() {
+        String driverClassName = "oracle.jdbc.OracleDriver";
         try {
             Class<?> driver = Class.forName(driverClassName);
-            Assertions.assertEquals(driver.getName(),driverClassName);
+            Assertions.assertEquals(driver.getName(), driverClassName);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -39,13 +40,13 @@ class DatabaseUtilTest {
     @Test
     @Order(4)
     @DisplayName("테스트를 위한 pool-size 설정, maxIdle, maxTotal, initialSize, minIdle")
-    void connection_pool_size(){
+    void connection_pool_size() {
         BasicDataSource basicDataSource = (BasicDataSource) DatabaseUtil.getDataSource();
         Assertions.assertAll(
-                ()->Assertions.assertEquals(5,basicDataSource.getMaxIdle()),
-                ()->Assertions.assertEquals(5,basicDataSource.getMaxTotal()),
-                ()->Assertions.assertEquals(5,basicDataSource.getInitialSize()),
-                ()->Assertions.assertEquals(5,basicDataSource.getMinIdle())
+                () -> Assertions.assertEquals(5, basicDataSource.getMaxIdle()),
+                () -> Assertions.assertEquals(5, basicDataSource.getMaxTotal()),
+                () -> Assertions.assertEquals(5, basicDataSource.getInitialSize()),
+                () -> Assertions.assertEquals(5, basicDataSource.getMinIdle())
         );
     }
 }

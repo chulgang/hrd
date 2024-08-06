@@ -40,8 +40,6 @@ public class GetCourseController extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO: 이미지 추가
-        // TODO: 리뷰 추가
         if (request.getRequestURI().contains(String.format("%s/", COURSE_DOMAIN_NAME))) {
             response.sendRedirect(
                     String.format(

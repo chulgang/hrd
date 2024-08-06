@@ -1,5 +1,6 @@
 package org.chulgang.hrd.course.model.service;
 
+import org.chulgang.hrd.classroom.domain.TimePeriod;
 import org.chulgang.hrd.classroom.model.repository.TimePeriodRepository;
 import org.chulgang.hrd.classroom.model.service.TimePeriodService;
 import org.chulgang.hrd.classroom.model.service.TimePeriodServiceImpl;
@@ -34,6 +35,8 @@ class CourseServiceTest {
     CourseService courseService = new CourseServiceImpl(courseRepository);
     TimePeriodRepository timePeriodRepository = mock(TimePeriodRepository.class);
     TimePeriodService timePeriodService = new TimePeriodServiceImpl(timePeriodRepository);
+    SubjectService subjectService = mock(SubjectService.class);
+    UsersService usersService = mock(UsersService.class);
     MockedStatic<DbConnection> dbConnection = mockStatic(DbConnection.class);
 
     LocalDateTime now = LocalDateTime.now();
@@ -42,6 +45,7 @@ class CourseServiceTest {
     @BeforeEach
     void setUp() {
         dbConnection.when(DbConnection::initialize).thenAnswer(invocation -> null);
+        when(usersService.findById(anyLong())).thenReturn(TEACHER_NAME);
     }
 
     @AfterEach
@@ -64,15 +68,15 @@ class CourseServiceTest {
     void getCourses() {
         // given
         Course course1 = CourseTestObjectFactory.createCourse(
-                COURSE_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1, LAST_DATE1,
+                COURSE_ID1, SUBJECT_ID1, TEACHER_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1, LAST_DATE1,
                 AVERAGE_SCORE1, REMAINED_SEAT1, now, now
         );
         Course course2 = CourseTestObjectFactory.createCourse(
-                COURSE_ID2, NAME2, DESCRIPTION2, PRICE2, START_DATE2, LAST_DATE2,
+                COURSE_ID2, SUBJECT_ID2, TEACHER_ID2, NAME2, DESCRIPTION2, PRICE2, START_DATE2, LAST_DATE2,
                 AVERAGE_SCORE2, REMAINED_SEAT2, now, now
         );
         Course course3 = CourseTestObjectFactory.createCourse(
-                COURSE_ID3, NAME3, DESCRIPTION3, PRICE3, START_DATE3, LAST_DATE3,
+                COURSE_ID3, SUBJECT_ID3, TEACHER_ID3, NAME3, DESCRIPTION3, PRICE3, START_DATE3, LAST_DATE3,
                 AVERAGE_SCORE3, REMAINED_SEAT3, now, now
         );
 
@@ -82,10 +86,12 @@ class CourseServiceTest {
         when(courseRepository.findAll(anyInt(), anyInt())).thenReturn(courses);
 
         // when
-        GetCoursesResponse getCoursesResponse1 = courseService.getCourses(SIZE1, PAGE_NUMBER, SubjectServiceImpl.getInstance(), UsersService.getInstance());
+        GetCoursesResponse getCoursesResponse1
+                = courseService.getCourses(SIZE1, PAGE_NUMBER, subjectService, usersService);
 
         courses.add(course3);
-        GetCoursesResponse getCoursesResponse2 = courseService.getCourses(SIZE2, PAGE_NUMBER, SubjectServiceImpl.getInstance(), UsersService.getInstance());
+        GetCoursesResponse getCoursesResponse2
+                = courseService.getCourses(SIZE2, PAGE_NUMBER, subjectService, usersService);
         ;
 
         // then
@@ -132,13 +138,15 @@ class CourseServiceTest {
         // given
         when(courseRepository.findById(anyLong())).thenReturn(
                 CourseTestObjectFactory.createCourse(
-                        COURSE_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1, LAST_DATE1,
+                        COURSE_ID1, SUBJECT_ID1, TEACHER_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1, LAST_DATE1,
                         AVERAGE_SCORE1, REMAINED_SEAT1, now, now
                 )
         );
 
+        when(subjectService.getSubjectName(anyLong())).thenReturn(SUBJECT_NAME);
+
         // when
-        GetCourseResponse getCourseResponse = courseService.getCourse(COURSE_ID1, SubjectServiceImpl.getInstance(), UsersService.getInstance());
+        GetCourseResponse getCourseResponse = courseService.getCourse(COURSE_ID1, subjectService, usersService);
 
         // then
         assertThat(getCourseResponse).isNotNull();
@@ -162,6 +170,10 @@ class CourseServiceTest {
                 SUBJECT_ID1, TEACHER_ID1, TIME_PERIOD_ID1, NAME1, DESCRIPTION1, PRICE1, START_DATE1, LAST_DATE1
         );
         dbConnection.when(DbConnection::initialize).thenAnswer(invocation -> null);
+        TimePeriod timePeriod = mock(TimePeriod.class);
+        when(timePeriodRepository.findById(createCourseRequest.getTimePeriodId())).thenReturn(timePeriod);
+        when(timePeriod.getStartDate()).thenReturn(START_DATE1);
+        when(timePeriod.getLastDate()).thenReturn(LAST_DATE1);
 
         // when
         courseService.create(createCourseRequest, timePeriodService);
