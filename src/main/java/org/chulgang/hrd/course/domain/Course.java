@@ -94,6 +94,25 @@ public class Course {
         this.modifiedAt = modifiedAt;
     }
 
+    private Course(
+            Long id, Long subjectId, Long teacherId, String name, String description,
+            int price, LocalDate startDate, LocalDate lastDate, float averageScore, int remainedSeat,
+            LocalDateTime createdAt, LocalDateTime modifiedAt) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.teacherId = teacherId;
+        this.timePeriodId = timePeriodId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.startDate = startDate;
+        this.lastDate = lastDate;
+        this.averageScore = averageScore;
+        this.remainedSeat = remainedSeat;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
+    }
+
     public static Course from(CreateCourseRequest createCourseRequest) {
         return new Course(
                 createCourseRequest.getSubjectId(),
@@ -134,6 +153,17 @@ public class Course {
             String description, int price, LocalDate startDate, LocalDate lastDate
     ) {
         return new Course(id, subjectId, teacherId, timePeriodId, name, description, price, startDate, lastDate);
+    }
+
+    protected static Course of(
+            Long id, Long subjectId, Long teacherId, String name,
+            String description, int price, LocalDate startDate, LocalDate lastDate,
+            float averageScore, int remainedSeat, LocalDateTime createdAt, LocalDateTime modifiedAt
+    ) {
+        return new Course(
+                id, subjectId, teacherId, name, description, price, startDate,
+                lastDate, averageScore, remainedSeat, createdAt, modifiedAt
+        );
     }
 
     protected static Course of(

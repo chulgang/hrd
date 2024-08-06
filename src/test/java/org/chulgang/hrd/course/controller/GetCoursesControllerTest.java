@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.chulgang.hrd.course.domain.Course;
 import org.chulgang.hrd.course.dto.GetCoursesResponse;
 import org.chulgang.hrd.course.model.service.CourseService;
+import org.chulgang.hrd.course.model.service.SubjectService;
 import org.chulgang.hrd.course.model.service.SubjectServiceImpl;
 import org.chulgang.hrd.course.model.testutil.CourseTestObjectFactory;
 import org.chulgang.hrd.users.model.usersService.UsersService;
@@ -27,6 +28,9 @@ import static org.mockito.Mockito.*;
 
 public class GetCoursesControllerTest {
     private CourseService courseService;
+    SubjectService subjectService;
+    UsersService usersService;
+
     private GetCoursesController getCoursesController;
     private HttpServletRequest request;
     private HttpServletResponse response;
@@ -37,6 +41,9 @@ public class GetCoursesControllerTest {
     @BeforeEach
     void setUp() throws ServletException {
         courseService = mock(CourseService.class);
+        subjectService = mock(SubjectService.class);
+        usersService = mock(UsersService.class);
+
         getCoursesController = new GetCoursesController();
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
@@ -46,6 +53,8 @@ public class GetCoursesControllerTest {
 
         when(servletConfig.getServletContext()).thenReturn(servletContext);
         when(servletContext.getAttribute(COURSE_SERVICE_ATTRIBUTE_NAME)).thenReturn(courseService);
+        when(servletContext.getAttribute(SUBJECT_SERVICE_ATTRIBUTE_NAME)).thenReturn(subjectService);
+        when(servletContext.getAttribute(USER_SERVICE_ATTRIBUTE_NAME)).thenReturn(usersService);
 
         getCoursesController.init(servletConfig);
     }
@@ -71,6 +80,7 @@ public class GetCoursesControllerTest {
         GetCoursesResponse getCoursesResponse = GetCoursesResponse.from(List.of(course1, course2), PAGE_COUNT);
 
         when(courseService.getCourses(SIZE1, PAGE_NUMBER, SubjectServiceImpl.getInstance(), UsersService.getInstance())).thenReturn(getCoursesResponse);
+        when(courseService.getPageCount(SIZE1)).thenReturn(PAGE_COUNT);
 
         // When
         getCoursesController.doGet(request, response);
@@ -78,17 +88,18 @@ public class GetCoursesControllerTest {
         // Then
         ArgumentCaptor<String> attributeCaptor = ArgumentCaptor.forClass(String.class);
         ArgumentCaptor<Object> valueCaptor = ArgumentCaptor.forClass(Object.class);
-        verify(request, times(3)).setAttribute(attributeCaptor.capture(), valueCaptor.capture());
+        verify(request, times(4)).setAttribute(attributeCaptor.capture(), valueCaptor.capture());
 
         List<String> capturedAttributes = attributeCaptor.getAllValues();
         List<Object> capturedValues = valueCaptor.getAllValues();
 
         assertThat(capturedAttributes.get(0)).isEqualTo(COURSES_ATTRIBUTE_NAME);
-        assertThat(capturedValues.get(0)).isEqualTo(getCoursesResponse);
         assertThat(capturedAttributes.get(1)).isEqualTo(SIZE_PARAMETER_NAME);
         assertThat(capturedValues.get(1)).isEqualTo(SIZE1);
-        assertThat(capturedAttributes.get(2)).isEqualTo(PAGE_NUMBER_PARAMETER_NAME);
-        assertThat(capturedValues.get(2)).isEqualTo(PAGE_NUMBER);
+        assertThat(capturedAttributes.get(2)).isEqualTo(PAGE_COUNT_PARAMETER_NAME);
+        assertThat(capturedValues.get(2)).isEqualTo(PAGE_COUNT);
+        assertThat(capturedAttributes.get(3)).isEqualTo(PAGE_NUMBER_PARAMETER_NAME);
+        assertThat(capturedValues.get(3)).isEqualTo(PAGE_NUMBER);
 
         verify(requestDispatcher).forward(request, response);
     }

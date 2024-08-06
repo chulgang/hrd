@@ -13,9 +13,13 @@ public class CourseTestConstant {
     public static final Long SUBJECT_ID2 = 2L;
     public static final Long SUBJECT_ID3 = 3L;
 
+    public static final String SUBJECT_NAME = "수학";
+
     public static final Long TEACHER_ID1 = 1L;
     public static final Long TEACHER_ID2 = 2L;
     public static final Long TEACHER_ID3 = 3L;
+
+    public static final String TEACHER_NAME = "홍길동";
 
     public static final Long TIME_PERIOD_ID1 = 1L;
     public static final Long TIME_PERIOD_ID2 = 2L;

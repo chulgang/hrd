@@ -7,9 +7,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.chulgang.hrd.classroom.dto.GetClassroomsResponse;
+import org.chulgang.hrd.classroom.model.service.ClassroomService;
 import org.chulgang.hrd.classroom.model.service.TimePeriodService;
 import org.chulgang.hrd.course.dto.CreateCourseRequest;
+import org.chulgang.hrd.course.dto.GetSubjectsResponse;
 import org.chulgang.hrd.course.model.service.CourseService;
+import org.chulgang.hrd.course.model.service.SubjectService;
 import org.chulgang.hrd.users.dto.UsersLoginResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,6 +30,8 @@ import static org.mockito.Mockito.*;
 
 public class RegisterCourseControllerTest {
     private CourseService courseService;
+    private SubjectService subjectService;
+    private ClassroomService classroomService;
     private TimePeriodService timePeriodService;
     private RegisterCourseController registerCourseController;
     private HttpServletRequest request;
@@ -37,18 +43,56 @@ public class RegisterCourseControllerTest {
     @BeforeEach
     void setUp() throws ServletException {
         courseService = mock(CourseService.class);
+        subjectService = mock(SubjectService.class);
+        classroomService = mock(ClassroomService.class);
         timePeriodService = mock(TimePeriodService.class);
         registerCourseController = new RegisterCourseController();
-        registerCourseController.init();
+
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
+        session = mock(HttpSession.class);
         servletConfig = mock(ServletConfig.class);
         servletContext = mock(ServletContext.class);
 
         when(servletConfig.getServletContext()).thenReturn(servletContext);
         when(servletContext.getAttribute(COURSE_SERVICE_ATTRIBUTE_NAME)).thenReturn(courseService);
+        when(servletContext.getAttribute(SUBJECT_SERVICE_ATTRIBUTE_NAME)).thenReturn(subjectService);
+        when(servletContext.getAttribute(CLASSROOM_SERVICE_ATTRIBUTE_NAME)).thenReturn(classroomService);
+        when(servletContext.getAttribute(TIME_PERIOD_SERVICE_ATTRIBUTE_NAME)).thenReturn(timePeriodService);
 
         registerCourseController.init(servletConfig);
+    }
+
+    @DisplayName("올바른 세션이 존재하면 과목 목록과 강의실 목록을 불러 오고, 강좌 개설 페이지로 포워딩할 수 있다.")
+    @Test
+    void doGetWithValidSession() throws ServletException, IOException {
+        // given
+        when(request.getRequestURI()).thenReturn(REGISTER_COURSE_SECOND_REQUEST_URL);
+        when(request.getSession()).thenReturn(session);
+
+        UsersLoginResponse usersLoginResponse = new UsersLoginResponse();
+        usersLoginResponse.setRole(TEACHER_ROLE_NAME);
+        when((UsersLoginResponse) session.getAttribute(LOGIN_SESSION_ATTRIBUTE_NAME)).thenReturn(usersLoginResponse);
+
+        GetSubjectsResponse getSubjectsResponse = mock(GetSubjectsResponse.class);
+        when(subjectService.getSubjects()).thenReturn(getSubjectsResponse);
+
+        GetClassroomsResponse getClassroomsResponse = mock(GetClassroomsResponse.class);
+        when(classroomService.getClassrooms()).thenReturn(getClassroomsResponse);
+
+        RequestDispatcher mockDispatcher = mock(RequestDispatcher.class);
+        when(request.getRequestDispatcher(COURSE_REGISTRATION_VIEW)).thenReturn(mockDispatcher);
+
+        // when
+        registerCourseController.doGet(request, response);
+
+        // then
+        verify(subjectService, times(1)).getSubjects();
+        verify(classroomService, times(1)).getClassrooms();
+        verify(request, times(1)).setAttribute(GET_SUBJECTS_ATTRIBUTE_NAME, getSubjectsResponse);
+        verify(request, times(1)).setAttribute(GET_CLASSROOMS_ATTRIBUTE_NAME, getClassroomsResponse);
+        verify(request, times(1)).getRequestDispatcher(COURSE_REGISTRATION_VIEW);
+        verify(mockDispatcher).forward(request, response);
     }
 
     @DisplayName("강좌 등록 요청을 처리할 수 있다.")
@@ -66,17 +110,21 @@ public class RegisterCourseControllerTest {
         when(request.getParameter("last-date")).thenReturn(LAST_DATE1.toString());
         when(request.getParameter("seatCount")).thenReturn(String.valueOf(REMAINED_SEAT1));
         when(request.getSession()).thenReturn(session);
-        when(session.getAttribute("dto")).thenReturn(UsersLoginResponse.class);
+        UsersLoginResponse usersLoginResponse = new UsersLoginResponse();
+        usersLoginResponse.setId(TEACHER_ID1);
+        when((UsersLoginResponse) request.getSession().getAttribute(LOGIN_SESSION_ATTRIBUTE_NAME))
+                .thenReturn(usersLoginResponse);
 
         RequestDispatcher mockDispatcher = mock(RequestDispatcher.class);
         when(request.getRequestDispatcher(COURSE_REGISTRATION_CONFIRM_VIEW)).thenReturn(mockDispatcher);
+        when(courseService.create(any(CreateCourseRequest.class), eq(timePeriodService))).thenReturn(true);
 
         // when
         registerCourseController.doPost(request, response);
 
         // then
         ArgumentCaptor<CreateCourseRequest> captor = ArgumentCaptor.forClass(CreateCourseRequest.class);
-        verify(courseService, times(1)).create(captor.capture(), timePeriodService);
+        verify(courseService, times(1)).create(captor.capture(), any(TimePeriodService.class));
         CreateCourseRequest capturedRequest = captor.getValue();
 
         assertThat(capturedRequest).isNotNull();

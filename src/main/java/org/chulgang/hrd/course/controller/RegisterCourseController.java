@@ -19,7 +19,6 @@ import org.chulgang.hrd.course.model.service.SubjectService;
 import org.chulgang.hrd.exception.GlobalExceptionHandler;
 import org.chulgang.hrd.exception.JsonSerializationFailedException;
 import org.chulgang.hrd.users.dto.UsersLoginResponse;
-import org.chulgang.hrd.users.model.usersService.UsersService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,7 +33,6 @@ public class RegisterCourseController extends HttpServlet {
     private SubjectService subjectService;
     private ClassroomService classroomService;
     private TimePeriodService timePeriodService;
-    private UsersService usersService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -84,8 +82,6 @@ public class RegisterCourseController extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO: 이미지 추가
-
         if (request.getRequestURI().equals(VALIDATION_URL)) {
             validateDuplicateCourseName(request, response);
             return;
