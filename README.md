@@ -1,5 +1,5 @@
-# 🏫 학원 강좌 예약 서비스 HRD
-<br>
+# 🏫 학원 강좌 예약 서비스 HRD<br><br>
+
 ## 📋 프로젝트 설명
 
 - 철강 2팀 프로젝트 HRD
@@ -15,9 +15,9 @@
 
 - [철강 2팀 노션](https://spring-periodical-246.notion.site/2-d0fd365a39af4b85be1852d8b2370e95?pvs=4)
 - [HRD 노션](https://spring-periodical-246.notion.site/3c5c92e563254e71aec423f7601788e2?pvs=4)
-- [기획 발표 자료](https://www.miricanvas.com/v/13hxu1j)
+- [기획 발표 자료](https://www.miricanvas.com/v/13it9cf)
 - [기획 와이어프레임](https://prezi.com/view/D5ar9xwC8OxzJwusOBWx)
-- [발표 자료](https://www.miricanvas.com/v/13hxu1j)
+- [최종 발표 자료](https://www.miricanvas.com/v/13hxu1j)
 - [최종 와이어프레임](https://prezi.com/view/nfhQexVTeiA3QzwhgdfH)
 - [시연 영상](https://youtu.be/E4kCNqFvDeU)
   <br><br>
